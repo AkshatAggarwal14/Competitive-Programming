@@ -7,4 +7,4 @@ executables/
 .vscode/
 /log
 bits/
-.hpp
+*.hpp
