@@ -6,5 +6,5 @@ sol.cpp
 executables/
 .vscode/
 /log
-bits/
+*.h
 *.hpp
