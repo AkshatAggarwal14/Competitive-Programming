@@ -8,3 +8,12 @@ executables/
 /log
 *.h
 *.hpp
+bits/
+cpeditor.cpp
+binary.cpp
+ncr.cpp
+numOfdivisors.cpp
+octalsum.cpp
+series.c
+snip.cpp
+Makefile
