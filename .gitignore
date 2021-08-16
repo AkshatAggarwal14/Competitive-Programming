@@ -1,20 +1,18 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.cpp*
+
+# Unignore all dirs
+!*/
+
+# Ignore selected dirs
+
+.vscode
 *.exe
-*.txt
-!git-notes.txt
-*.gch
 sol.cpp
-executables/
-.vscode/
-/log
-*.h
-*.hpp
-bits/
 */cpeditor.cpp
-*/binary.cpp
-*/nCr.cpp
-*/numOfdivisors.cpp
-*/octalsum.cpp
-*/series.c
-*/snip.cpp
 */Makefile
-/Leetcode/*
+Other/
+!Akshat.hpp
