@@ -123,3 +123,7 @@ git clone <URL> //copy url from the repo to clone
 git clone <URL> <foldername> //creates a folder inside current directory where the repo is cloned
 
 rm -rf .git to delete the repo
+
+if errors while pushing (because some files are in the branch but not in working tree) first pull using
+git pull origin master
+and then push with the changes
