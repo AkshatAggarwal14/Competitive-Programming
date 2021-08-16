@@ -1,0 +1,125 @@
+git init //this initialises an empty git repository, by making .git folder
+ls -lart //shows even hidden folders
+
+
+/*
+
+    Without options, ls displays files names only. The most common options to display additional information are:
+
+    -l long format, displaying Unix file types, permissions, number of hard links, owner, group, size, last-modified date and filename
+    -F append a "/" to directory names and a "*" to executable files.
+    -g display group but not owner
+    -o display owner but not group (when combined with -g both group and owner are suppressed)
+    -d shows information about a symbolic link or directory, rather than about the link's target or listing the contents of a directory.
+    -h output sizes in human readable format. (e.g., 1K, 234M, 2G, etc.) This option is not part of the POSIX standard, although implemented in several systems, e.g., GNU coreutils in 1997,[10] FreeBSD 4.5 in 2002,[11] and Solaris 9 in 2002.[12]
+
+Additional options controlling how files are displayed include:
+
+    -f do not sort. Useful for directories containing large numbers of files.
+    -t sort the list of files by modification time. (default is alphabetically)
+    -1 (one) force output to be one entry per line.
+    -R recursively list files in subdirectories and their subdirectories …
+    --full-time to show times with seconds and milliseconds instead of down to the minute.
+
+It is frequently possible to highlight different types of files with different colors, instead of with characters as -F would. This is an area where the two main ls versions differ:
+
+    GNU ls uses the --color option; checks the Unix file type, the file permissions and the file extension and uses its own database to control colors maintained using dircolors.
+    FreeBSD ls uses the -G option; checks only the Unix file type and file permissions. and uses the termcap database[13]
+
+*/
+
+git add <> // used to add files to repo and sent to staging area
+git status // shows changes to be committed in green that is the staging area
+            // this also tells which branch etc etc, VERY important command
+git commit // this will open a place to write a commit message
+git commit -m "commit message" //better
+touch file.cpp //creates an empty file
+touch .gitignore //is used to make gitignore file
+git add -A //to stage all files
+git checkout <file> //matches working files with last commit
+git checkout -f //macthes all files with previous commit
+git log // to check commit log
+git log -p -<num> //to check log of last <num> commits
+git diff //compare working tree with staging area
+git diff --staged //compare working tree with staged changes
+git commit -a -m "message" // this directly adds and commits , only works with tracked files(git add'd atleast once)
+git rm <file> //deletes from working directory as well as staged
+git rm --cached <file> //deletes only from staging area
+git rm --cached -r * // remove every staged thing
+git add -f <file> //can be used to forcefully add an ignored file
+git status -s //summarised status, first box-green staging area, second box-red working tree, green-added to staging
+            //If "MM" modified in staging area as well as working tree
+
+
+
+
+#Branches are used to make another copy to work on, thus not affecting master branch
+
+git branch <branch_name> //used to create branch
+git branch //used to see all branches, current branche is highlighted by green
+git checkout <branch_name> //to switch to a different branch, we can edit anything here, and later we can merge this to the master branch
+
+#Merge command will be used to merge two branches
+To merge "new" branch to "master"
+1. first come to master branch
+2. git merge "new"
+
+git checkout -b <branch_name> // this makes a branch and switches to it
+
+#Github
+Github is the hosting service for git repositories
+Remote repositories: we can push local repo into remote repo
+git remote add origin <https://github.com/AkshatAggarwal14/test.git> //adds remote repo with name "origin"
+git remote // lists all remotes
+git remote -v // lists the URLs for fetch and push
+git push origin master //pushes master repo to origin remote
+git branch -d <branch_name> // to delete branch
+git filter-branch -f --tree-filter 'rm -f <THE PATH TO GIANT FILE>' HEAD --all //to remove large files <- as file needs to be removed from commit/unpushed history
+
+#for large files
+$ git rm --cached giant_file
+# Stage our giant file for removal, but leave it on disk
+
+git commit --amend -CHEAD
+# Amend the previous commit with your change
+# Simply making a new commit won't work, as you need
+# to remove the file from the unpushed history as well
+
+git push
+# Push our rewritten, smaller commit
+
+if repository is not found because it was private, you might need to add SSH keys
+ssh-keygen -t rsa -b 4096 -C "akshataggarwal1411@gmail.com" //this generates our key
+ssh-keygen -t ed25519 -C "akshataggarwal1411@gmail.com"
+// to deploy key
+eval "$(ssh-agent -s)" //Agent pid XXXX //pid is process id 
+ssh-add ~/.ssh/id_ed25519 //to add the identity
+
+//now to add ssh key to github account
+cat ~/.ssh/id_rsa //will show content of the key
+clip < ~/.ssh/id_ed25519.pub //to copy
+
+NOW this key can be added to your github account and provides the computer read/write access
+
+
+
+
+to use SSH we can change to SSH on github and use that link as origin
+git remote set-url origin git@github.com:AkshatAggarwal14/test.git //to change URL
+now URLS have been changed in git remote -v 
+
+git push -u origin master //to push
+
+# we can checkout to other branches and push them to repo too
+#if other branch has changes we get a prompt on github to compare and pull req
+git push //shorthand repeats last push command where we used -u
+
+
+
+#Git Clone
+git clone <URL> //copy url from the repo to clone 
+    //^ This clones into the current directory
+
+git clone <URL> <foldername> //creates a folder inside current directory where the repo is cloned
+
+rm -rf .git to delete the repo
