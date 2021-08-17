@@ -121,29 +121,32 @@ ll power(ll x, ll y, ll p) {
 }
 
 vl fib(100005);
+vl len(100005);
 void fibonacci() {
-    fib[0] = 1;
+    fib[0] = 0;
     fib[1] = 1;
     rep(i, 2, 100005) {
         fib[i] = (fib[i - 1] + fib[i - 2]) % mod;
     }
 }
+void lens() {
+    len[0] = 1;
+    len[1] = 1;
+    rep(i, 2, 100005) {
+        len[i] = (len[i - 1] + len[i - 2]) % (mod - 1);
+    }
+}
 
 void Solution() {
+    //https://math.stackexchange.com/questions/379996/computing-bmods-with-large-exponents-by-paper-and-pencil-using-fermats-littl/380048#380048
+    //for mod-1
+    //https://discuss.codechef.com/t/fiboseq-editorial/93553/2
     ll n;
     cin >> n;
-    // str s = fibWord(n);
-    ll cnt2 = fib[n - 1];
-
+    ll cnt1 = fib[n];
     //** ans is sum of subsequence * 2^n-1 = cnt1 * 2^(sz(s)-1)
-
-    ll N2 = fib[n] - 1;
-    // ll cnt1 = count(all(s), '1');
-    // ll N = sz(s) - 1;
-    // cout << ((cnt1)*1LL * (power(2, N, mod))) % mod << " ";
-    cout << ((cnt2)*1LL * (power(2, N2, mod))) % mod << ln;
-    // cout << fib[1000];
-    // cout << s << ln;
+    ll N = (len[n] - 1) % (mod - 1);  // as we had to mod by different values had to use two different sequences
+    cout << ((cnt1 % mod) * 1LL * (power(2, N, mod))) % mod << ln;
 }
 //*read stuff at the bottom
 
@@ -153,6 +156,7 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     fibonacci();
+    lens();
     ios_base::sync_with_stdio(false), cin.tie(nullptr);
 
     ll tc = 1;
