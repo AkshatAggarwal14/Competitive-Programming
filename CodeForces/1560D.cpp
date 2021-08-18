@@ -107,12 +107,9 @@ void fill() {
 void Solution() {
     str s;
     cin >> s;
-    dbg(twos);
+    // dbg(twos);
     ll mini = inf;
     for (str two : twos) {
-        // if (sz(two) > sz(s)) break;
-        //s1 is the substring whos subsequence we have to check
-        // cout << s1 << " ";
         ll pos = 0;
         for (ll j = 0; j < sz(s); ++j) {
             if (s[j] == two[pos]) {
@@ -122,20 +119,6 @@ void Solution() {
         ll extra = sz(s) - pos;  //to remove
         ll inc = sz(two) - pos;  //to add
         amin(mini, extra + inc);
-
-        // dbg(two, pos);
-        // if (pos == sz(two)) {             //whole substring found
-        //     amin(mini, sz(s) - sz(two));  //to delete excess characters
-        // }
-        // if (pos == sz(s)) {
-        //     //just insert some chars
-        //     amin(mini, sz(two) - sz(s));
-        // }
-        // if (pos < sz(two)) {
-        //     ll inc = sz(two) - pos;
-        //     ll rem = sz(s) - pos;
-        //     amin(mini, inc + rem);
-        // }
     }
 
     cout << mini << ln;
