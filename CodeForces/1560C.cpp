@@ -96,16 +96,40 @@ void print(T &&t, Args &&...args) {
 }
 
 void Solution() {
-    ll k, l, r;
-    cin >> k;
-    ll sq = sqrt(k);
-    if (sq * sq == k)
-        l = sq, r = 1;
-    else if (k - (sq * sq) < (sq + 1) * (sq + 1) - k)
-        l = k - (sq * sq), r = sq + 1;
-    else if (k - (sq * sq) >= (sq + 1) * (sq + 1) - k)
-        l = sq + 1, r = (sq + 1) * (sq + 1) - k + 1;
-    cout << l << " " << r << ln;
+    /*
+        layers of numbers:
+        1 2 3 4
+        2 2 3 4
+        3 3 3 4
+        4 4 4 4
+
+        1  2  5  10
+        4  3  6  11
+        9  8  7  12
+        16 15 14 13
+    */
+    //layer i contains, (i-1)*(i-1)+1 to i*i elements
+
+    ll n;
+    cin >> n;
+    ll layer = ceil(sqrt(n));
+    ll pos = n - (layer - 1) * (layer - 1);  //pos in layer
+    if (pos <= layer)
+        cout << pos << " " << layer << ln;
+    else
+        cout << layer << " " << 2 * layer - pos << ln;
+
+    //! m2
+    // ll k, l, r;
+    // cin >> k;
+    // ll sq = sqrt(k);
+    // if (sq * sq == k)
+    //     l = sq, r = 1;
+    // else if (k - (sq * sq) < (sq + 1) * (sq + 1) - k)
+    //     l = k - (sq * sq), r = sq + 1;
+    // else if (k - (sq * sq) >= (sq + 1) * (sq + 1) - k)
+    //     l = sq + 1, r = (sq + 1) * (sq + 1) - k + 1;
+    // cout << l << " " << r << ln;
 }
 //*read stuff at the bottom
 
