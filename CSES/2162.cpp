@@ -111,18 +111,21 @@ T amin(T &a, T1 b) {
 
 void Solution() {
     indexed_set s;
-    int n, k = 1;
+    int n;
     cin >> n;
-    cin >> k;
+    if (n == 1) {
+        cout << "1\n";
+        return;
+    }
     for (int i = 1; i <= n; i++)
         s.insert(i);
 
-    int ind = k % n;
+    int ind = 1;
     while (n--) {
         auto y = s.find_by_order(ind);
         cout << *y << ' ';
         s.erase(y);
-        if (n) ind = (ind % n + k) % n;
+        if (n) ind = (ind + 1) % n;
     }
 }
 
