@@ -106,16 +106,6 @@ void LL<T>::Append(T x) {
 }
 
 template <class T>
-void Concat(Node<T> *first, Node<T> *second) {  //concats second to first
-    // Node<T> *p = first;                         //* extra pointer needed and O(n) time
-    // while (p->next) {                           //takes us to last node of first1
-    //     p = p->next;
-    // }
-    // p->next = second;  //!
-    // second = nullptr;
-}
-
-template <class T>
 void concat(Node<T> *first, Node<T> *second) {  //concats second to first
     Node<T> *p = first;                         //* extra pointer needed and O(n) time
     while (p->next) {                           //takes us to last node of first1
