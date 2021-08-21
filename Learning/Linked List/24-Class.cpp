@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 template <class T>
@@ -21,6 +22,7 @@ class LL {
         last = nullptr;
     }
     LL(T A[], int n);
+    LL(vector<T> vec);
 
     // --Destructor--
     ~LL();
@@ -67,6 +69,26 @@ LL<T>::LL(T A[], int n) {
         t->next = nullptr;  //no next node yet
         last->next = t;     // last node should point on t
         last = t;           // last becomes t, and t will be used for next node
+    }
+
+    last->next = nullptr;
+}
+
+template <class T>
+LL<T>::LL(vector<T> A) {
+    Node<T> *t;
+    first = new Node<T>;
+    first->data = A[0];
+    first->next = nullptr;
+    last = first;
+
+    int n = A.size();
+    for (int i = 1; i < n; i++) {
+        t = new Node<T>;
+        t->data = A[i];
+        t->next = nullptr;
+        last->next = t;
+        last = t;
     }
 
     last->next = nullptr;
@@ -241,8 +263,8 @@ bool LL<T>::isLoop() {  // O(n)
 }
 
 int main() {
-    int A[] = {1, 2, 3, 4, 5};
-    LL<int> l1(A, 5), l2;
+    vector<int> A = {1, 2, 3, 4, 5};
+    LL<int> l1(A), l2;
     l1.Reverse();
     l1.Display();
     l2.Append(6);
