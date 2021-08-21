@@ -133,7 +133,7 @@ int main() {
     l2.Append(10);
     l2.Append(100);
     l2.Display();
-    Concat(l1.getHead(), l2.getHead());
+    // Concat(l1.first, l2.first);
 
     l1.Display();
     return 0;
