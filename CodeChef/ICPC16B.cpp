@@ -40,8 +40,8 @@ using o_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_nod
 #define PI 3.1415926535897932384626
 #define sz(x) ((ll)(x).size())
 #define present(b, a) ((a).find((b)) != (a).end())
-#define yes() cout << "YES\n"
-#define no() cout << "NO\n"
+#define yes() cout << "yes\n"
+#define no() cout << "no\n"
 const ll mod = 1e9 + 7;  //1000000007
 const ll mod2 = 998244353;
 const ll inf = LLONG_MAX;
@@ -92,57 +92,52 @@ void print(T &&t, Args &&...args) {
 }
 
 void Solution() {
-    //! m1
-    //take opposite of si[i] so resultant string is different from all strings at atleast one position
     ll n;
     cin >> n;
-    vector<str> s(n);
-    cin >> s;
+    map<ll, ll> mp;
+    ll num;
+    vl other;
     fo(i, n) {
-        cout << 1 - (s[i][i] == '1');  //gives 0 at 1, 1 at 0
+        cin >> num;
+        ++mp[num];
+        if (num != 1 && num != -1 && num != 0) other.eb(num);
     }
-    cout << ln;
-
-    //! m2
-    /*
-    ll n;
-    cin >> n;
-    vector<str> a(n);
-    cin >> a;
-    ll ones = (n + 1) / 2;
-    str s1(ones, '1');
-    str s2(n - ones, '0');
-    str s3 = s1 + s2;
-    do {
-        if (find(all(a), s3) == a.end()) {
-            cout << s3 << ln;
-            return;
+    if (n == 1) {
+        yes();
+        return;
+    }
+    if (mp.count(-1)) {
+        if (mp[-1] >= 2) {
+            if (!mp.count(1)) {
+                no();
+                return;
+            }
         }
-    } while (next_permutation(all(s3)));
-    str last(n, '0');
-    cout << last << ln;
-    */
+    }
+    if (sz(other) > 2) {
+        no();
+        return;
+    } else if (sz(other) == 2) {
+        if (other[0] + other[1] == 0 && mp.count(-1))
+            yes();
+        else
+            no();
+        return;
+    } else if (sz(other) == 1) {
+        if (mp.count(-1) == 0)
+            yes();
+        else
+            no();
+        return;
+    } else if (sz(other) == 0) {
+        yes();
+        return;
+    }
+    // can have any number of 0s and 1s and -1s and any one other number if no -1 and 2 others if -1 present
+    no();
+    return;
 }
 //*read stuff at the bottom
-
-/*
-4
-1
-0
-2
-00
-11
-3
-101
-110
-100
-4
-1100
-1010
-0100
-0010
-
-*/
 
 int main() {
 #ifndef ONLINE_JUDGE
