@@ -35,21 +35,39 @@ typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
 
-void solve()
-{
+void solve() {
     string s;
     cin >> s;
-    for (int i = 0; i < s.length(); i++)
-    {
-        if (s[i] != 'W' || s[i + 1] != 'U' || s[i + 2] != 'B') //if it forms something else than WUB
-        {
-            cout << s[i];
-            if (s[i + 1] == 'W' && s[i + 2] == 'U' && s[i + 3] == 'B') // next 3 letters are WUB then space
-                cout << " ";
-        }
-        else
-            i += 2;
+    while (true) {
+        ll i = s.find("WUBWUB");
+        if (i == string::npos)
+            break;
+        s.replace(i, 3, "");
     }
+    while (true) {
+        ll i = s.find("WUB");
+        if (i == string::npos)
+            break;
+        else if (i == 0)
+            s.replace(i, 3, "");
+        else
+            s.replace(i, 3, " ");
+    }
+    cout << s;
+
+    // string s;
+    // cin >> s;
+    // for (int i = 0; i < s.length(); i++)
+    // {
+    //     if (s[i] != 'W' || s[i + 1] != 'U' || s[i + 2] != 'B') //if it forms something else than WUB
+    //     {
+    //         cout << s[i];
+    //         if (s[i + 1] == 'W' && s[i + 2] == 'U' && s[i + 3] == 'B') // next 3 letters are WUB then space
+    //             cout << " ";
+    //     }
+    //     else
+    //         i += 2;
+    // }
     /*
     string s;
     cin >> s;
@@ -68,13 +86,11 @@ void solve()
     return;
 }
 
-int main()
-{
+int main() {
     fast_io();
     ll t = 1;
     //cin >> t;
-    while (t--)
-    {
+    while (t--) {
         solve();
     }
     return 0;
