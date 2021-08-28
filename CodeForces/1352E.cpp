@@ -1,5 +1,5 @@
 #ifndef ONLINE_JUDGE
-#include "Akshat.h"
+#include "Akshat.hpp"
 #else
 #include "bits/stdc++.h"
 using namespace std;
@@ -17,7 +17,7 @@ using o_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_nod
 //2. find_by_order(k) : k-th element in the set
 
 #define ll long long
-#define db long double
+#define db double
 #define str string
 #define ull unsigned long long
 #define fo(i, n) for (ll i = 0; i < n; i++)
@@ -27,12 +27,8 @@ using o_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_nod
 #define deb2(x, y) cout << "[" << #x << "]: " << x << ", [" << #y << "]: " << y << ln
 #define bit(x) __builtin_popcount(x)
 #define bitll(x) __builtin_popcountll(x)
-#define popb pop_back
 #define pb push_back
 #define eb emplace_back
-#define mp(x, y) make_pair(x, y)
-#define ub upper_bound
-#define lb lower_bound
 #define ff first
 #define ss second
 #define all(x) (x).begin(), (x).end()
@@ -43,7 +39,7 @@ using o_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_nod
 #define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
 #define PI 3.1415926535897932384626
 #define sz(x) ((ll)(x).size())
-#define present(b, a) ((a).find((b)) != (a).end())  //if b is present in a
+#define present(b, a) ((a).find((b)) != (a).end())
 #define yes() cout << "YES\n"
 #define no() cout << "NO\n"
 const ll mod = 1e9 + 7;  //1000000007
@@ -60,14 +56,6 @@ typedef vector<int> vi;
 typedef vector<pi> vpi;
 typedef vector<vi> vvi;
 
-template <typename T>
-void print(T &&t) { cout << t << "\n"; }
-template <typename T, typename... Args>
-void print(T &&t, Args &&...args) {
-    cout << t << " ";
-    print(forward<Args>(args)...);
-}  //print template ends
-
 template <typename T, typename T1>
 T amax(T &a, T1 b) {
     if (b > a) a = b;
@@ -79,11 +67,52 @@ T amin(T &a, T1 b) {
     return a;
 }
 
-void Solution() {
-    //code here
-
-    //read stuff at the bottom
+//*Operator overloads
+template <typename T1, typename T2>  // cin >> pair<T1, T2>
+istream &operator>>(istream &istream, pair<T1, T2> &p) { return (istream >> p.first >> p.second); }
+template <typename T>  // cin >> vector<T>
+istream &operator>>(istream &istream, vector<T> &v) {
+    for (auto &it : v) cin >> it;
+    return istream;
 }
+template <typename T1, typename T2>  // cout << pair<T1, T2>
+ostream &operator<<(ostream &ostream, const pair<T1, T2> &p) { return (ostream << p.first << " " << p.second); }
+template <typename T>  // cout << vector<T>
+ostream &operator<<(ostream &ostream, const vector<T> &c) {
+    for (auto &it : c) cout << it << " ";
+    return ostream;
+}
+
+template <typename T>
+void print(T &&t) { cout << t << "\n"; }
+template <typename T, typename... Args>
+void print(T &&t, Args &&...args) {
+    cout << t << " ";
+    print(forward<Args>(args)...);
+}
+
+void Solution() {
+    // storing sum of all subsets and binary search will give MLE
+    // lets store in array
+    int n;
+    cin >> n;
+    vl a(n);
+    ll mp[8005]{};  //because maps have logn lookup
+    fo(i, n) cin >> a[i], ++mp[a[i]];
+    ll ans = 0;
+    fo(i, n) {
+        ll sum = a[i];
+        rep(j, i + 1, n) {
+            sum += a[j];
+            if (sum <= n) {
+                ans += mp[sum];
+                mp[sum] = 0;
+            }
+        }
+    }
+    print(ans);
+}
+//*read stuff at the bottom
 
 int main() {
 #ifndef ONLINE_JUDGE
@@ -93,12 +122,12 @@ int main() {
     ios_base::sync_with_stdio(false), cin.tie(nullptr);
 
     ll tc = 1;
-    //cin >> tc;
+    cin >> tc;
     while (tc--) {
         Solution();
     }
 
-    cerr << clock() / CLOCKS_PER_SEC * 1000 << " ms" << endl;
+    cerr << (float)clock() / CLOCKS_PER_SEC << " secs" << endl;
     return 0;
 }
 
@@ -112,4 +141,6 @@ int main() {
     * When using a set, lower_bound(all(set),l) is slower than set.lower_bound(l) because of random iterators
     * string .append() or += is O1, but s = s + s is On (as it creates a copy first), use wisely
     * DONT GET STUCK ON ONE APPROACH
+    * use __lg(n) instead of log2(n), int: 32 - __builtin_clz(n), ll: 63 - __builtin_clzll(n), https://codeforces.com/blog/entry/45966
+    * string.rfind() finds first occurence from end
 */
