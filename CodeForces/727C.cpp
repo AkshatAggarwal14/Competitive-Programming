@@ -84,56 +84,35 @@ ostream &operator<<(ostream &ostream, const vector<T> &c) {
 }
 
 template <typename T>
-void print(T &&t) { cout << t << "\n"; }
+void print(T &&t) { cout << t << endl; }
 template <typename T, typename... Args>
 void print(T &&t, Args &&...args) {
     cout << t << " ";
     print(forward<Args>(args)...);
 }
 
-ll q_and(ll i, ll j) {
-    cout << "and " << i << " " << j << endl;
-    ll res;
-    cin >> res;
-    return res;
-}
-
-ll q_or(ll i, ll j) {
-    cout << "or " << i << " " << j << endl;
+ll query(ll i, ll j) {
+    cout << "? " << i << " " << j << endl;
     ll res;
     cin >> res;
     return res;
 }
 
 void Solution() {
-    //! key: (a & b) + (a | b) = a + b
-
-    ll n, k;
-    cin >> n >> k;
-    ll s1 = q_and(1, 2) + q_or(1, 2);  //a+b
-    ll s2 = q_and(2, 3) + q_or(2, 3);  //b+c
-    ll s3 = q_and(1, 3) + q_or(1, 3);  //a+c
+    ll n;
+    cin >> n;
     vl a(n);
-    a[0] = ((s1 + s3) - s2) / 2;
-    a[1] = ((s1 + s2) - s3) / 2;
-    a[2] = ((s2 + s3) - s1) / 2;
-    for (ll i = 4; i <= n; ++i) {
-        ll x = q_and(1, i) + q_or(1, i);
-        a[i - 1] = x - a[0];
-    }
-    sort(all(a));
-    cout << "finish " << a[k - 1] << endl;
-
-    //? https://codeforces.com/blog/entry/94384?#comment-834316
-    // 5n/3 queries using
-    //! (a ^ b) = (a & b) ^ (a | b)
-    //! (b ^ c) = (a ^ b) ⊕ (a ^ c) <- FREE
-    //! (a + b) = (a ^ b) + 2 * (a & b)
+    ll s1 = query(1, 2), s2 = query(2, 3), s3 = query(1, 3);
+    a[0] = (s1 + s3 - s2) / 2;
+    a[1] = (s1 + s2 - s3) / 2;
+    a[2] = (s2 + s3 - s1) / 2;
+    for (ll i = 3; i < n; ++i) a[i] = query(1, i + 1) - a[0];
+    cout << "! ";
+    print(a);
 }
+//*read stuff at the bottom
 
 int main() {
-    // ios_base::sync_with_stdio(false), cin.tie(nullptr);
-
     ll tc = 1;
     //cin >> tc;
     while (tc--) {
@@ -156,4 +135,5 @@ int main() {
     * DONT GET STUCK ON ONE APPROACH
     * use __lg(n) instead of log2(n), int: 32 - __builtin_clz(n), ll: 63 - __builtin_clzll(n), https://codeforces.com/blog/entry/45966
     * string.rfind() finds first occurence from end
+    * (a & b) + (a | b) = a + b
 */
