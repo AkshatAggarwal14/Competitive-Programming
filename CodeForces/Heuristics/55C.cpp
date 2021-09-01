@@ -113,7 +113,24 @@ ll findpos(string n) {
 void Solution() {
     str s;
     cin >> s;
-    print(findpos(s));
+    //! m1
+    // print(findpos(s));
+
+    //! m2
+    //convert 248 to 123 and then use positional values
+    reverse(all(s));
+    ll ans = 0, val = 0;
+    ll n = sz(s);
+    fo(i, n) {
+        if (s[i] == '2')
+            val = 1;
+        else if (s[i] == '4')
+            val = 2;
+        else if (s[i] == '8')
+            val = 3;
+        ans += (val * (static_cast<ll>(pow(3, i))));
+    }
+    print(ans);
 }
 //*read stuff at the bottom
 
