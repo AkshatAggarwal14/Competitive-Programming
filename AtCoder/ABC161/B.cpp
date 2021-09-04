@@ -96,7 +96,6 @@ void Solution() {
     cin >> n >> m;
     vl a(n);
     cin >> a;
-    ll cnt = 0;
     ll sum = accumulate(all(a), 0LL);
     sum /= (4 * m);
     ll cnt{};
