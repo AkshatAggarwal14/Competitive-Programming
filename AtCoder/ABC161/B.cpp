@@ -97,9 +97,9 @@ void Solution() {
     vl a(n);
     cin >> a;
     ll sum = accumulate(all(a), 0LL);
-    sum /= (4 * m);
+    // sum /= (4 * m);
     ll cnt{};
-    fo(i, n) if (a[i] >= sum)++ cnt;
+    fo(i, n) if (a[i] * 4 * m >= sum)++ cnt;
     if (cnt >= m)
         yes();
     else
