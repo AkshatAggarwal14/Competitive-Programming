@@ -2,16 +2,17 @@
 using namespace std;
 
 // Add edge
-void addEdge(vector<vector<int>> adj, int s, int d) {
+void addEdge(vector<vector<int>> &adj, int s, int d) {
     adj[s].push_back(d);
     adj[d].push_back(s);
 }
 
 // Print the graph
-void printGraph(vector<vector<int>> adj, int V) {
-    for (int d = 0; d < V; ++d) {
-        cout << "\nVertex " << d << " ";
-        for (auto x : adj[d]) cout << "-> " << x;
+void printGraph(vector<vector<int>> adj) {
+    for (int d = 0; d < (int)adj.size(); ++d) {
+        cout << "Vertex " << d;
+        for (auto x : adj[d]) cout << " -> " << x;
+        cout << '\n';
     }
 }
 
@@ -28,5 +29,5 @@ int main() {
     addEdge(adj, 2, 0);
     addEdge(adj, 2, 3);
 
-    printGraph(adj, V);
+    printGraph(adj);
 }
