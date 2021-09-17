@@ -9,11 +9,10 @@ If the following graph represents a network of friends, then
 - Node 2 and 1 are friends
 - Node 2 and 4 aren't (they are mutual friends of 1 and 3)
 
-<p align="center">
-  <img src="./images/1.png" alt="Graph"/>
-</p>
+![image](./images/1.png)
 
-In the above undirected Graph, the set of vertices `V = \{0,1,2,3,4\}` and the set of edges `E = \{(1, 0), (0, 4), (1, 4), (1, 3), (3, 4), (1, 2), (3, 2)\}`.
+
+In the above undirected Graph, the set of vertices `V = {0,1,2,3,4}` and the set of edges `E = {(1, 0), (0, 4), (1, 4), (1, 3), (3, 4), (1, 2), (3, 2)}`.
 
 ## Representations
 
@@ -38,11 +37,7 @@ There are other representations also like, Incidence Matrix and Incidence List. 
 
 The adjacency matrix for the above example graph is: 
 
-<!-- ![image](images/2.png) -->
-<p align="center">
-  <img src="./images/2.png" alt="Adjacency Matrix"/>
-</p>
-
+![image](./images/2.png)
 
 #### Pros
 - Representation is easier to implement and follow. 
@@ -59,9 +54,8 @@ The adjacency matrix for the above example graph is:
 - Let the array be an `array[~]`. An entry `array[i]` represents the list of vertices adjacent to the ith vertex. This representation can also be used to represent a weighted graph. 
 
 The weights of edges can be represented as lists of pairs. Following is the adjacency list representation of the above graph:
-<p align="center">
-  <img src="./images/3.png" alt="Adjacency List"/>
-</p>
+
+![image](./images/3.png)
 
 #### Pros
 - Saves space `O(|V|+|E|)`.
