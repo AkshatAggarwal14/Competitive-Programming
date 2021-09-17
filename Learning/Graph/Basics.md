@@ -9,7 +9,10 @@ If the following graph represents a network of friends, then
 - Node 2 and 1 are friends
 - Node 2 and 4 aren't (they are mutual friends of 1 and 3)
 
-![Graph](Images/graph.png)
+<!-- ![Graph](Images/graph.png) -->
+<p align="center">
+  <img src="Images/graph.png" alt="Graph"/>
+</p>
 
 
 In the above undirected Graph, the set of vertices `V = {0,1,2,3,4}` and the set of edges `E = {(1, 0), (0, 4), (1, 4), (1, 3), (3, 4), (1, 2), (3, 2)}`.
@@ -37,7 +40,10 @@ There are other representations also like, Incidence Matrix and Incidence List. 
 
 The adjacency matrix for the above example graph is: 
 
-![Adjacency Matrix](Images/adjmatrix.png)
+<!-- ![Adjacency Matrix](Images/adjmatrix.png) -->
+<p align="center">
+  <img src="Images/adjmatrix.png" alt="Adjacency Matrix"/>
+</p>
 
 #### Pros
 - Representation is easier to implement and follow. 
@@ -55,7 +61,10 @@ The adjacency matrix for the above example graph is:
 
 The weights of edges can be represented as lists of pairs. Following is the adjacency list representation of the above graph:
 
-![Adjacency List](Images/adjlist.png)
+<!-- ![Adjacency List](Images/adjlist.png) -->
+<p align="center">
+  <img src="Images/adjlist.png" alt="Adjacency List"/>
+</p>
 
 #### Pros
 - Saves space `O(|V|+|E|)`.
