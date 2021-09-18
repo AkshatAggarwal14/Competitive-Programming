@@ -1,83 +1,50 @@
-//****************master._.mind****************
-//-----------Author: Akshat Aggarwal-----------
-#include <bits/stdc++.h>
+#ifndef ONLINE_JUDGE
+#include "Akshat.hpp"
+#else
+#include "bits/stdc++.h"
 using namespace std;
+#define dbg(...)
+#define debug(...)
+#endif
 
-#define ll long long
+using ll = int64_t;
+using str = string;
+template <class T>
+using v = vector<T>;
+using vl = v<ll>;
+using vvl = v<vl>;
 #define fo(i, n) for (ll i = 0; i < n; i++)
-#define rep(i, k, n) for (ll i = k; k < n ? i < n : i > n; k < n ? i++ : i--)
-#define deb(x) cout << #x << "=" << x << endl
-#define deb2(x, y) cout << #x << "=" << x << "," << #y << "=" << y << endl
-#define pb(x) push_back(x)
-#define mp(x, y) make_pair(x, y)
-#define ub() upper_bound()
-#define lb() lower_bound()
-#define F first
-#define S second
-#define all(x) x.begin(), x.end()
-#define rall(x) x.rbegin(), x.rend()
-#define ps(x, y) fixed << setprecision(y) << x
-#define clr(x) memset(x, 0, sizeof(x))
-#define sortall(x) sort(all(x))
 #define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
-#define PI 3.1415926535897932384626
-#define endl "\n"
-#define fast_io()                 \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0)
-const ll mod = 1e9 + 7;
-const ll inf = LLONG_MAX;
-const double eps = 1e-12;
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pl;
-typedef vector<int> vi;
-typedef vector<ll> vl;
-typedef vector<pii> vpii;
-typedef vector<pl> vpl;
-typedef vector<vi> vvi;
-typedef vector<vl> vvl;
-//ll divisorCount(ll);
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((ll)(x).size())
 
-const int N = 1000010;
-int cnt[N];
-long long f[N];
+const int N = 100010;
+vector<ll> cnt(N, 0);
+vector<ll> dp(N, 0);
 
-void solve()
-{
-
+void solve() {
     ll n;
     cin >> n;
-    clr(cnt);
-    fo(i, n)
-    {
+    fo(i, n) {
         ll num;
         cin >> num;
         cnt[num]++;
     }
-    f[0] = 0;
-    for (int i = 1; i < N; i++)
-    {
-        f[i] = (ll)i * cnt[i];
-        if (i - 2 >= 0)
-            f[i] += f[i - 2];
-        if (f[i - 1] > f[i])
-            f[i] = f[i - 1];
+    dp[0] = 0;
+    for (int i = 1; i < N; i++) dp[i] = i * cnt[i];
+    for (int i = 1; i < N; ++i) {
+        if (i > 1) dp[i] += dp[i - 2];
+        if (dp[i - 1] > dp[i]) dp[i] = dp[i - 1];  //as removing previous would be ok
     }
-    cout << f[N - 1];
-
-    return;
+    cout << dp[N - 1];
 }
 
-int main()
-{
-    fast_io();
-    ll t = 1;
-    //cin >> t;
-    while (t--)
-    {
-        solve();
-        cout << "\n";
-    }
+int main() {
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    cin.tie(nullptr)->sync_with_stdio(false);
+    solve();
     return 0;
 }
