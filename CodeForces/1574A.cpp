@@ -111,6 +111,18 @@ void Solution() {
     // ((())), (())(), ()()() <- 3
 }
 
+void solve() {
+    ll n;
+    cin >> n;
+    rep(i, 1, n + 1) {
+        rep(j, 1, i + 1) cout << '(';
+        rep(j, 1, i + 1) cout << ')';
+        rep(j, 1, n - i + 1) cout << '(';
+        rep(j, 1, n - i + 1) cout << ')';
+        cout << '\n';
+    }
+}
+
 // --------------------------------</Solve>-------------------------------
 
 int main() {
@@ -122,7 +134,8 @@ int main() {
     ll tc = 1;
     cin >> tc;
     while (tc--) {
-        Solution();
+        solve();
+        // Solution();
     }
 #ifndef ONLINE_JUDGE
     cerr << fixed << setprecision(4) << (double)clock() / CLOCKS_PER_SEC << " secs" << endl;
