@@ -37,7 +37,7 @@ using namespace std;
     cin.tie(0);                   \
     cout.tie(0)
 //cin.tie(NULL) is used to read all input before displaying any output
-const ll mod = 1e9 + 7; //1000000007
+const ll mod = 1e9 + 7;  //1000000007
 const ll mod2 = 998244353;
 const ll inf = LLONG_MAX;
 const double eps = 1e-12;
@@ -86,23 +86,19 @@ void _print(multiset<T> v);
 The idea is to fill the required number from end. We know can observe that the last digit is 4 if n is odd and last digit is 7 if n is even. After filling last digit, we move to parent node in tree. If n is odd, then parent node corresponds to (n-1/2. Else parent node corresponds to (n-2)/2. 
 */
 
-ll NthLuckyNumber(ll n)
-{
+ll NthLuckyNumber(ll n) {
     string res = "";
-    while (n >= 1)
-    {
+    while (n >= 1) {
         // If n is odd, append 4 and
         // move to parent
-        if (n & 1)
-        {
+        if (n & 1) {
             res = res + "4";
             n = (n - 1) / 2;
         }
 
         // If n is even, append 7 and
         // move to parent
-        else
-        {
+        else {
             res = res + "7";
             n = (n - 2) / 2;
         }
@@ -118,11 +114,9 @@ ll NthLuckyNumber(ll n)
 }
 
 vl lucky;
-void fillLukcy()
-{
+void fillLukcy() {
     ll i = 1;
-    while (true)
-    {
+    while (true) {
         if (NthLuckyNumber(i - 1) > mod)
             re;
         lucky.pb(NthLuckyNumber(i));
@@ -131,8 +125,7 @@ void fillLukcy()
     re;
 }
 
-void solve()
-{
+void solve() {
     //*********************CODE STARTS HERE*********************
 
     //! M1 find all "lucky numbers" until the range.
@@ -155,25 +148,20 @@ void solve()
     // }
     // cout << ans; //:' TLE AT TEST 15
 
-    for (int i = 0; i < lucky.size(); i++)
-    {
+    for (int i = 0; i < lucky.size(); i++) {
         if (l > r)
             break;
-        if (l <= lucky[i])
-        {
-            if (r >= lucky[i])
-            {
-                int cnt = lucky[i] - l + 1; //count of numbers between l and lucky[i]
+        if (l <= lucky[i]) {
+            if (r >= lucky[i]) {
+                int cnt = lucky[i] - l + 1;  //count of numbers between l and lucky[i]
                 ans += lucky[i] * cnt;
-                l = lucky[i] + 1; //start from after the count is completed
-            }
-            else
-            {
-                ans += lucky[i]; // add greater element for one element at a time
-                l++;             // adding 1 to l when r<lucky[i] and
-                                 //for example when l is 2 and 3 so lucky[i] is 4 so we add 4 for 2 and 4 for 3 but not for 4 so we go through them one by one when r<lucky[i]
-                                 //! instead we could have counted terms where r<lucky[i] and then multiply by lucky[i]
-                i--;             //to nullify i++ from for loop which takes us to next one.
+                l = lucky[i] + 1;  //start from after the count is completed
+            } else {
+                ans += lucky[i];  // add greater element for one element at a time
+                l++;              // adding 1 to l when r<lucky[i] and
+                                  //for example when l is 2 and 3 so lucky[i] is 4 so we add 4 for 2 and 4 for 3 but not for 4 so we go through them one by one when r<lucky[i]
+                                  //! instead we could have counted terms where r<lucky[i] and then multiply by lucky[i]
+                i--;              //to nullify i++ from for loop which takes us to next one.
             }
         }
     }
@@ -181,10 +169,9 @@ void solve()
 
     //**********************CODE ENDS HERE**********************
     re;
-} //todo solve
+}  //todo solve
 
-int main()
-{
+int main() {
     fast_io();
 #ifndef ONLINE_JUDGE
     freopen("error.txt", "w", stderr);
@@ -197,8 +184,7 @@ int main()
     ll testcases = 1;
     //todo testcases
     //cin >> testcases;
-    while (testcases--)
-    {
+    while (testcases--) {
         solve();
         cn;
     }
@@ -208,12 +194,11 @@ int main()
     double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
     cerr << "\nTime taken:" << ln << ps(time_taken, 6) << " sec\n";
     re 0;
-} //todo main
+}  //todo main
 
 //* ------function definitions------
 template <class T, class V>
-void _print(pair<T, V> p)
-{
+void _print(pair<T, V> p) {
     cerr << "{";
     _print(p.ff);
     cerr << ",";
@@ -221,44 +206,36 @@ void _print(pair<T, V> p)
     cerr << "}";
 }
 template <class T>
-void _print(vector<T> v)
-{
+void _print(vector<T> v) {
     cerr << "[ ";
-    for (T i : v)
-    {
+    for (T i : v) {
         _print(i);
         cerr << " ";
     }
     cerr << "]";
 }
 template <class T>
-void _print(set<T> v)
-{
+void _print(set<T> v) {
     cerr << "[ ";
-    for (T i : v)
-    {
+    for (T i : v) {
         _print(i);
         cerr << " ";
     }
     cerr << "]";
 }
 template <class T>
-void _print(multiset<T> v)
-{
+void _print(multiset<T> v) {
     cerr << "[ ";
-    for (T i : v)
-    {
+    for (T i : v) {
         _print(i);
         cerr << " ";
     }
     cerr << "]";
 }
 template <class T, class V>
-void _print(map<T, V> v)
-{
+void _print(map<T, V> v) {
     cerr << "[ ";
-    for (auto i : v)
-    {
+    for (auto i : v) {
         _print(i);
         cerr << " ";
     }
