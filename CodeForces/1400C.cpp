@@ -78,61 +78,27 @@ bool amax(T& a, U&& b) {
 
 // ---------------------------------<Solve>-------------------------------
 
-// /*** @brief Nth lucky number */
-// ll NthLuckyNumber(ll n) {
-//     string res = "";
-//     while (n >= 1) {
-//         if (n & 1) {  // If n is odd, append 4 and move to parent
-//             res.push_back('4');
-//             n = (n - 1) / 2;
-//         } else {  // If n is even, append 7 and move to parent
-//             res.push_back('7');
-//             n = (n - 2) / 2;
-//         }
-//     }
-//     // Reverse res and return.
-//     reverse(all(res));
-//     // converting string to number using a stringstream
-//     stringstream ok(res);
-//     ll ret = 0;
-//     ok >> ret;
-//     return ret;
-// }
-// vl lucky;
-// void fill() {
-//     ll i = 1;
-//     while (true) {
-//         if (NthLuckyNumber(i - 1) > mod)
-//             return;
-//         lucky.push_back(NthLuckyNumber(i));
-//         i++;
-//     }
-// }
-
-//! Recursion
-vl lucky;
-void fill(ll num, ll digits) {
-    if (digits == 10) return;
-    lucky.push_back(num * 10 + 4);
-    fill(num * 10 + 4, digits + 1);
-    lucky.push_back(num * 10 + 7);
-    fill(num * 10 + 7, digits + 1);
-}
-
 void Solution() {
-    fill(0, 0);
-    dbg(lucky);
-    sort(all(lucky));
-    ll l, r, sum{};
-    cin >> l >> r;
-    while (l <= r) {
-        ll it = *lower_bound(all(lucky), l);
-        sum += (it - l + 1) * (it);
-        l = it + 1;
+    ll x;
+    str s;
+    cin >> s >> x;
+    int n = s.size();
+    str w(n, '1');
+    fo(i, n) {
+        if (s[i] == '0') {
+            if (i - x >= 0) w[i - x] = '0';
+            if (i + x < n) w[i + x] = '0';
+        }
     }
-    ll it = *lower_bound(all(lucky), r);
-    sum -= (it - r) * (it);
-    cout << sum;
+    bool flag = true;
+    fo(i, n) {
+        if ((i - x >= 0 and w[i - x] == '1') or (i + x < n and w[i + x] == '1')) {
+            if (s[i] == '0') flag = false;
+        } else {
+            if (s[i] == '1') flag = false;
+        }
+    }
+    cout << (flag ? w : "-1") << '\n';
 }
 
 // --------------------------------</Solve>-------------------------------
@@ -144,8 +110,7 @@ int main() {
 #endif
     cin.tie(nullptr)->sync_with_stdio(false);
     ll tc = 1;
-    // fill();
-    //cin >> tc;
+    cin >> tc;
     while (tc--) {
         Solution();
     }
