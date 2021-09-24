@@ -84,31 +84,32 @@ void Solution() {
     vl a(n);
     fo(i, n) cin >> a[i];
     sort(all(a));
-    ll mid = n / 2;
-    ll mini = 0;
-    for (ll i = mid + 1; i < n; ++i) {
-        mini += (a[n - 1] - a[i]);
+    ll cnt = 1;
+    if (sz(a) < 3) {
+        cout << a[0] + k << '\n';
+        return;
     }
-    dbg(mini);
-    // mini is minimum requirement to inc 1
-    if (k < mini) {
-        cout << a[mid] << '\n';
-    } else {
-        k -= mini;
-        //remaining k directly on a[mid] until it is equal to a[n-1]
-        if (k <= a[n - 1] - a[mid]) {
-            a[mid] += k;
-            cout << a[mid] << '\n';
+    rep(i, n / 2 + 1, n) {
+        if (k > cnt * (a[i] - a[i - 1])) {
+            k -= cnt * (a[i] - a[i - 1]);  // previous cnt equal to it current so decrement k for all
+            cnt++;
+            /**
+             * 1 2 3 4 100
+             * 1 2 4 4 100 <== k -= 2 * (100 - 4)
+             * 1 2 100 100 100
+             */
         } else {
-            k -= (a[n - 1] - a[mid]);
-            a[mid] = a[n - 1];
-            ll ele = n / 2 + 1;
-            cout << a[mid] + k / ele << '\n';
+            // done until a[i - 1] and there are cnt equal elements before it.
+            cout << a[i - 1] + k / (cnt) << '\n';
+            return;
         }
     }
+    cout << a[n - 1] + k / (cnt) << '\n';
+    return;
 }
 /**
  * 1 2 3 4 4 4 4
+ * 1 1 1 1 100
 */
 
 // --------------------------------</Solve>-------------------------------
