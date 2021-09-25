@@ -71,6 +71,8 @@ void Solution() {
     fo(i, sz(primes)) {
         if (n % primes[i] != 0) {
             cout << primes[i] * n << ' ' << (primes[i] - 1) * n << '\n';  // As n and n-1 are coprime
+            // Let N*p has t+1 prime factors
+            // N*(p-1) will have t+1 too as p-1 will be even
             return;
         }
     }

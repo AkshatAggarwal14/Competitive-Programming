@@ -74,6 +74,40 @@ void Solution() {
         cout << a2;
 }
 
+void solve() {
+    /*
+        Case 1. If n is odd, n -= 1
+        Case 2. If n is divisible by 2 but not by 4, n /= 2
+        [OR] even and is maximum divisible by 2 (not divisible by 4,8,16...)
+        Case 3. If n is divisible by 4 
+        !Last case gives power to player to win
+        4 1 0  <->   4 2 1 0
+        12 1 0 <-> 12 3 2 1 0 <-> 12 6 3 2 1 0 
+        ?^ Thus we can add a number in between so we land at winning position
+    */
+    ll n;
+    cin >> n;
+    ll moves = 1;
+    while (n) {
+        if (n & 1)
+            n--;
+        else if (n % 4 != 0)
+            n /= 2;
+        else {
+            if (moves & 1) {
+                cout << "Alice\n";
+            } else
+                cout << "Bob\n";
+            return;
+        }
+        moves++;
+    }
+    if (moves & 1)
+        cout << "Bob\n";
+    else
+        cout << "Alice\n";
+}
+
 int main() {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
@@ -85,7 +119,7 @@ int main() {
 #endif
     ll tc = 1;
     cin >> tc;
-    for (ll i = 1; i <= tc; ++i) Solution();
+    for (ll i = 1; i <= tc; ++i) solve();
     cerr << "\n";
     cerr << (float)clock() / CLOCKS_PER_SEC << " secs" << endl;
     return 0;
