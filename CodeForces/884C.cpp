@@ -52,9 +52,8 @@ void Solution() {
         cout << loops[0] * loops[0];
     } else {
         sort(loops.begin(), loops.end());
-        loops[N - 2] += loops[N - 1];
-        ll ans = 0;
-        fo(i, sz(loops) - 1) ans += loops[i] * loops[i];
+        ll ans = (loops[N - 2] + loops[N - 1]) * (loops[N - 2] + loops[N - 1]);
+        fo(i, sz(loops) - 2) ans += loops[i] * loops[i];
         cout << ans;
     }
     cout << '\n';
