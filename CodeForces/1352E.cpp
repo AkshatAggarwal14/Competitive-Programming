@@ -114,6 +114,28 @@ void Solution() {
 }
 //*read stuff at the bottom
 
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> a(n + 1);
+    vector<int> values(8005);
+    rep(i, 1, n + 1) cin >> a[i], values[a[i]]++;
+    vector<int> pref(n + 1);
+    rep(i, 1, n + 1) pref[i] = pref[i - 1] + a[i];
+    int ans = 0;
+    rep(i, 1, n + 1) {
+        rep(j, i + 1, n + 1) {
+            int sum = pref[j] - pref[i - 1];
+            if (sum > 8000) break;
+            if (values[sum]) {
+                ans += values[sum];
+                values[sum] = 0;
+            }
+        }
+    }
+    cout << ans << '\n';
+}
+
 int main() {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
@@ -124,7 +146,7 @@ int main() {
     ll tc = 1;
     cin >> tc;
     while (tc--) {
-        Solution();
+        solve();
     }
 
     cerr << (float)clock() / CLOCKS_PER_SEC << " secs" << endl;
