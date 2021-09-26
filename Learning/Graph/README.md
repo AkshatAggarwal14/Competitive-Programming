@@ -158,7 +158,7 @@ We can mark the uncoloured nodes with some color and count how many we marked in
 ```py
 count = 0
 
-def dfs(node):
+dfs(node):
     color[node] = blue; count++
      # Takes list for a vertex from adj list
     for X in adj[node]:  
