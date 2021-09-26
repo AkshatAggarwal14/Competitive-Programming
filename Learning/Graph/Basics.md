@@ -87,7 +87,7 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 
 -   ![formula](https://render.githubusercontent.com/render/math?math=Distance): Number of edges between 2 connected nodes (on the path). Example: `1->2->3->4`, distance is 3
 
-# Types of graph:
+## Types of graph:
   -
     -   ![formula](https://render.githubusercontent.com/render/math?math=Undirected-Graph): Edges are non directional. Example: Brother 1 <-> Brother 2 (Bidirectional relationship) [1 -- 2]
     
