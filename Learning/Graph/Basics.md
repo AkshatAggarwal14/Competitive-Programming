@@ -55,8 +55,8 @@ The adjacency matrix for the above example graph is:
 - Queries like whether there is an edge from vertex ‘u’ to vertex ‘v’ are efficient and can be done `O(1)`.
 
 #### Cons
-- Consumes more space `O(V^2)`. Even if the graph is sparse(contains less number of edges), it consumes the same space. 
-- Adding a vertex is `O(V^2)` time. 
+- Consumes more space `O(N^2)`. Even if the graph is sparse(contains less number of edges), it consumes the same space. 
+- Adding a vertex is `O(N^2)` time. 
 
 ### Adjacency List: 
 - An array of lists is used. The size of the array is equal to the number of vertices. 
@@ -71,14 +71,14 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 </p>
 
 #### Pros
-- Saves space `O(|V|+|E|)`.
-- In the worst case, there can be `C(V, 2)` number of edges in a graph thus consuming `O(V^2)` space. 
+- Saves space `O(|V|+|E|)` OR `O(2M)` where M is number of edges.
+- In the worst case, there can be `C(V, 2)` number of edges in a graph thus consuming `O(N^2)` space. 
 - Adding a vertex is easier.
 
 #### Cons 
-- Queries like whether there is an edge from vertex u to vertex v are not efficient and can be done `O(V)`.
+- Queries like whether there is an edge from vertex u to vertex v are not efficient and can be done `O(N)`.
 
-# Important Things:
+# Important Terms:
 
 -   Two nodes are ![formula](https://render.githubusercontent.com/render/math?math=connected) if there exists a path between them. Example: `1->2->3->4`, 1 and 4 are connected
   Thus connectivity is defined based on path
@@ -112,7 +112,7 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 
   -
     - ![formula](https://render.githubusercontent.com/render/math?math=Connected-Graph): Path from any node to any other node
-    -  ![formula](https://render.githubusercontent.com/render/math?math=Disconnecte-Graph): Otherwise
+    -  ![formula](https://render.githubusercontent.com/render/math?math=Disconnected-Graph): Otherwise, A disconnected graph will have multiple connected components.
 
 <br/>
 
@@ -126,3 +126,85 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 1. In a connected component, all nodes are connected to each other.
 
 2. A connected component needs to be maximal. (Should not be a part of something bigger)
+
+# Connectivity Check
+
+> Tell if a given graph is connected or not.
+
+If we start along some vertex, and follow the edges, we must be able to reach all other vertices.
+
+### How to store a graph in a program?
+
+> We need to know which vertex is connected to which others
+
+1. Adjacency Matrix, `adj[][]` (Discussed above)
+2. Adjacency List (Discussed above) `[Uses less memory]`
+
+<p align="center">
+  <img src="Images/g1.png" alt="Graph"/>
+</p>
+
+### DFS (Depth First Search)
+
+We can mark the uncoloured nodes with some color and count how many we marked in total, if it is equal to number of nodes then the graph is connected
+> Just like throwing popcorn in maze to find out the exit<br><br> A grid is just like a graph, with positions we can move to representing the nodes.
+
+
+<p align="center">
+  <img src="Images/dfs-intro.png" alt="Graph"/>
+</p>
+
+#### Algorithm: 
+```py
+count = 0
+
+def dfs(node):
+    color[node] = blue; count++
+     # Takes list for a vertex from adj list
+    for X in adj[node]:  
+        if color[X] = blue:
+            continue
+        # Recursively go through all connected nodes
+        dfs(X)
+```
+
+#### Code (C++):
+
+```cpp
+const int N = 1'00'000;  // maximum number of nodes
+vector<int> adj[N];      //adjacency list
+bool visited[N];
+int cnt;
+
+void dfs(int node) {
+    // mark it blue
+    visited[node] = true;
+    cnt++;
+    for (int x : adj[node]) {
+        if (visited[x]) continue;
+        dfs(x);
+    }
+}
+
+int main() {
+    int n;  // nodes
+    cin >> n;
+    int m;  // edges
+    cin >> m;
+
+    for (int i = 0; i < m; ++i) {
+        int x, y;
+        cin >> x >> y;  // represents edge between x and y
+        adj[x].push_back(y);
+        adj[y].push_back(x);
+        // As undirected so both edges
+    }
+    dfs(1);  // dfs from any node
+    if (n == cnt) {
+        // connected graph
+    } else {
+        // not connected
+    }
+    return 0;
+}
+```
