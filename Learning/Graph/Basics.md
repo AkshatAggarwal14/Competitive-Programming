@@ -77,3 +77,52 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 
 #### Cons 
 - Queries like whether there is an edge from vertex u to vertex v are not efficient and can be done `O(V)`.
+
+# Important Things:
+
+-   Two nodes are ![formula](https://render.githubusercontent.com/render/math?math=connected) if there exists a path between them. Example: `1->2->3->4`, 1 and 4 are connected
+  Thus connectivity is defined based on path
+
+-   ![formula](https://render.githubusercontent.com/render/math?math=Cycle): We come back to the same node without repeating. Example: `1->2->3->4->1`
+
+-   ![formula](https://render.githubusercontent.com/render/math?math=Distance): Number of edges between 2 connected nodes (on the path). Example: `1->2->3->4`, distance is 3
+
+# Types of graph:
+  -
+    -   ![formula](https://render.githubusercontent.com/render/math?math=Undirected-Graph): Edges are non directional. Example: Brother 1 <-> Brother 2 (Bidirectional relationship) [1 -- 2]
+    
+    -   ![formula](https://render.githubusercontent.com/render/math?math=Directed-Graph): Edges are directional. Example: Father -> Son (Unidirectional) 1 --> 2
+
+<br/>
+
+  -  
+    -   ![formula](https://render.githubusercontent.com/render/math?math=Weighted-Graph): Edges have weights. Example: Flight route with cost of edges    
+
+    -    ![formula](https://render.githubusercontent.com/render/math?math=Unweighted-Graph): Normal Edges
+
+<br/>
+
+
+  - 
+    - ![formula](https://render.githubusercontent.com/render/math?math=Cyclic-Graph): If the graph has atleast one cycle
+    
+    - ![formula](https://render.githubusercontent.com/render/math?math=Acyclic-Graph): otherwise
+
+<br/>
+
+  -
+    - ![formula](https://render.githubusercontent.com/render/math?math=Connected-Graph): Path from any node to any other node
+    -  ![formula](https://render.githubusercontent.com/render/math?math=Disconnecte-Graph): Otherwise
+
+<br/>
+
+## Trees and Forests:
+  -   Both are Acyclic. No cycle is allowed.
+  -   ![formula](https://render.githubusercontent.com/render/math?math=Tree)    - Graph is connected.
+      <br>![formula](https://render.githubusercontent.com/render/math?math=Forest)  - Graph is disconnected.
+  -   Thus forest has different components. Forests are collection of trees, Thus its name.
+
+### Connected components: 
+1. In a connected component, all nodes are connected to each other.
+
+2. A connected component needs to be maximal. (Should not be a part of something bigger)
