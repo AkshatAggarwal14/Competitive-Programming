@@ -11,8 +11,7 @@ void dfs(int node) {
     visited[node] = true;
     cnt++;
     for (int x : adj[node]) {
-        if (visited[x]) continue;
-        dfs(x);
+        if (!visited[x]) dfs(x);
     }
 }
 
@@ -32,8 +31,10 @@ int main() {
     dfs(1);  // dfs from any node
     if (n == cnt) {
         // connected graph
+        cout << "Connected! :)";
     } else {
         // not connected
+        cout << "Not Connected :(";
     }
     return 0;
 }

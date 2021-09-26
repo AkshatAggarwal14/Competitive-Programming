@@ -191,7 +191,6 @@ int main() {
     cin >> n;
     int m;  // edges
     cin >> m;
-
     for (int i = 0; i < m; ++i) {
         int x, y;
         cin >> x >> y;  // represents edge between x and y
@@ -208,3 +207,10 @@ int main() {
     return 0;
 }
 ```
+
+> What is the time complexity of dfs?
+
+`O(m + n)` if `m` is number of edges and `n` is number of nodes
+
+> Why?
+
