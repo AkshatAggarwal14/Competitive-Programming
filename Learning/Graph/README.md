@@ -214,3 +214,12 @@ int main() {
 
 > Why?
 
+How many times do we visit a certain node? 
+`1` time as we never visit an already marked node
+Then it should be `O(n)` right?
+
+> Where does the O(n + `m`) come from?
+<br> How many times do we visit a single Edge?
+
+`2` times, as When at node A, `A->B`
+and similarly when at node B, `B->A`. Thus n + 2*m reduces to `O(n+m)` complexity.
