@@ -21,6 +21,8 @@ If the following graph represents a network of friends, then
 
 In the above undirected Graph, the set of vertices `V = {0,1,2,3,4}` and the set of edges `E = {(1, 0), (0, 4), (1, 4), (1, 3), (3, 4), (1, 2), (3, 2)}`.
 
+<br><br>
+
 ## Representations
 
 A graph is a data structure that consists of the following two components: 
@@ -78,6 +80,8 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 #### Cons 
 - Queries like whether there is an edge from vertex u to vertex v are not efficient and can be done `O(N)`.
 
+<br><br>
+
 # Important Terms:
 
 -   Two nodes are ![formula](https://render.githubusercontent.com/render/math?math=connected) if there exists a path between them. Example: `1->2->3->4`, 1 and 4 are connected
@@ -126,6 +130,8 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 1. In a connected component, all nodes are connected to each other.
 
 2. A connected component needs to be maximal. (Should not be a part of something bigger)
+
+<br><br>
 
 # Connectivity Check
 
@@ -223,6 +229,8 @@ Then it should be `O(n)` right?
 
 `2` times, as When at node A, `A->B`
 and similarly when at node B, `B->A`. Thus n + 2*m reduces to `O(n+m)` complexity.
+
+<br><br>
 
 # Connected Components
 
@@ -395,3 +403,99 @@ int main() {
 > What is time complexity of bfs?
 
 `O(n + m)` because every vertex is pushed and popped from queue only once, and every edge is visited twice `[Similar to DFS]`
+
+<br><br>
+
+# MultiNode BFS:
+
+We are given a matrix denoting some oranges, Green means rotten orange and orange means ripe.
+Every ripe orange adjacent to a rotten orange will rot in a minute.
+<p align="center">
+    <img src="Images/Oranges-1.png" alt="figure"/>
+</p>
+
+> Q1. Will All oranges Rot?
+
+Yes! All oranges will rot here, But how to check that using code?
+
+All oranges can be connected as vertices of graph, and we have to check that each connected component contains atleast one rotten orange, Thus only needs basic DFS.
+
+> Q2. Assume that all oranges will rot. Find the minimum time taken for all oranges to rot.
+
+#### Method 1: `O(NM*NM)`
+
+We run a BFS from each ripe orange to nearest rotten orange in O(NM) time and as there are NM vertices at max, the complexity is `O(NM*NM)`.
+
+#### Method 2: `O(NM)` -> Multinode BFS
+
+<p align="center">
+    <img src="Images/Oranges-2.png" alt="figure"/>
+</p>
+
+We consider an imaginary node "rot" and connect all rotten oranges to it. Now BFS from "rot" to all other nodes give minimum distance from it, and `dist[i] - 1` gives distance from nearest rotten orange.
+
+The maximum distance gives the time taken.
+
+Thus BFS only once, so `O(NM)`
+
+> When this is done, instead of pushing extra node in graph, we can instead push the rotten nodes in queue intially. [Because this will happen anyway after "rot" is popped.]
+
+### Code (C++):
+```cpp
+int n, m;
+int a[1000][1000];
+bool vis[1000][1000];
+
+bool valid(int x, int y) {
+    if (x < 0 || y < 0 || x >= n || y >= m) return false;
+    if (vis[x][y] || a[x][y] == 0) return false;  // if already visited or empty
+    return true;
+}
+
+// graph moves - 4 directions
+int dx[] = {1, 0, -1, 0};
+int dy[] = {0, 1, 0, -1};
+
+int main() {
+    cin >> n >> m;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> a[i][j];
+        }
+    }
+
+    // {x, y, distance}
+    queue<array<int, 3>> q;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (a[i][j] == 2) {
+                q.push({i, j, 0});  //distance 0 for rotten orange
+                vis[i][j] = true;
+            }
+        }
+    }
+
+    int ans = 0;  // max distance of any code
+    while (!q.empty()) {
+        int x = q.front()[0];
+        int y = q.front()[1];
+        int dis = q.front()[2];
+
+        ans = max(ans, dis);
+
+        q.pop();
+        for (int i = 0; i < 4; ++i) {  // 4 directions
+            int X = x + dx[i];
+            int Y = y + dy[i];
+
+            int newDis = dis + 1;
+            if (valid(X, Y)) {
+                vis[X][Y] = true;
+                q.push({X, Y, newDis});
+            }
+        }
+    }
+    cout << ans << '\n';
+    return 0;
+}
+```
