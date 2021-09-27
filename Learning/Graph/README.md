@@ -223,3 +223,113 @@ Then it should be `O(n)` right?
 
 `2` times, as When at node A, `A->B`
 and similarly when at node B, `B->A`. Thus n + 2*m reduces to `O(n+m)` complexity.
+
+# Connected Components
+
+> Count number of connected components in a given graph.
+
+<p align="center">
+  <img src="Images/connected.png" alt="Graph"/>
+</p>
+
+
+`Example`: Counting number of rooms in a given area.
+
+<p align="center">
+  <img src="Images/room.png" alt="Graph"/>
+</p>
+
+### Algorithm:
+```py
+components = 0
+
+loop node from 1 to n:
+    if node is blue:
+        continue
+    dfs(node)          #This function will look same
+    components += 1
+```
+
+## Methods of Graph Transversal
+
+There are two algorithms for graph transversal:
+1. DFS (Depth First Search) `[Already Discussed]`
+2. BFS (Breadth First Search)
+
+
+`Transversal` is in the following manner:
+<p align="center">
+  <img src="Images/bfs.png" alt="Graph"/>
+  &nbsp;
+  &nbsp;
+  <img src="Images/dfs.png" alt="Graph"/>
+</p>
+
+### Uses of BFS:
+
+It can be used to find shortest distance between 2 nodes.<br>
+We can fix a node and find shortest distance from it to all other nodes.
+
+<p align="center">
+  <img src="Images/shortest.png" alt="Graph"/>
+</p>
+
+`Example`: Shortest path between two houses in a city
+
+### Algorithm:
+```py
+#A queue is used to store the order in which we visit vertices
+queue 
+push initial vertex
+distance[initial] = 0
+while queue not empty:
+    take front of queue
+    add all unvisited children to queue
+    mark distance
+```
+
+### Code (C++):
+```cpp
+const int N = 1'00'000;  // maximum number of nodes
+vector<int> adj[N];      //adjacency list
+int dis[N];
+bool pushed_in_queue[N];  // visited
+
+int main() {
+    int n;  // nodes
+    cin >> n;
+    int m;  // edges
+    cin >> m;
+
+    for (int i = 0; i < m; ++i) {
+        int x, y;
+        cin >> x >> y;  // represents edge between x and y
+        // Undirected
+        adj[x].push_back(y);
+        adj[y].push_back(x);
+    }
+
+    // lets say we have to run bfs from 1
+    queue<int> q;
+    q.push(1);  // fixed vertex
+    dis[1] = 0;
+    pushed_in_queue[1] = true;
+
+    while (!q.empty()) {
+        int node = q.front();  // currently visiting this node
+        q.pop();               // dont want to visit this again
+
+        // Go through all children
+        for (int x : adj[node]) {
+            if (pushed_in_queue[x] == true) continue;
+            q.push(x);  //visit x later
+            dis[x] = dis[node] + 1;
+            pushed_in_queue[node] = true;  // to make sure we dont visit twice
+        }
+    }
+
+    cout << dis[10];  // must be 3
+
+    return 0;
+}
+```
