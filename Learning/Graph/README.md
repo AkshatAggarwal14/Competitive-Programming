@@ -499,3 +499,28 @@ int main() {
     return 0;
 }
 ```
+
+<br><br>
+
+# Dijkstra's Algorithm:
+
+> There are different cities and flights between them, flying cost for each route is given, We have to minimize the total cost of going from city A to city B.
+
+<p align="center">
+    <img src="Images/dijkstra.png" alt="Flight Map"/>
+</p>
+
+> `BFS` would have worked here, if the graph was unweighted or cost of each flight is same.
+
+Thus we can convert all to equal weights, by adding extra nodes in between. `[Hack]`
+
+
+<p align="center">
+    <img src="Images/dj-1.png" alt="Flight Map"/>
+    &nbsp;
+    <img src="Images/d-2.png" alt="Flight Map"/>
+</p>
+
+Now, as BFS works, we can just use it, But the problem is that there might be a long edge. Example: If the weight is ![formula](https://render.githubusercontent.com/render/math?math=10^9), we have to add many edges which is `NOT` feasible.
+
+- It can be observed that nodes with less distance are visited first.
