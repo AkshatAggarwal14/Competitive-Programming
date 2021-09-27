@@ -333,3 +333,7 @@ int main() {
     return 0;
 }
 ```
+
+> What is time complexity of bfs?
+
+`O(n + m)` because every vertex is pushed and popped from queue only once, and every edge is visited twice `[Similar to DFS]`
