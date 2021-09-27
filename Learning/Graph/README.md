@@ -271,7 +271,7 @@ It can be used to find shortest distance between 2 nodes.<br>
 We can fix a node and find shortest distance from it to all other nodes.
 
 <p align="center">
-  <img src="Images/shortest.png" alt="Graph"/>
+    <img src="Images/shortest.png" alt="Graph"/>
 </p>
 
 `Example`: Shortest path between two houses in a city
