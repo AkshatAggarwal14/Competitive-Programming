@@ -236,7 +236,7 @@ and similarly when at node B, `B->A`. Thus n + 2*m reduces to `O(n+m)` complexit
 `Example`: Counting number of rooms in a given area.
 
 <p align="center">
-  <img src="Images/room.png" alt="Graph"/>
+  <img src="Images/room.png" alt="room"/>
 </p>
 
 ### Algorithm:
