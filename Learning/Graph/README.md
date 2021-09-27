@@ -523,4 +523,4 @@ Thus we can convert all to equal weights, by adding extra nodes in between. `[Ha
 
 Now, as BFS works, we can just use it, But the problem is that there might be a long edge. Example: If the weight is ![formula](https://render.githubusercontent.com/render/math?math=10^9), we have to add many edges which is `NOT` feasible.
 
-- It can be observed that nodes with less distance are visited first.
+> It can be observed that nodes with less distance are visited first. This observation is the base of Dijkstra's Algorithm
