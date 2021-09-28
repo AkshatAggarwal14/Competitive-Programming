@@ -88,11 +88,7 @@ void Solution() {
     cin >> n >> m >> k;
     V<V<bool>> mark(n, V<bool>(m, false));
     V<V<char>> vv(n, V<char>(m));
-    fo(i, n) {
-        fo(j, m) {
-            cin >> vv[i][j];
-        }
-    }
+    fo(i, n) fo(j, m) cin >> vv[i][j];
 
     for (ll i = n - 1; i >= 0; --i) {
         for (ll j = 0; j < m; ++j) {
@@ -118,17 +114,13 @@ void Solution() {
             }
         }
     }
-    // cerrGrid();
     bool flag = true;
     fo(i, n) {
         fo(j, m) {
             if ((vv[i][j] == '*' && mark[i][j] == false)) flag = false;
         }
     }
-    if (flag)
-        cout << "YES\n";
-    else
-        cout << "NO\n";
+    cout << (flag ? "YES\n" : "NO\n");
 }
 
 // --------------------------------</Solve>-------------------------------
