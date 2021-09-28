@@ -606,9 +606,15 @@ The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `
 
 Finally we have, `dis[] = {0, 100, 200, 100, 300}`
 
+# MultiNode Dijkstra:
 
+> We are given a map of a city with traffc. The traffic is represented by time taken to travel throught that road. Hospitals are marked as blue and patients are marked as yellow. find nearest hospital for each patient.
 
+<p align="center">
+    <img src="Images/multi-dijkstra.png" alt="Flight Map"/>
+</p>
 
+This can be done by similarly creating a `"Need healthcare"` Node and connecting all patients to it, with `weight 0`. And now Dijkstra can be used with this as a source for all hospitals. [All patients can be inserted in the set already]
 
 
 
