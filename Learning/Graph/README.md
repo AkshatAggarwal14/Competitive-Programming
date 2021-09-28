@@ -525,18 +525,74 @@ Now, as BFS works, we can just use it.<br><br>But the `problem` is that there mi
 
 > It can be observed that nodes with less distance are visited first. This observation is the base of `Dijkstra's Algorithm`
 
+### Algorithm: 
 
+This is just like BFS but instead of a queue, we use a `set` or a `priority queue`.
+We push `{distance, node}` in the set.
 
+> We initiallise all distance to infinite. Then we push the source in set. Then we pop it and do BFS stuff. Now we iterate all children (Adj. vertices) to find their new distance now if newDis is smaller than old distance we modify it.
 
+### Code (C++):
 
+```cpp
+const int INF = 1e9;
 
+// Node and weight
+vector<pair<int, int>> v[100005];
+int d[100005];  // distance
 
+int main() {
+    int n, m;  // vertices, edges
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
+        int x, y, w;
+        cin >> x >> y >> w;
+        v[x].push_back({y, w});
+        v[y].push_back({x, w});
+    }
+    // initially all nodes at INF distance
+    for (int i = 1; i <= n; ++i) d[i] = INF;
 
+    // source is 1.
+    d[1] = 0;
+    // distance 1st so it is sorted
+    set<pair<int, int>> s;  //{distance, node}
+    s.insert({0, 1});
+    while (!s.empty()) {
+        int dis = s.begin()->first;
+        int vertex = s.begin()->second;
+        s.erase(s.begin());
 
+        for (pair<int, int> x : v[vertex]) {
+            int newDis = dis + x.second;
+            int newVer = x.first;
+            if (newDis < d[newVer]) {
+                s.erase({d[newVer], newVer}); // erase old distance
+                d[newVer] = newDis;  // update
+                s.insert({d[newVer], newVer});
+            }
+        }
+    }
 
+    for (int i = 1; i <= n; ++i) {
+        cout << d[i] << ' ';
+    }
+    return 0;
+}
+```
 
+The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `m > n`, thus `O(mlogn)` [`FASTER` than multinode bfs]
+<br><br>For each edge we are pushing something in set, thus `nlogm`(Because of set operations) and for each vertex we are poppong something out which gives `mlogn`.
 
+- Each node visited once.
+- Each edge visited twice.
 
+#### Dry run :
+<p align="center">
+    <img src="Images/dijkstra-dryrun.png" alt="Flight Map"/>
+</p>
+
+> We start with source node 1 and push {0, 1} in the set. Now we visit the children {100, 2}, {100, 4}, {200, 3}
 
 
 
