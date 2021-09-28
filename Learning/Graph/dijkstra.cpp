@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int INF = 1e9;
+// #include <Akshat.hpp>
 
 // Node and weight
 vector<pair<int, int>> v[100005];
@@ -26,6 +27,7 @@ int main() {
     while (!s.empty()) {
         int dis = s.begin()->first;
         int vertex = s.begin()->second;
+        // dbg("Parent (Before erase): ", s);
         s.erase(s.begin());
 
         for (pair<int, int> x : v[vertex]) {
@@ -35,6 +37,7 @@ int main() {
                 s.erase({d[newVer], newVer});
                 d[newVer] = newDis;  // update
                 s.insert({d[newVer], newVer});
+                // dbg("Child (After update): ", s);
             }
         }
     }

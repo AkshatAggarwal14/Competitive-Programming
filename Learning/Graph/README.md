@@ -150,7 +150,7 @@ If we start along some vertex, and follow the edges, we must be able to reach al
   <img src="Images/g1.png" alt="Graph"/>
 </p>
 
-### DFS (Depth First Search)
+### [DFS (Depth First Search)](https://cp-algorithms.com/graph/depth-first-search.html)
 
 We can mark the uncoloured nodes with some color and count how many we marked in total, if it is equal to number of nodes then the graph is connected
 > Just like throwing popcorn in maze to find out the exit<br><br> A grid is just like a graph, with positions we can move to representing the nodes.
@@ -232,7 +232,7 @@ and similarly when at node B, `B->A`. Thus n + 2*m reduces to `O(n+m)` complexit
 
 <br><br>
 
-# Connected Components
+# [Connected Components](https://cp-algorithms.com/graph/search-for-connected-components.html)
 
 > Count number of connected components in a given graph.
 
@@ -320,7 +320,7 @@ void CountingRooms() {
 
 There are two algorithms for graph transversal:
 1. DFS (Depth First Search) `[Already Discussed]`
-2. BFS (Breadth First Search)
+2. [BFS (Breadth First Search)](https://cp-algorithms.com/graph/breadth-first-search.html)
 
 
 `Transversal` is in the following manner:
@@ -502,7 +502,7 @@ int main() {
 
 <br><br>
 
-# Dijkstra's Algorithm:
+# [Dijkstra's Algorithm](https://cp-algorithms.com/graph/dijkstra_sparse.html):
 
 > There are different cities and flights between them, flying cost for each route is given, We have to minimize the total cost of going from city A to city B.
 
@@ -587,13 +587,24 @@ The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `
 - Each node visited once.
 - Each edge visited twice.
 
+> How to store predecessors using Dijkstra? [Here](https://cp-algorithms.com/graph/dijkstra.html)
+
 #### Dry run :
 <p align="center">
     <img src="Images/dijkstra-dryrun.png" alt="Flight Map"/>
 </p>
 
-> We start with source node 1 and push {0, 1} in the set. Now we visit the children {100, 2}, {100, 4}, {200, 3}
 
+- After updating children, s = {(100, 4)}
+- After updating children, s = {(100, 4), (200, 3)}
+- After updating children, s = {(100, 2), (100, 4), (200, 3)}
+- Before erasing parent, s = {(100, 2), (100, 4), (200, 3)}
+- After updating children, s = {(100, 4), (200, 3), (300, 5)}
+- Before erasing parent, s = {(100, 4), (200, 3), (300, 5)}
+- Before erasing parent, s = {(200, 3), (300, 5)}
+- Before erasing parent, s = {(300, 5)}<br>
+
+Finally we have, `dis[] = {0, 100, 200, 100, 300}`
 
 
 
