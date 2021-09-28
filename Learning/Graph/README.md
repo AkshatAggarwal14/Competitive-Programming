@@ -521,6 +521,39 @@ Thus we can convert all to equal weights, by adding extra nodes in between. `[Ha
     <img src="Images/d-2.png" alt="Flight Map"/>
 </p>
 
-Now, as BFS works, we can just use it.<br><br>But the problem is that there might be a long edge. Example: If the weight is ![formula](https://render.githubusercontent.com/render/math?math=10^9), we have to add many edges which is `NOT` feasible.
+Now, as BFS works, we can just use it.<br><br>But the `problem` is that there might be a long edge. Example: If the weight is ![formula](https://render.githubusercontent.com/render/math?math=10^9), we have to add many edges which is `NOT` feasible.
 
 > It can be observed that nodes with less distance are visited first. This observation is the base of Dijkstra's Algorithm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+<br><br>
+<br><br>
+# Relevant Questions:
+
+- CSES - [1192](https://cses.fi/problemset/task/1192)
+- CF - [884C](https://codeforces.com/contest/884/problem/C)
+- CF - [1033A](https://codeforces.com/contest/1033/problem/A)
