@@ -611,7 +611,7 @@ Finally we have, `dis[] = {0, 100, 200, 100, 300}`
 > We are given a map of a city with traffc. The traffic is represented by time taken to travel throught that road. Hospitals are marked as blue and patients are marked as yellow. find nearest hospital for each patient.
 
 <p align="center">
-    <img src="Images/multi-dijkstra.png" alt="Flight Map"/>
+    <img src="Images/multi-dijkstra.png" alt="Hospitals and patients"/>
 </p>
 
 This can be done by similarly creating a `"Need healthcare"` Node and connecting all patients to it, with `weight 0`. And now Dijkstra can be used with this as a source for all hospitals. [All patients can be inserted in the set already]
@@ -627,6 +627,6 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 <br><br>
 # Relevant Questions:
 
-- CSES - [1192](https://cses.fi/problemset/task/1192)
-- CF - [884C](https://codeforces.com/contest/884/problem/C)
-- CF - [1033A](https://codeforces.com/contest/1033/problem/A)
+- DFS - [CSES - 1192](https://cses.fi/problemset/task/1192)
+- DFS - [CF - 884C](https://codeforces.com/contest/884/problem/C)
+- DFS - [CF - 1033A](https://codeforces.com/contest/1033/problem/A)
