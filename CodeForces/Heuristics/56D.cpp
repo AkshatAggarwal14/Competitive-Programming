@@ -32,12 +32,17 @@ int main() {
     // 2 - people infected
     // 0 - susceptible
     // 1 - vaccinated
+
+    // {x, y}
+    queue<array<int, 2>> q;
     int A;
     cin >> A;
     for (int i = 0; i < A; ++i) {
         int X, Y;
         cin >> X >> Y;
         a[Y][X] = 2;
+        q.push({Y, X});
+        vis[Y][X] = true;
     }
     int V;
     cin >> V;
@@ -47,17 +52,7 @@ int main() {
         a[Y][X] = 1;
     }
 
-    // {x, y}
-    queue<array<int, 2>> q;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            if (a[i][j] == 2) {
-                q.push({i, j});
-                vis[i][j] = true;
-            }
-        }
-    }
-    // Visit all Nodes using BFS - FASTER THAN DFS
+    // Visit all Nodes using multisource BFS - FASTER THAN DFS
     while (!q.empty()) {
         int x = q.front()[0];
         int y = q.front()[1];
