@@ -83,6 +83,7 @@ bool check(str s) {
 }
 
 vector<str> vals;
+
 void fill() {
     for (char a = '0'; a <= '9'; ++a) {
         str s1 = "";
@@ -114,7 +115,21 @@ void fill() {
     }
 }
 
+void rec_fill(str s, ll digs) {
+    if (digs == 6) {
+        if (check(s)) {
+            vals.push_back(s);
+        }
+        return;
+    }
+    digs += 1;
+    for (char c = '0'; c <= '9'; ++c) {
+        rec_fill(s + c, digs);
+    }
+}
+
 void Solution() {
+    rec_fill("", 0);
     str s;
     cin >> s;
     // dbg(vals);
@@ -137,18 +152,7 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     cin.tie(nullptr)->sync_with_stdio(false);
-#ifdef NCR
-    init();
-#endif
-    fill();
-    ll tc = 1;
-    //cin >> tc;
-    while (tc--) {
-        Solution();
-    }
-#ifndef ONLINE_JUDGE
-    cerr << fixed << setprecision(4) << (double)clock() / CLOCKS_PER_SEC << " secs" << endl;
-#endif
+    Solution();
     return 0;
 }
 
