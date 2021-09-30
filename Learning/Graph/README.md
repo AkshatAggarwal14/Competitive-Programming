@@ -406,7 +406,7 @@ int main() {
 
 <br><br>
 
-# MultiNode BFS:
+# Multisource BFS:
 
 We are given a matrix denoting some oranges, Green means rotten orange and orange means ripe.
 Every ripe orange adjacent to a rotten orange will rot in a minute.
@@ -426,7 +426,7 @@ All oranges can be connected as vertices of graph, and we have to check that eac
 
 We run a BFS from each ripe orange to nearest rotten orange in O(NM) time and as there are NM vertices at max, the complexity is `O(NM*NM)`.
 
-#### Method 2: `O(NM)` -> Multinode BFS
+#### Method 2: `O(NM)` -> Multisource BFS
 
 <p align="center">
     <img src="Images/Oranges-2.png" alt="figure"/>
@@ -581,7 +581,7 @@ int main() {
 }
 ```
 
-The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `m > n`, thus `O(mlogn)` [`FASTER` than multinode bfs]
+The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `m > n`, thus `O(mlogn)` [`FASTER` than Multisource bfs]
 <br><br>For each edge we are pushing something in set, thus `nlogm`(Because of set operations) and for each vertex we are poppong something out which gives `mlogn`.
 
 - Each node visited once.
