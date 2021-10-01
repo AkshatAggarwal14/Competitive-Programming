@@ -333,8 +333,11 @@ There are two algorithms for graph transversal:
 
 ### Uses of BFS:
 
-It can be used to find shortest distance between 2 nodes.<br>
-We can fix a node and find shortest distance from it to all other nodes.
+1. It can be used to find shortest distance between 2 nodes.
+
+2. We can fix a node and find ***shortest distance*** from it to all other nodes.
+
+3. We can also use BFS to find the predecessors/parent of a given node and then use that to ***[backtrack to the shortest path from one node to another](./1193.cpp)***<br>
 
 <p align="center">
     <img src="Images/shortest.png" alt="Graph"/>
