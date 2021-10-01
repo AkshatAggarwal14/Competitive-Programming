@@ -411,6 +411,8 @@ int main() {
 
 # Multisource BFS:
 
+> In an unweighted graph, this is the fastest way to visit all nodes starting from the "special" nodes. Thus can be used to find [number of unvisited nodes](./unvisited_in_grid.cpp) / length of shortest path / the shortest path itself. 
+
 We are given a matrix denoting some oranges, Green means rotten orange and orange means ripe.
 Every ripe orange adjacent to a rotten orange will rot in a minute.
 <p align="center">
