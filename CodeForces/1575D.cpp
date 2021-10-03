@@ -11,6 +11,7 @@ void Solution() {
     cin >> s;
     ll n = s.length();
     if (s == "0" || s == "X" || s == "_") return void(cout << 1 << '\n');
+    if (s[0] == '0') return void(cout << 0 << '\n');
     if (n == 1) return void(cout << 0 << '\n');
     // now n >= 2 && n <= 8
     string bak = s.substr(n - 2);
@@ -145,7 +146,7 @@ int main() {
 #endif
     cin.tie(nullptr)->sync_with_stdio(false);
     ll tc = 1;
-    cin >> tc;
+    // cin >> tc;
     while (tc--)
         Solution();
     return 0;
