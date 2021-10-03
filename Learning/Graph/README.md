@@ -35,7 +35,7 @@ The following two are the most commonly used representations of a graph.
 2. Adjacency List 
 There are other representations also like, Incidence Matrix and Incidence List. The choice of graph representation is situation-specific. It totally depends on the type of operations to be performed and ease of use. 
 
-### Adjacency Matrix
+### [Adjacency Matrix](./Adjacency_Matrix.cpp)
 - Adjacency Matrix is a 2D array of size V x V where V is the number of vertices in a graph. 
 
 - Let the 2D array be `adj[][]`, a slot `adj[i][j] = 1` indicates that there is an edge from vertex i to vertex j. 
@@ -60,7 +60,7 @@ The adjacency matrix for the above example graph is:
 - Consumes more space `O(N^2)`. Even if the graph is sparse(contains less number of edges), it consumes the same space. 
 - Adding a vertex is `O(N^2)` time. 
 
-### Adjacency List: 
+### [Adjacency List](./Adjacency_List.cpp): 
 - An array of lists is used. The size of the array is equal to the number of vertices. 
 
 - Let the array be an `array[]`. An entry `array[i]` represents the list of vertices adjacent to the ith vertex. This representation can also be used to represent a weighted graph. 
@@ -133,7 +133,7 @@ The weights of edges can be represented as lists of pairs. Following is the adja
 
 <br><br>
 
-# Connectivity Check
+# [Connectivity Check](./dfs.cpp)
 
 > Tell if a given graph is connected or not.
 
@@ -155,6 +155,7 @@ If we start along some vertex, and follow the edges, we must be able to reach al
 We can mark the uncoloured nodes with some color and count how many we marked in total, if it is equal to number of nodes then the graph is connected
 > Just like throwing popcorn in maze to find out the exit<br><br> A grid is just like a graph, with positions we can move to representing the nodes.
 
+> ***[DFS can also be used to find the actual path from one node to another and simultaneously checking if it exists](./getPath_dfs.cpp)***
 
 <p align="center">
   <img src="Images/dfs-intro.png" alt="Graph"/>
@@ -632,6 +633,14 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 <br><br>
 # Relevant Questions:
 
-- DFS - [CSES - 1192](https://cses.fi/problemset/task/1192)
+- DFS - [CF - 500A](https://codeforces.com/contest/500/problem/A)
 - DFS - [CF - 884C](https://codeforces.com/contest/884/problem/C)
-- DFS - [CF - 1033A](https://codeforces.com/contest/1033/problem/A)
+- DFS - [CF - 893C](https://codeforces.com/contest/893/problem/C)
+- DFS on Grid - [CSES - 1192](https://cses.fi/problemset/task/1192)
+- DFS on Grid - [CF - 1033A](https://codeforces.com/contest/1033/problem/A)
+- DFS and Find Path - [CF - 1057A](https://codeforces.com/contest/1057/problem/A)
+- DFS and Graph Coloring - [CF - 902B](https://codeforces.com/contest/902/problem/B)
+- DFS and Graph Coloring - [CF - 1167C](https://codeforces.com/contest/1167/problem/C)
+- DFS and Missing Edges [CSES - 1666](https://cses.fi/problemset/task/1666)
+- BFS and Find Path (Grid) [CSES - 1193](https://cses.fi/problemset/task/1193)
+- BFS and Find Path [CSES - 1667](https://cses.fi/problemset/task/1667)
