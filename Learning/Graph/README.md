@@ -573,6 +573,7 @@ int main() {
             int newDis = dis + x.second;
             int newVer = x.first;
             if (newDis < d[newVer]) {
+                //! can erase non existent element from set freely
                 s.erase({d[newVer], newVer}); // erase old distance
                 d[newVer] = newDis;  // update
                 s.insert({d[newVer], newVer});
