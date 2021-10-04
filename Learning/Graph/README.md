@@ -612,7 +612,7 @@ The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `
 
 Finally we have, `dis[] = {0, 100, 200, 100, 300}`
 
-# MultiNode Dijkstra:
+# Multisource Dijkstra:
 
 > We are given a map of a city with traffc. The traffic is represented by time taken to travel throught that road. Hospitals are marked as blue and patients are marked as yellow. find nearest hospital for each patient.
 
