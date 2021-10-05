@@ -1,188 +1,51 @@
-//**********************master._.mind**********************
-//-----------------Author: Akshat Aggarwal-----------------
-//If you don't understand the code below... dont worry, i didn't either
-#include <bits/stdc++.h>
+// #include "Akshat.hpp"
+#include "bits/stdc++.h"
 using namespace std;
+using ll = int64_t;
+vector<ll> vals = {0};
 
-#define ll long long
-#define lld long double
-#define ull unsigned long long
-#define fo(i, n) for (ll i = 0; i < n; i++)
-#define rep(i, k, n) for (ll i = k; k < n ? i < n : i > n; k < n ? i++ : i--)
-#define deb(x) cout << #x << "=" << x << endl
-#define deb2(x, y) cout << #x << "=" << x << "," << #y << "=" << y << endl
-#define pb push_back
-#define mp(x, y) make_pair(x, y)
-#define ub upper_bound
-#define lb lower_bound
-#define ff first
-#define ss second
-#define all(x) (x).begin(), (x).end()
-#define uniq(x) (x).erase(unique(all(x)), (x).end())
-#define rall(x) (x).rbegin(), (x).rend()
-#define ps(x, y) fixed << setprecision(y) << x
-#define clr(x) memset(x, 0, sizeof(x))
-#define sortall(x) sort(all(x))
-#define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
-#define PI 3.1415926535897932384626
-#define endl "\n"
-#define ln "\n"
-#define sz(x) ((ll)(x).size())
-#define cn cout << "\n"
-#define cy cout << "YES"
-#define cno cout << "NO"
-#define re return
-#define fast_io()                 \
-    ios_base::sync_with_stdio(0); \
-    cin.tie(0);                   \
-    cout.tie(0)
-//cin.tie(NULL) is used to read all input before displaying any output
-const ll mod = 1e9 + 7; //1000000007
-const ll mod2 = 998244353;
-const ll inf = LLONG_MAX;
-const double eps = 1e-12;
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pl;
-typedef vector<int> vi;
-typedef vector<ll> vl;
-typedef vector<pii> vpii;
-typedef vector<pl> vpl;
-typedef vector<vi> vvi;
-typedef vector<vl> vvl;
+void fill() {
+    ll i = 1, term = 1;
+    while (term < 1e16 + 5) {
+        term = static_cast<ll>(pow(i, 10));
+        vals.push_back(term);
+        i++;
+    }
+}
 
-//* --------pre defined functions--------
-void _print(ll t) { cerr << t; }
-void _print(int t) { cerr << t; }
-void _print(string t) { cerr << t; }
-void _print(char t) { cerr << t; }
-void _print(lld t) { cerr << t; }
-void _print(double t) { cerr << t; }
-void _print(ull t) { cerr << t; }
-
-template <class T, class V>
-void _print(pair<T, V> p);
-template <class T>
-void _print(vector<T> v);
-template <class T>
-void _print(set<T> v);
-template <class T, class V>
-void _print(map<T, V> v);
-template <class T>
-void _print(multiset<T> v);
-
-//divisor_count(ll)
-//prime_facorisation(n)
-//primes_less_than(n)
-
-void solve()
-{
-    //*********************CODE STARTS HERE*********************
-
+void Solution() {
     ll k;
     cin >> k;
-    //! Dont just repeat s, that gives MLE
-    // k--;
-    // cout << "codeforces";
-    // while (k--)
-    //     cout << 's';
-
-    //! repeat all characters, %..times;
-    //k=7, ccooddeforces <--generates 8 codeforces
-    string s = "codeforces";
-    int n = (int)s.size();
-    vector<long long> a(n, 1);
-    long long prod = 1;
-    for (ll i = 0; prod < k; i = (i + 1) % n)
-    {
-        prod = prod / a[i] * (a[i] + 1);
-        ++a[i];
+    ll ctr = 0;
+    for (ll i = 0; i < (ll)vals.size() - 1; ++i) {
+        if (vals[i + 1] > k) break;
+        ctr++;
     }
-    for (ll i = 0; i < n; i++)
-        for (ll j = 0; j < a[i]; j++)
-            cout << s[i];
+    vector<ll> ok(10, ctr);
+    ll P = static_cast<ll>(pow(ctr, 10));
+    for (ll i = 0; i < 10; ++i) {
+        if (P >= k) break;
+        P /= ok[i];
+        ok[i]++;
+        P *= ok[i];
+    }
+    // dbg(ok);
+    string ans = "codeforces";
+    for (ll i = 0; i < 10; ++i) {
+        for (ll j = 0; j < ok[i]; ++j) {
+            cout << ans[i];
+        }
+    }
+}
 
-    //**********************CODE ENDS HERE**********************
-    re;
-} //todo solve
-
-int main()
-{
-    fast_io();
+int main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
 #ifndef ONLINE_JUDGE
-    freopen("error.txt", "w", stderr);
-    //freopen("input.txt", "r", stdin);
-    //freopen("output.txt", "w", stdout);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 #endif
-    clock_t start, end;
-    start = clock();
-
-    ll testcases = 1;
-    //todo testcases
-    //cin >> testcases;
-    while (testcases--)
-    {
-        solve();
-        cn;
-    }
-
-    //* -----for time calc-----
-    end = clock();
-    double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
-    cerr << "\nTime taken:" << ln << ps(time_taken, 6) << " sec\n";
-    re 0;
-} //todo main
-
-//* ------function definitions------
-template <class T, class V>
-void _print(pair<T, V> p)
-{
-    cerr << "{";
-    _print(p.ff);
-    cerr << ",";
-    _print(p.ss);
-    cerr << "}";
-}
-template <class T>
-void _print(vector<T> v)
-{
-    cerr << "[ ";
-    for (T i : v)
-    {
-        _print(i);
-        cerr << " ";
-    }
-    cerr << "]";
-}
-template <class T>
-void _print(set<T> v)
-{
-    cerr << "[ ";
-    for (T i : v)
-    {
-        _print(i);
-        cerr << " ";
-    }
-    cerr << "]";
-}
-template <class T>
-void _print(multiset<T> v)
-{
-    cerr << "[ ";
-    for (T i : v)
-    {
-        _print(i);
-        cerr << " ";
-    }
-    cerr << "]";
-}
-template <class T, class V>
-void _print(map<T, V> v)
-{
-    cerr << "[ ";
-    for (auto i : v)
-    {
-        _print(i);
-        cerr << " ";
-    }
-    cerr << "]";
+    fill();
+    Solution();
+    cerr << fixed << setprecision(4) << (double)clock() / CLOCKS_PER_SEC << " secs" << endl;
+    return 0;
 }
