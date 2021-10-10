@@ -20,28 +20,22 @@ void Solution() {
         if (i - a[i] >= 0) adj[i - a[i]].push_back(i);
         if (i + a[i] <= n - 1) adj[i + a[i]].push_back(i);
     }
+    auto go = [&](queue<ll> &q, vector<ll> &dist) {
+        while (!q.empty()) {
+            ll parent = q.front();
+            q.pop();
+            for (auto child : adj[parent]) {
+                if (dist[child] == -1) {
+                    q.emplace(child);
+                    dist[child] = dist[parent] + 1;
+                }
+            }
+        }
+    };
     // for even elements
-    while (!odd.empty()) {
-        ll parent = odd.front();
-        odd.pop();
-        for (auto child : adj[parent]) {
-            if (d_odd[child] == -1) {
-                odd.emplace(child);
-                d_odd[child] = d_odd[parent] + 1;
-            }
-        }
-    }
+    go(odd, d_odd);
     // for odd elements
-    while (!even.empty()) {
-        ll parent = even.front();
-        even.pop();
-        for (auto child : adj[parent]) {
-            if (d_even[child] == -1) {
-                even.emplace(child);
-                d_even[child] = d_even[parent] + 1;
-            }
-        }
-    }
+    go(even, d_even);
     for (ll i = 0; i < n; ++i) {
         cout << ((a[i] & 1) ? d_even[i] : d_odd[i]) << ' ';
     }
