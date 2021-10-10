@@ -99,6 +99,21 @@ void Solution() {
     cout << (n * (n - 1) * (n - 2)) / 6 - dec << '\n';
 }
 
+void Better() {
+    ll n;
+    cin >> n;
+    vector<array<ll, 2>> a(n);
+    map<ll, ll> X, Y;
+    for (auto& [x, y] : a) {
+        cin >> x >> y;
+        X[x]++, Y[y]++;
+    }
+    ll ans = 0;
+    for (auto& [x, y] : a) ans += (X[x] - 1) * (Y[y] - 1);
+    ans = (n * (n - 1) * (n - 2)) / 6 - ans;
+    cout << ans << '\n';
+}
+
 // --------------------------------</Solve>-------------------------------
 
 int main() {
@@ -113,7 +128,7 @@ int main() {
     ll tc = 1;
     cin >> tc;
     while (tc--) {
-        Solution();
+        Better();
     }
 #ifndef ONLINE_JUDGE
     cerr << fixed << setprecision(4) << (double)clock() / CLOCKS_PER_SEC << " secs" << endl;
