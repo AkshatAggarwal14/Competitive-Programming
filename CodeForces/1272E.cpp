@@ -20,7 +20,7 @@ void Solution() {
         if (i - a[i] >= 0) adj[i - a[i]].push_back(i);
         if (i + a[i] <= n - 1) adj[i + a[i]].push_back(i);
     }
-    auto go = [&](queue<ll> &q, vector<ll> &dist) {
+    auto go = [&adj](queue<ll> &q, vector<ll> &dist) {
         while (!q.empty()) {
             ll parent = q.front();
             q.pop();
