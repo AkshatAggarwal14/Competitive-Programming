@@ -647,3 +647,4 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - BFS on Grid - [CF - 57A](https://codeforces.com/contest/57/problem/A)
 - BFS and Find Path (Grid) [CSES - 1193](https://cses.fi/problemset/task/1193)
 - BFS and Find Path [CSES - 1667](https://cses.fi/problemset/task/1667)
+- BFS on String - [CF - 1183E](https://codeforces.com/contest/1183/problem/E)
