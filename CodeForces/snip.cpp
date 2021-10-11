@@ -30,6 +30,7 @@ using ll = int64_t;
 using db = double;
 using str = string;
 using ull = unsigned long long;
+#define fo(i, n) for (ll i = 0; i < n; i++)
 #define set_bits(x) __builtin_popcountll(x)
 #define eb emplace_back
 #define ff first
