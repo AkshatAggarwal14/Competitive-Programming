@@ -94,6 +94,7 @@ void Solution() {
     V<V<char>> mat1(n, V<char>(n));
     V<V<char>> mat2(n, V<char>(n));
     char ch[] = {'0', '1'};
+    // forming the two matrices and checking cost for each, and brute
     fo(i, n) {
         fo(j, n) {
             mat1[i][j] = ch[(i + j) % 2];

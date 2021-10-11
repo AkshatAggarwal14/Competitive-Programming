@@ -95,6 +95,7 @@ void Solution() {
     fo(i, n) cin >> a[i];
     fo(i, n) {
         cin >> t[i];
+        // already include awake ones in answer
         if (t[i] == 1) ans += a[i], a[i] = 0, t[i] = 1;
     }
     dbg(ans);
@@ -103,6 +104,7 @@ void Solution() {
     dbg(pref);
     ll maxi = pref[k - 1];
     for (ll i = k; i < n; ++i) {
+        // find max using prefix sums and add to ans
         amax(maxi, pref[i] - pref[i - k]);
     }
     cout << ans + maxi << '\n';
