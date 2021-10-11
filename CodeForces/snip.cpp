@@ -1,17 +1,17 @@
+// clang-format off
 #ifndef ONLINE_JUDGE
-#include "Akshat.hpp"
+    #include "Akshat.hpp"
 #else
-#include "bits/stdc++.h"
-using namespace std;
-#define dbg(...)
-#define debug(...)
+    #include "bits/stdc++.h"
+    using namespace std;
+    #define dbg(...)
 #endif
 
 // ----------------------------<optimizations>----------------------------
-/*
-#pragma GCC optimize("Ofast,unroll-loops")
-#pragma GCC target("avx,avx2,fma")
-*/
+
+// #pragma GCC optimize("Ofast,unroll-loops")
+// #pragma GCC target("avx,avx2,fma")
+
 // ---------------------------</optimizations>----------------------------
 
 // ---------------------------------<PBDS>--------------------------------
@@ -35,8 +35,6 @@ using ll = int64_t;
 using db = double;
 using str = string;
 using ull = unsigned long long;
-#define fo(i, n) for (ll i = 0; i < n; i++)
-#define rep(i, k, n) for (ll i = k; k < n ? i < n : i > n; k < n ? i++ : i--)
 #define set_bits(x) __builtin_popcountll(x)
 #define eb emplace_back
 #define ff first
@@ -49,54 +47,72 @@ using ull = unsigned long long;
 #define sz(x) ((ll)(x).size())
 template <class T>
 using V = vector<T>;
-using vl = V<ll>;
-using vvl = V<vl>;
 template <class T, class U = T>
 using P = pair<T, U>;
-using pl = P<ll, ll>;
-using vpl = V<pl>;
 // ------------------------</Defines and typedefs>------------------------
 
 // --------------------------------<Consts>-------------------------------
-const ll mod = 1e9 + 7;  //1000000007
-const ll mod2 = 998244353;
-const ll inf = LLONG_MAX;
-const db eps = 1e-12;
+constexpr ll mod = 1e9 + 7;  //1000000007
+constexpr ll mod2 = 998244353;
+constexpr ll inf = LLONG_MAX;
+constexpr db eps = 1e-12;
 const double PI = acos(-1);
 // -------------------------------</Consts>-------------------------------
 
 // -------------------------------<Templates>-----------------------------
 template <class T, class U = T>
-bool amin(T& a, U&& b) { return b < a ? a = std::forward<U>(b), true : false; }
+bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
 template <class T, class U = T>
-bool amax(T& a, U&& b) { return a < b ? a = std::forward<U>(b), true : false; }
+bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
+// Utility print function
+template <typename T>
+void print(T &&t) { cout << t << '\n'; }
+template <typename T, typename... Args>
+void print(T &&t, Args &&...args) {
+    cout << t << ' ';
+    print(forward<Args>(args)...);
+}
 // ------------------------------</Templates>-----------------------------
 
+// -------------------------------<Safe-Map>------------------------------
+struct custom_hash {
+    static uint64_t splitmix64(uint64_t x) {
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+        return x ^ (x >> 31);
+    }
+    size_t operator()(uint64_t x) const {
+        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
+template <typename T1, typename T2>  // Key should be integer type
+using safe_map = unordered_map<T1, T2, custom_hash>;
+// -------------------------------</Safe-Map>-----------------------------
+
+// clang-format on
 // ---------------------------------<Solve>-------------------------------
 
 void Solution() {
-    ll n;
+    // code here
 }
 
 // --------------------------------</Solve>-------------------------------
 
-int main() {
+// clang-format off
+int32_t main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    cin.tie(nullptr)->sync_with_stdio(false);
 #ifdef NCR
     init();
 #endif
-    ll tc = 1;
-    //cin >> tc;
-    while (tc--) {
-        Solution();
-    }
-#ifndef ONLINE_JUDGE
+    // ll tc = 1; cin >> tc; while (tc--)
+    Solution();
     cerr << (double)clock() / CLOCKS_PER_SEC << " secs";
-#endif
     return 0;
 }
 
