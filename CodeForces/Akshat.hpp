@@ -88,8 +88,9 @@ void pretty_print(const char* names, Arg1&& arg1, Args&&... args) {
          << "\033[39m";                 \
     beauty(__VA_ARGS__)
 
-#define debug(...) cerr << "Line " << __LINE__ << ": ";\
-                   debug_out(#__VA_ARGS__, __VA_ARGS__)
+#define debug(...)                       \
+    cerr << "Line " << __LINE__ << ": "; \
+    debug_out(#__VA_ARGS__, __VA_ARGS__)
 
 // base case for template recursion when one argument remains
 template <typename Arg1>
