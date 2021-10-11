@@ -60,14 +60,6 @@ template <class T, class U = T>
 bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
 template <class T, class U = T>
 bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
-// Utility print function
-template <typename T>
-void print(T &&t) { cout << t << '\n'; }
-template <typename T, typename... Args>
-void print(T &&t, Args &&...args) {
-    cout << t << ' ';
-    print(forward<Args>(args)...);
-}
 // ------------------------------</Templates>-----------------------------
 
 // -------------------------------<Safe-Map>------------------------------
