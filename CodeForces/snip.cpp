@@ -1,10 +1,10 @@
-#ifndef Akshat
+#ifndef ONLINE_JUDGE
+#include "Akshat.hpp"
+#else
 #include "bits/stdc++.h"
 using namespace std;
-#define dbg(...) 0
-#define debug(...) 0
-#else
-#include "Akshat.hpp"
+#define dbg(...)
+#define debug(...)
 #endif
 
 // ----------------------------<optimizations>----------------------------
@@ -67,40 +67,35 @@ const double PI = acos(-1);
 
 // -------------------------------<Templates>-----------------------------
 template <class T, class U = T>
-bool amin(T& a, U&& b) {
-    return b < a ? a = std::forward<U>(b), true : false;
-}
+bool amin(T& a, U&& b) { return b < a ? a = std::forward<U>(b), true : false; }
 template <class T, class U = T>
-bool amax(T& a, U&& b) {
-    return a < b ? a = std::forward<U>(b), true : false;
-}
+bool amax(T& a, U&& b) { return a < b ? a = std::forward<U>(b), true : false; }
 // ------------------------------</Templates>-----------------------------
 
 // ---------------------------------<Solve>-------------------------------
 
 void Solution() {
     ll n;
-    cin >> n;
-    cout << n;
 }
 
 // --------------------------------</Solve>-------------------------------
 
 int main() {
-#ifndef Akshat
-#else
+#ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
     cin.tie(nullptr)->sync_with_stdio(false);
+#ifdef NCR
+    init();
+#endif
     ll tc = 1;
     //cin >> tc;
     while (tc--) {
         Solution();
     }
-#ifndef Akshat
-#else
-    cerr << fixed << setprecision(4) << (double)clock() / CLOCKS_PER_SEC << " secs" << endl;
+#ifndef ONLINE_JUDGE
+    cerr << (double)clock() / CLOCKS_PER_SEC << " secs";
 #endif
     return 0;
 }
@@ -119,4 +114,5 @@ int main() {
     * string.rfind() finds first occurence from end
     * (a & b) + (a | b) = a + b
     * TLE due to ll ? or multiple copies of large DS?
+    * didnt use inv() in modular combinatorics? 
 */
