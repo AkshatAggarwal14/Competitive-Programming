@@ -112,7 +112,7 @@ int32_t main() {
 #endif
     // ll tc = 1; cin >> tc; while (tc--)
     Solution();
-    cerr << (double)clock() / CLOCKS_PER_SEC << " secs";
+    cerr << "Time:" << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
 
