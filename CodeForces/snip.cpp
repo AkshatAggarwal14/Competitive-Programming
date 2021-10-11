@@ -1,6 +1,11 @@
 // clang-format off
+#ifndef ONLINE_JUDGE
+#include"Akshat.hpp"
+#else
 #include "bits/stdc++.h"
 using namespace std;
+#define dbg(...)
+#endif
 
 // ----------------------------<optimizations>----------------------------
 
@@ -47,21 +52,6 @@ template <class T, class U = T>
 using P = pair<T, U>;
 // ------------------------</Defines and typedefs>------------------------
 
-// --------------------------------<Consts>-------------------------------
-constexpr ll mod = 1e9 + 7;  //1000000007
-constexpr ll mod2 = 998244353;
-constexpr ll inf = LLONG_MAX;
-constexpr db eps = 1e-12;
-const double PI = acos(-1);
-// -------------------------------</Consts>-------------------------------
-
-// -------------------------------<Templates>-----------------------------
-template <class T, class U = T>
-bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
-template <class T, class U = T>
-bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
-// ------------------------------</Templates>-----------------------------
-
 // -------------------------------<Safe-Map>------------------------------
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
@@ -79,58 +69,26 @@ template <typename T1, typename T2>  // Key should be integer type
 using safe_map = unordered_map<T1, T2, custom_hash>;
 // -------------------------------</Safe-Map>-----------------------------
 
-// ---------------------------<Debugging Template>------------------------
-#define print_op(...) ostream& operator<<(ostream& out, const __VA_ARGS__& u)
-#define db(val) "[\033[34mLine "<<__LINE__<<": \033[39m"<< #val " = "<< "\033[33m"  << (val) << "\033[39m] "
-//"\033[33m" << to_string(arg1) << "\033[39m"
-#define CONCAT_(x, y) x##y
-#define CONCAT(x, y) CONCAT_(x, y)
-#ifndef ONLINE_JUDGE
-#define dbg cerr << setw(__db_level * 2) << setfill(' ') << "" << setw(0)
-#define DB() debug_block CONCAT(dbbl, __LINE__)
-int __db_level = 0;
-struct debug_block {
-    debug_block() {
-        dbg << "{" << '\n';
-        ++__db_level;
-    }
-    ~debug_block() {
-        --__db_level;
-        dbg << "}" << '\n';
-    }
-};
-#else
-#define dbg \
-    if (0) cerr
-#define DB(...)
-#endif
+// --------------------------------<Consts>-------------------------------
+constexpr ll mod = 1e9 + 7;  //1000000007
+constexpr ll mod2 = 998244353;
+constexpr ll inf = LLONG_MAX;
+constexpr db eps = 1e-12;
+const double PI = acos(-1);
+// -------------------------------</Consts>-------------------------------
 
-template <class U, class V>
-print_op(pair<U, V>) { return out << "(" << u.first << ", " << u.second << ")"; }
-
-template <class Con, class = decltype(begin(declval<Con>()))>
-typename enable_if<!is_same<Con, string>::value, ostream&>::type
-operator<<(ostream& out, const Con& con) {
-    out << "{";
-    for (auto beg = con.begin(), it = beg; it != con.end(); ++it) out << (it == beg ? "" : ", ") << *it;
-    return out << "}";
-}
-
-template <size_t i, class T>
-ostream& print_tuple_utils(ostream& out, const T& tup) {
-    if constexpr (i == tuple_size<T>::value) return out << ")";
-    else return print_tuple_utils<i + 1, T>(out << (i ? ", " : "(") << get<i>(tup), tup);
-}
-
-template <class... U>
-print_op(tuple<U...>) { return print_tuple_utils<0, tuple<U...>>(out, u); }
-// --------------------------</Debugging Template>------------------------
+// -------------------------------<Templates>-----------------------------
+template <class T, class U = T>
+bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
+template <class T, class U = T>
+bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
+// ------------------------------</Templates>-----------------------------
 
 // ---------------------------------<Solve>-------------------------------
 // clang-format on
 
 void Solution() {
-    // CODE HERE, DB() and dbg << db(val)
+    // code here
 }
 
 // --------------------------------</Solve>-------------------------------
