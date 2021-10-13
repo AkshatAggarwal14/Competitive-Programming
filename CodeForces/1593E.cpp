@@ -127,6 +127,45 @@ void Solution() {
     cout << ans << '\n';
 }
 
+// https://codeforces.com/contest/1593/submission/131840493
+void Better() {
+    ll n, k, u, v;
+    cin >> n >> k;
+    V<V<ll>> adj(n);
+    V<ll> deg(n, 0), dist(n, 0), vis(n, 0);
+    fo(_, n - 1) {
+        cin >> u >> v;
+        u--, v--;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+        deg[v]++, deg[u]++;
+    }
+    queue<ll> Q;
+    fo(i, n) {
+        if (deg[i] <= 1) {
+            dist[i] = 1;
+            Q.push(i);
+            vis[i] = 1;
+        }
+    }
+    while (!Q.empty()) {
+        ll parent = Q.front();
+        Q.pop();
+        for (ll child : adj[parent]) {
+            if (vis[child]) continue;
+            dist[child] = max(dist[parent] + 1, dist[child]);
+            deg[child]--;
+            if (deg[child] <= 1) {
+                vis[child] = 1;
+                Q.push(child);
+            }
+        }
+    }
+    ll ans = 0;
+    fo(i, n) if (dist[i] > k) ans++;
+    cout << ans << "\n";
+}
+
 // --------------------------------</Solve>-------------------------------
 
 // clang-format off
@@ -141,7 +180,7 @@ int32_t main() {
     init();
 #endif
     ll tc = 1; cin >> tc; while (tc--)
-    Solution();
+    Better();
     cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
