@@ -91,11 +91,7 @@ bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 void Solution() {
     str s;
     cin >> s;
-    V<ll> cnt(10, 0);
-    fo(i, sz(s))++ cnt[s[i] - '0'];
     ll ans = LLONG_MAX;
-    // 25 50 75 00 0
-    str s1 = s;
     reverse(all(s));
     V<str> vv = {"52", "05", "57", "00"};
     for (str &x : vv) {
@@ -107,7 +103,24 @@ void Solution() {
         }
         if (ctr >= 2) amin(ans, ctr - 2);
     }
-    if (ans == LLONG_MAX) return void(cout << sz(s) - 1 << '\n');
+    cout << ans << '\n';
+}
+
+void Easier() {
+    str s;
+    cin >> s;
+    ll n = s.length();
+    ll ans = inf;
+    // Brute over 2 digits
+    fo(i, n) {
+        for (ll j = i + 1; j < n; j++) {
+            ll val = 10 * (s[i] - '0') + (s[j] - '0');
+            if (val % 25 == 0) {
+                ll left = i + 2;
+                amin(ans, n - left);
+            }
+        }
+    }
     cout << ans << '\n';
 }
 
