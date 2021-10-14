@@ -111,6 +111,21 @@ void Solution() {
     cout << ans << '\n';
 }
 
+void Better() {
+    ll n, k;
+    cin >> n >> k;
+    V<ll> a(k);
+    fo(i, k) cin >> a[i];
+    sort(all(a), greater<ll>());
+    ll ans = 0, cat = 0;
+    fo(i, k) {
+        if (a[i] <= cat) break;
+        cat += (n - a[i]);  // n - a[i] is distance from end
+        ans++;
+    }
+    cout << ans << '\n';
+}
+
 // --------------------------------</Solve>-------------------------------
 
 // clang-format off
@@ -125,7 +140,7 @@ int32_t main() {
     init();
 #endif
     ll tc = 1; cin >> tc; while (tc--)
-    Solution();
+    Better();
     cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
