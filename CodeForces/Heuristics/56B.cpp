@@ -1,11 +1,5 @@
-#ifndef ONLINE_JUDGE
-#include "Akshat.hpp"
-#else
 #include "bits/stdc++.h"
 using namespace std;
-#define dbg(...)
-#define debug(...)
-#endif
 
 // ----------------------------<optimizations>----------------------------
 /*
@@ -78,25 +72,30 @@ bool amax(T& a, U&& b) {
 
 // ---------------------------------<Solve>-------------------------------
 
+template <bool b>
+auto binsearch(auto l, auto r, const auto& pred) {
+    --l, ++r;
+    for (decltype(l) m; m = midpoint(l, r), r > l + 1;) (pred(m) ? l : r) = m;
+    return (b ? l : r);
+}
+
+// returns first i in [l, r], p(i) false, and if none found, returns r + 1
+auto find_first_false(auto l, auto r, const auto& p) {
+    return binsearch<false>(l, r, p);
+}
+
+// returns last i in [l, r], p(i) true, and if none found, returns l - 1
+auto find_last_true(auto l, auto r, const auto& p) {
+    return binsearch<true>(l, r, p);
+}
+
 void Solution() {
     ll n, x, y;
     cin >> n >> x >> y;
-    if (n == 1) {
-        cout << min(x, y) << '\n';
-    } else {
-        n--;
-        ll l = 0;
-        ll r = 1e18;
-        while (r > l + 1) {
-            ll m = (l + r) / 2;
-            if (m / x + m / y >= n) {
-                r = m;
-            } else {
-                l = m;
-            }
-        }
-        cout << r + min(x, y) << "\n";
-    }
+    ll ans = min(x, y);
+    n--;
+    if (n) ans += find_first_false(0LL, (ll)1e18, [&](ll m) { return m / x + m / y < n; });
+    cout << ans << '\n';
 }
 
 // --------------------------------</Solve>-------------------------------
