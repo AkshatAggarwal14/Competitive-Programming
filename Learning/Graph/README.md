@@ -648,6 +648,7 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - BFS and Find Path (Grid) [CSES - 1193](https://cses.fi/problemset/task/1193)
 - BFS and Find Path [CSES - 1667](https://cses.fi/problemset/task/1667)
 - BFS on String - [CF - 1183E](https://codeforces.com/contest/1183/problem/E)
+- BFS with priority_queue - [CF - 1106D](https://codeforces.com/contest/1106/problem/D)
 - Multisource BFS twice (Invert Graph) - [CF - 1272E](https://codeforces.com/contest/1272/problem/E)
 - Multisource BFS - [CF - 1593E](https://codeforces.com/contest/1593/problem/E)
 - Dijkstra - [CSES - 1671](https://cses.fi/problemset/task/1671)
