@@ -40,7 +40,7 @@ def makeFolders():
 
 
 def getFiles():
-    folders = [f for f in os.listdir(mypath) if f[0].isdigit()]
+    folders = [f for f in os.listdir(mypath) if os.path.isdir(os.path.join(mypath, f)) and f[0].isdigit()]
     # print(folders)
     for contest in folders:
         files = [f for f in os.listdir(mypath+contest) if os.path.isfile(os.path.join(mypath+contest, f)) and f[0].isdigit()]
