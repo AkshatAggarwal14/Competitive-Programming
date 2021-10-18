@@ -51,7 +51,7 @@ def getFiles():
 
 if __name__=="__main__":
     # makeFolders()
-    getFiles()
+    # getFiles()
     os.system('git add -A')
     os.system('git commit -m "Restructured"')
     os.system('git push')
