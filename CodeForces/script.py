@@ -49,4 +49,17 @@ def makeFolders():
             print(contest,'Already exists!')
 
 
-makeFolders()
+
+def getFiles():
+    folders = [f for f in os.listdir(mypath) if f[0].isdigit()]
+    # print(folders)
+    for contest in folders:
+        files = [f for f in os.listdir(mypath+contest) if os.path.isfile(os.path.join(mypath+contest, f)) and f[0].isdigit()]
+        print(files)
+        for code in files:
+            os.rename(mypath+contest+'/'+code, mypath+code)
+        os.rmdir(mypath+contest)
+
+if __name__=="__main__":
+    # makeFolders()
+    # getFiles()
