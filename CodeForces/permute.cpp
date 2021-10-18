@@ -23,7 +23,9 @@ int main() {
         cin >> i;
     }
     permute(a, 0);
-    for (auto v : ans) {
+    for (int cnt = 0; auto v : ans) {
+        cnt++;
+        cout << cnt << ": ";
         for (auto i : v) {
             cout << i << " ";
         }
