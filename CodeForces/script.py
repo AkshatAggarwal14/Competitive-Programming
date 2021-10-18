@@ -11,17 +11,6 @@ def getContestName(problem:str):
 
 def makeFolders():
     onlyfiles = [f for f in os.listdir(mypath) if os.path.isfile(os.path.join(mypath, f)) and f[0].isdigit()]
-    # print(onlyfiles)
-    # print(len(onlyfiles))
-    # mkdir('D:/NITH/CP/CodeForces/Test')
-    # print(os.path.exists(mypath))
-
-    # def manageFiles():
-    #     try:
-    #         os.mkdir(os.path.join(mypath,'Test'))
-    #         print('Created')
-    #     except:
-    #         print('Failed')
 
     contests={}
     added = []
