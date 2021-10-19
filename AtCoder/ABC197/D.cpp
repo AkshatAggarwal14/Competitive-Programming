@@ -20,7 +20,7 @@ void Solution() {
     double cy = (y0 + y2) / 2;
     x0 -= cx;
     y0 -= cy;
-    double theta = 2.0 * acos(-1) / (n * 1.0);
+    double theta = 2.0 * acos(-1) / (double(n));
     double ax, ay;
     ax = x0 * cos(theta) - y0 * sin(theta);
     ay = x0 * sin(theta) + y0 * cos(theta);
