@@ -8,7 +8,7 @@ using namespace std;
 #endif
 using ll = int;
 using db = double;
-auto sz = [](const auto &container) -> ll { return container.size(); };
+auto sz = [](const auto &container) -> ll { return ll(container.size()); };
 
 void Solution() {
     ll n, m;
