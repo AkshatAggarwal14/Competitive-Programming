@@ -656,3 +656,4 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - Multisource BFS twice (Invert Graph) - [CF - 1272E](https://codeforces.com/contest/1272/problem/E)
 - Multisource BFS - [CF - 1593E](https://codeforces.com/contest/1593/problem/E)
 - Dijkstra - [CSES - 1671](https://cses.fi/problemset/task/1671)
+- **[Floyd Warshall](https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html)** - [CSES - 1672](https://cses.fi/problemset/task/1672/)
