@@ -47,7 +47,7 @@ void Solution() {
                 c = char(j) + 'a';
             }
         }
-        if (cost == INF) return void(cout << -1 << '\n');
+        if (cost == INF) return void(cout << -1 << '\n');  //cant be changed to any equal char
         ans += cost;
         res += c;
     }
