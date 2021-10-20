@@ -40,16 +40,17 @@ void Solution() {
     cout << ans << '\n';
 }
 
-// clang-format off
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    cout<< fixed << setprecision(12);
-    ll tc; cin >> tc; while (tc--)
-    Solution();
+    cout << fixed << setprecision(12);
+    ll tc;
+    cin >> tc;
+    while (tc--)
+        Solution();
     cerr << "Time:" << 1000 * ((db)clock()) / (db)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
