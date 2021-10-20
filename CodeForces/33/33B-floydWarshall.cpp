@@ -35,7 +35,7 @@ void Solution() {
     }
     if (sz(a) != sz(b)) return void(cout << -1 << '\n');
     ll ans = 0;
-    string res = "";
+    string res;
     for (ll i = 0; i < sz(a); ++i) {
         ll cost = INF;
         char c = a[i];
@@ -49,7 +49,7 @@ void Solution() {
         }
         if (cost == INF) return void(cout << -1 << '\n');  //cant be changed to any equal char
         ans += cost;
-        res += c;
+        res.push_back(c);
     }
     cout << ans << '\n';
     cout << res << '\n';
