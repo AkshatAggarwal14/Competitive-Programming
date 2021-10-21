@@ -650,6 +650,7 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - DFS and Missing Edges [CSES - 1666](https://cses.fi/problemset/task/1666)
 - DFS and Expected Path length [CF - 839](https://codeforces.com/contest/839/problem/C)
 - BFS on Grid - [CF - 57A](https://codeforces.com/contest/57/problem/A)
+- BFS on Grid - [CF - 329B](https://codeforces.com/contest/329/problem/B)
 - BFS and Find Path (Grid) [CSES - 1193](https://cses.fi/problemset/task/1193)
 - BFS and Find Path [CSES - 1667](https://cses.fi/problemset/task/1667)
 - BFS on String - [CF - 1183E](https://codeforces.com/contest/1183/problem/E)
