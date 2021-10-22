@@ -663,4 +663,5 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - [Floyd Warshall](https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html) ` * ` - [CSES - 1672](https://cses.fi/problemset/task/1672/)
 - Floyd Warshall ` *** ` - [CF - 33B](https://codeforces.com/contest/33/problem/B)
 - Floyd Warshall or DFS ` ** ` - [CC - ACM14KG3](https://www.codechef.com/LRNDSA08/problems/ACM14KG3)
+- Floyd Warshall ` * ` - [CC - INOI1402](https://www.codechef.com/INOIPRAC/problems/INOI1402)
 - DFS + BFS ` ** ` - [CC - INOI2001](https://www.codechef.com/LRNDSA08/problems/INOI2001)
