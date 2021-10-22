@@ -640,6 +640,7 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - DFS ` *** ` - [CF - 884C](https://codeforces.com/contest/884/problem/C)
 - DFS ` * ` - [CF - 893C](https://codeforces.com/contest/893/problem/C)
 - DFS ` ** ` - [CF - 1020B](https://codeforces.com/contest/1020/problem/B)
+- DFS ` * ` - [CC - FIRESC](https://www.codechef.com/LRNDSA08/problems/FIRESC)
 - DFS on Grid ` * ` - [CSES - 1192](https://cses.fi/problemset/task/1192)
 - DFS on Cube ` ** ` - [CF - 60B](https://codeforces.com/contest/60/problem/B)
 - DFS on Grid ` * ` - [CF - 1033A](https://codeforces.com/contest/1033/problem/A)
@@ -662,3 +663,4 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - [Floyd Warshall](https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html) ` * ` - [CSES - 1672](https://cses.fi/problemset/task/1672/)
 - Floyd Warshall ` *** ` - [CF - 33B](https://codeforces.com/contest/33/problem/B)
 - Floyd Warshall or DFS ` ** ` - [CC - ACM14KG3](https://www.codechef.com/LRNDSA08/problems/ACM14KG3)
+- DFS + BFS ` ** ` - [CC - INOI2001](https://www.codechef.com/LRNDSA08/problems/INOI2001)
