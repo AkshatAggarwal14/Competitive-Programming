@@ -46,9 +46,9 @@ def getFiles():
         files = [f for f in os.listdir(mypath+contest) if os.path.isfile(os.path.join(mypath+contest, f)) and f[0].isdigit()]
         # print(files)
         for code in files:
-            print(contest+'/'+code)
-            # os.rename(mypath+contest+'/'+code, mypath+code)
-        # os.rmdir(mypath+contest)
+            # print(contest+'/'+code)
+            os.rename(mypath+contest+'/'+code, mypath+code)
+        os.rmdir(mypath+contest)
 
 if __name__=="__main__":
     # makeFolders()
