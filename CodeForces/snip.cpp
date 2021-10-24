@@ -1,5 +1,5 @@
 // clang-format off
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
 #include"Akshat.hpp"
 #else
 #include "bits/stdc++.h"
@@ -33,6 +33,7 @@ using o_map = __gnu_pbds::tree<key, value, cmp, __gnu_pbds::rb_tree_tag, __gnu_p
 // -------------------------<Defines and typedefs>------------------------
 using ll = int64_t;
 using db = double;
+using ld = long double;
 using str = string;
 using ull = unsigned long long;
 #define fo(i, n) for (ll i = 0; i < n; i++)
@@ -88,7 +89,9 @@ bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 // clang-format on
 
 void Solution() {
-    // code here
+    ll n;
+    cin >> n;
+    cout << n;
 }
 
 // --------------------------------</Solve>-------------------------------
@@ -96,20 +99,23 @@ void Solution() {
 // clang-format off
 int32_t main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
+    cout << fixed << setprecision(12);
 #ifdef NCR
     init();
 #endif
     // ll tc = 1; cin >> tc; while (tc--)
     Solution();
-    cerr << "\nTime : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
+    cerr << "Time : " << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
 
 /*
+    // https://github.com/AkshatAggarwal14/Competetive-Programming
+
     ? Stuff to look for ->
     * stay organised
     * int overflows, array bounds, etc.
@@ -124,4 +130,6 @@ int32_t main() {
     * (a & b) + (a | b) = a + b
     * TLE due to ll ? or multiple copies of large DS?
     * didnt use inv() in modular combinatorics? 
+    * For binary search on doubles, iterations = log2(range size / eps) + 10
+    * oeis.org for sequence questions!
 */
