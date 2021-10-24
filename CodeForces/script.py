@@ -51,8 +51,8 @@ def getFiles():
         os.rmdir(mypath+contest)
 
 if __name__=="__main__":
-    # makeFolders()
-    getFiles()
+    makeFolders()
+    # getFiles()
     os.system('git add -A')
     os.system('git commit -m "Restructured"')
     os.system('git push')
