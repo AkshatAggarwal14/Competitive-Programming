@@ -97,6 +97,7 @@ void Solution() {
         for (ll j = 0; j < 31; j++)
             if ((a[i] & (1LL << j)) != 0) cnt[j]++;
     }
+    dbg(cnt);
     for (ll i = 1; i <= n; i++) {
         bool flag = true;
         for (ll j = 0; j < 30; j++)
