@@ -53,3 +53,63 @@ int main() {
     cerr << "Time:" << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
+
+/*
+//! BFS
+    queue<pii> q;
+    q.push(s);
+    bool ans = false;
+    while (!q.empty())
+    {
+        auto [x, y] = q.front();
+        q.pop();
+ 
+        if (grid[x][y] == 'T')
+            ans = true;
+ 
+        if (turns[x][y] == 3)
+            continue;
+        if (!col[x][y])
+        {
+            col[x][y] = 1;
+            for (int j = y - 1; j >= 0; j--)
+            {
+                if (grid[x][j] == '*')
+                    break;
+                col[x][j] = 1;
+                q.push({x, j});
+                turns[x][j] = turns[x][y] + 1;
+            }
+            for (int j = y + 1; j < m; j++)
+            {
+                if (grid[x][j] == '*')
+                    break;
+                col[x][j] = 1;
+                q.push({x, j});
+                turns[x][j] = turns[x][y] + 1;
+            }
+        }
+        if (!row[x][y])
+        {
+            row[x][y] = 1;
+            for (int i = x - 1; i >= 0; i--)
+            {
+                if (grid[i][y] == '*')
+                    break;
+                row[i][y] = 1;
+                q.push({i, y});
+                turns[i][y] = turns[x][y] + 1;
+            }
+            for (int i = x + 1; i < n; i++)
+            {
+                if (grid[i][y] == '*')
+                    break;
+                row[i][y] = 1;
+                q.push({i, y});
+                turns[i][y] = turns[x][y] + 1;
+            }
+        }
+    }
+ 
+    cout << (ans ? "YES" : "NO");
+*/
