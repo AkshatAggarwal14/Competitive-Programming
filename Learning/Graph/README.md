@@ -671,3 +671,4 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - Floyd Warshall or DFS ` ** ` - [CC - ACM14KG3](https://www.codechef.com/LRNDSA08/problems/ACM14KG3)
 - Floyd Warshall ` * ` - [CC - INOI1402](https://www.codechef.com/INOIPRAC/problems/INOI1402)
 - DFS + BFS ` ** ` - [CC - INOI2001](https://www.codechef.com/LRNDSA08/problems/INOI2001)
+- Graph Coloring ` *** ` - [CF - 246D](https://codeforces.com/contest/246/problem/D)
