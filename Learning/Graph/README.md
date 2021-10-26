@@ -645,6 +645,7 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - DFS ` ** ` - [CF - 598D](https://codeforces.com/contest/598/problem/D)
 - DFS ` * ` - [CC - FIRESC](https://www.codechef.com/LRNDSA08/problems/FIRESC)
 - DFS ` **** ` - [CF - 1263D](https://codeforces.com/contest/1263/problem/D)
+- DFS and connected components` *** ` - [CF - 977E](https://codeforces.com/contest/977/problem/E)
 - DFS on Grid ` * ` - [CSES - 1192](https://cses.fi/problemset/task/1192)
 - DFS on Cube ` ** ` - [CF - 60B](https://codeforces.com/contest/60/problem/B)
 - DFS on Grid ` * ` - [CF - 1033A](https://codeforces.com/contest/1033/problem/A)
