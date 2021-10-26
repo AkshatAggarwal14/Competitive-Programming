@@ -48,12 +48,13 @@ void Solution() {
             cin >> grid[i][j];
         }
     }
+    // calculate for all .
     for (ll i = 0; i < n; ++i) {
         for (ll j = 0; j < m; ++j) {
             if (vis[i][j] || grid[i][j] == '*') continue;
             cnt = 0;
-            dfs(i, j);
-            dfs(i, j, cnt);
+            dfs(i, j);       // find ans
+            dfs(i, j, cnt);  // save ans for all nodes in component
         }
     }
     while (q--) {
