@@ -639,6 +639,7 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - DFS ` * ` - [CF - 500A](https://codeforces.com/contest/500/problem/A)
 - DFS ` * ` - [CF - 505B](https://codeforces.com/contest/505/problem/B)
 - DFS ` *** ` - [CF - 884C](https://codeforces.com/contest/884/problem/C)
+- DFS ` *** ` - [CF - 580C](https://codeforces.com/contest/580/problem/C)
 - DFS ` **** ` - [CF - 793B](https://codeforces.com/contest/793/problem/B)
 - DFS ` * ` - [CF - 893C](https://codeforces.com/contest/893/problem/C)
 - DFS ` ** ` - [CF - 1020B](https://codeforces.com/contest/1020/problem/B)
