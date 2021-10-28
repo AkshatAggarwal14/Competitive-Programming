@@ -658,6 +658,7 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - DFS and Expected Path length ` *** ` [CF - 839](https://codeforces.com/contest/839/problem/C)
 - Block and DFS ` ** ` - [CF - 1365D](https://codeforces.com/contest/1365/problem/D)
 - BFS ` ** ` - [CC - DIGJUMP](https://www.codechef.com/LRNDSA08/problems/DIGJUMP)
+- Reorder then BFS ` *** ` - [CF - 1037D](https://codeforces.com/contest/1037/problem/D)
 - BFS on Grid ` * ` - [CF - 57A](https://codeforces.com/contest/57/problem/A)
 - BFS on Grid ` *** ` - [CF - 329B](https://codeforces.com/contest/329/problem/B)
 - BFS and Find Path (Grid) ` *** ` [CSES - 1193](https://cses.fi/problemset/task/1193)
