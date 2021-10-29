@@ -24,9 +24,25 @@ bool valid(ll &x, ll &y) {
     return true;
 };
 
+// BFS
+void BFS(queue<pair<ll, ll>> &qq, ll dd[N][N], bool flag) {
+    while (!qq.empty()) {
+        ll xx = qq.front().first, yy = qq.front().second;
+        qq.pop();
+        for (ll i = 0; i < 4; ++i) {
+            ll _xx = xx + dx[i];
+            ll _yy = yy + dy[i];
+            if (!valid(_xx, _yy)) continue;
+            if (dd[_xx][_yy] != -1) continue;
+            if (flag) p_dir[_xx][_yy] = i;  // only for person
+            dd[_xx][_yy] = dd[xx][yy] + 1;
+            qq.push({_xx, _yy});
+        }
+    }
+}
+
 void Solution() {
     cin >> n >> m;
-    // input
     for (ll i = 0; i < n; ++i) {
         for (ll j = 0; j < m; ++j) {
             cin >> grid[i][j];
@@ -36,36 +52,10 @@ void Solution() {
         }
     }
 
-    // multisource bfs for monsters
-    while (!monsters.empty()) {
-        ll xx = monsters.front().first, yy = monsters.front().second;
-        monsters.pop();
-        for (ll i = 0; i < 4; ++i) {
-            ll _xx = xx + dx[i];
-            ll _yy = yy + dy[i];
-            if (!valid(_xx, _yy)) continue;
-            if (monster_d[_xx][_yy] != -1) continue;
-            monster_d[_xx][_yy] = monster_d[xx][yy] + 1;
-            monsters.push({_xx, _yy});
-        }
-    }
-
+    BFS(monsters, monster_d, false);  // multisource bfs for monsters
     bfs.push({sx, sy});
     d[sx][sy] = 0;
-    // bfs for person
-    while (!bfs.empty()) {
-        ll xx = bfs.front().first, yy = bfs.front().second;
-        bfs.pop();
-        for (ll i = 0; i < 4; ++i) {
-            ll _xx = xx + dx[i];
-            ll _yy = yy + dy[i];
-            if (!valid(_xx, _yy)) continue;
-            if (d[_xx][_yy] != -1) continue;
-            d[_xx][_yy] = d[xx][yy] + 1;
-            p_dir[_xx][_yy] = i;
-            bfs.push({_xx, _yy});
-        }
-    }
+    BFS(bfs, d, true);  // bfs for person
 
     for (ll i = 0; i < n; ++i) {
         for (ll j = 0; j < m; ++j) {
