@@ -12,30 +12,25 @@ auto sz = [](const auto &container) -> ll { return container.size(); };
 void Solution() {
     ll n, q, type, x, y;
     cin >> n >> q;
-    vector<ll> parent(n), child(n);
-    for (ll i = 0; i < n; ++i) parent[i] = i, child[i] = -1;
+    vector<ll> parent(n + 1, -1), child(n + 1, -1);
+    for (ll i = 1; i <= n; ++i) parent[i] = i;
     while (q--) {
         cin >> type;
         dbg(parent, child);
         if (type == 3) {
             cin >> x;
-            x--;
-
-            ll start = x;
             vector<ll> temp;
-            while (start != parent[start]) start = parent[start];
-            while (child[start] != -1) {
-                temp.push_back(start + 1);
-                start = child[start];
+            while (x != parent[x]) x = parent[x];
+            while (child[x] != -1) {
+                temp.push_back(x);
+                x = child[x];
             }
-            temp.push_back(start + 1);
-
+            temp.push_back(x);
             cout << sz(temp) << ' ';
             for (ll &ele : temp) cout << ele << ' ';
             cout << '\n';
         } else {
             cin >> x >> y;
-            x--, y--;
             if (type == 1) {
                 parent[y] = x;
                 child[x] = y;
