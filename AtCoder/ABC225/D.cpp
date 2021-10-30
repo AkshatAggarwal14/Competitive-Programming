@@ -12,14 +12,13 @@ auto sz = [](const auto &container) -> ll { return container.size(); };
 void Solution() {
     ll n, q, type, x, y;
     cin >> n >> q;
-    vector<ll> parent(n + 1, -1), child(n + 1, -1);
+    vector<ll> parent(n + 1, -1), child(n + 1, -1), temp;
     for (ll i = 1; i <= n; ++i) parent[i] = i;
     while (q--) {
         cin >> type;
-        dbg(parent, child);
         if (type == 3) {
             cin >> x;
-            vector<ll> temp;
+            temp.clear();
             while (x != parent[x]) x = parent[x];
             while (child[x] != -1) {
                 temp.push_back(x);
