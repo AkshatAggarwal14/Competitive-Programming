@@ -13,13 +13,11 @@ void Solution() {
     ll x, y, ans;
     cin >> x >> y;
     if (x == y)
-        ans = x;
-    else if (x > y)
-        ans = x + y;
+        cout << x << "\n";
+    else if (y < x)
+        cout << x + y << "\n";
     else
-        ans = y - ((x + y) / 2) % x;
-    dbg(ans % x);
-    cout << ans << '\n';
+        cout << y - (y % x) / 2 << "\n";
 }
 
 // clang-format off
