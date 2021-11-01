@@ -36,8 +36,11 @@ def makeFolders():
                 os.rename('D:/NITH/CP/CodeForces/'+code, 'D:/NITH/CP/CodeForces/'+contest+'/'+code)
         except:
             print(contest,'Already exists!')
-
-
+            for code in contests[contest]:
+                try:
+                    os.rename('D:/NITH/CP/CodeForces/'+code, 'D:/NITH/CP/CodeForces/'+contest+'/'+code)
+                except:
+                    print(contest,'/',code,'Already exists!')
 
 def getFiles():
     folders = [f for f in os.listdir(mypath) if os.path.isdir(os.path.join(mypath, f)) and f[0].isdigit()]
