@@ -11,28 +11,26 @@ auto sz = [](const auto &container) -> ll { return container.size(); };
 
 void Solution() {
     ll n, m;
+    cin >> n >> m;
     string s;
-    cin >> n >> m >> s;
-    ll m_c = 1, m_r = 1, x_c = 1, x_r = 1, r = 1, c = 1;
-    ll ans1 = 1, ans2 = 1;
-    for (ll i = 0; i < sz(s); i++) {
-        if (s[i] == 'U') r--;
-        if (s[i] == 'D') r++;
-        if (s[i] == 'R') c++;
-        if (s[i] == 'L') c--;
-        m_c = min(m_c, c);
-        x_c = max(x_c, c);
-        m_r = min(m_r, r);
-        x_r = max(x_r, r);
-        if (x_c - m_c >= m or x_r - m_r >= n) break;
-        ans1 = 1;
-        if (m_r < 0) ans1 += abs(m_r);
-        if (m_r <= 0) ans1++;
-        ans2 = 1;
-        if (m_c < 0) ans2 += abs(m_c);
-        if (m_c <= 0) ans2++;
+    cin >> s;
+    ll maxX = 0, minX = 0, maxY = 0, minY = 0;
+    ll x = 0, y = 0;
+    ll ans1 = 0, ans2 = 0;
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == 'L') x--;
+        if (s[i] == 'R') x++;
+        if (s[i] == 'D') y--;
+        if (s[i] == 'U') y++;
+        minX = min(minX, x);
+        maxX = max(maxX, x);
+        minY = min(minY, y);
+        maxY = max(maxY, y);
+        if (maxX - minX >= m || maxY - minY >= n) break;
+        ans1 = abs(maxY);
+        ans2 = abs(minX);
     }
-    cout << ans1 << ' ' << ans2 << '\n';
+    cout << 1 + ans1 << ' ' << 1 + ans2 << '\n';
 }
 
 // clang-format off
