@@ -71,9 +71,7 @@ int main() {
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    cout << fixed << setprecision(12);
     ll tc; cin >> tc; while (tc--)
     Solution();
-    cerr << "Time:" << 1000 * ((double)clock()) / (double)CLOCKS_PER_SEC << "ms\n";
     return 0;
 }
