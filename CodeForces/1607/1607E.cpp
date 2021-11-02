@@ -17,7 +17,7 @@ void Solution() {
     ll maxX = 0, minX = 0, maxY = 0, minY = 0;
     ll x = 0, y = 0;
     ll ans1 = 0, ans2 = 0;
-    for (int i = 0; i < s.size(); i++) {
+    for (int i = 0; i < sz(s); i++) {
         if (s[i] == 'L') x--;
         if (s[i] == 'R') x++;
         if (s[i] == 'D') y--;
