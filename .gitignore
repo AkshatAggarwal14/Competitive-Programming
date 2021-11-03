@@ -3,6 +3,7 @@
 
 # Unignore all with extensions
 !*.cpp*
+!*.sh
 
 # Unignore all dirs
 !*/
