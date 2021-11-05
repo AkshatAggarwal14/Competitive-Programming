@@ -4,16 +4,27 @@ import sys
 mypath = 'D:/NITH/CP/CodeForces/'
 
 
-def main():
-    need = ['.'+_ for _ in sys.argv[1:]]
-    if(len(need) == 0):
+def fileUTIL(filename: str):
+    if '.' not in filename:
+        return None
+    return '.'+filename.split('.')[-1]
+
+
+def deleter():
+    if '--help' in sys.argv or '-h' in sys.argv:
+        print('Usage:\npython .\\del.py [extensions (- for no extension)]')
         return
-    files = [f for f in os.listdir(mypath) if len(f) >= 4 and f[-4:] in need]
-    print(files)
+    need = ['.' + _ for _ in sys.argv[1:]]
+    files = [f for f in os.listdir(mypath) if os.path.isfile(
+        os.path.join(mypath, f)) and fileUTIL(f) in need]
+    if '.-' in need:
+        for f in os.listdir(mypath):
+            if os.path.isfile(os.path.join(mypath, f)) and fileUTIL(f) == None:
+                files.append(f)
     for file in files:
-        # print(os.path.join(mypath, file))
+        print('Removed', os.path.join(mypath, file))
         os.remove(os.path.join(mypath, file))
 
 
 if __name__ == "__main__":
-    main()
+    deleter()
