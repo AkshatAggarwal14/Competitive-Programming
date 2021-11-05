@@ -4,21 +4,18 @@
 # Unignore all with extensions
 !*.cpp*
 !*.sh
+!*.py
+!*.hpp
+!*.md
+!*.png
 
 # Unignore all dirs
 !*/
 
 # Ignore selected dirs
-
-.vscode
+.vscode/
 *.exe
-sol.cpp
-*/cpeditor.cpp
-*/Makefile
+*.out
 Other/
-!Akshat.hpp
-!*.md
-!*.png
 
 # Unignore selected files
-!*.py
