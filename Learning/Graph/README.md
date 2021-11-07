@@ -677,4 +677,6 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - Floyd Warshall ` * ` - [CC - INOI1402](https://www.codechef.com/INOIPRAC/problems/INOI1402)
 - DFS + BFS ` ** ` - [CC - INOI2001](https://www.codechef.com/LRNDSA08/problems/INOI2001)
 - DFS or BFS ` ** ` - [CSES - 1668](https://cses.fi/problemset/task/1668)
+- DFS or BFS ` ** ` - [AC - abc226_c](https://atcoder.jp/contests/abc226/tasks/abc226_c)
 - Graph Coloring ` *** ` - [CF - 246D](https://codeforces.com/contest/246/problem/D)
+- Cycles (DFS) ` *** ` [AC - abc226_e](https://atcoder.jp/contests/abc226/tasks/abc226_e)
