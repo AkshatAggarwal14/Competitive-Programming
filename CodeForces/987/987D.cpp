@@ -28,7 +28,7 @@ void Solution() {
         g[u].push_back(v), g[v].push_back(u);
     }
     // multisource bfs for all goods of same type
-    vector<vector<ll>> dist(k, vector<ll>(n, -1));  // find a cost to bring a good in each town
+    vector<vector<ll>> dist(k, vector<ll>(n, -1));
     for (ll type = 0; type < k; type++) {
         queue<ll> bfs;
         for (ll i = 0; i < n; i++) {
