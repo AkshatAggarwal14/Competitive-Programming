@@ -28,7 +28,7 @@ void Solution() {
         g[u].push_back(v), g[v].push_back(u);
     }
     // multisource bfs for all goods of same type
-    // check each type of good for each town
+    // find distance of one type of good from all towns.
     vector<vector<ll>> dist(k, vector<ll>(n, -1));
     for (ll type = 0; type < k; type++) {
         queue<ll> bfs;
