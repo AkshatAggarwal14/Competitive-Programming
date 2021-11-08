@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import sys
 mypath = 'D:/NITH/CP/CodeForces/'
 
 
@@ -67,5 +68,5 @@ if __name__ == "__main__":
     makeFolders()
     # getFiles()
     os.system('git add -A')
-    os.system('git commit -m "Restructured"')
+    os.system('git commit -m "'+sys.argv[1]+'"')
     os.system('git push')
