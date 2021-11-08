@@ -19,11 +19,10 @@ void Solution() {
     cin >> s;
     for (ll c = 0; c < 1000; c += 8) {  // as last 3 digits must be divisible by 8
         string t = to_string(c);
-        ll n = sz(t);
         ll pos = 0;
         for (ll i = 0; i < sz(s); ++i) {
-            if (s[i] == t[pos] && pos < n) pos++;
-            if (pos != n) continue;
+            if (s[i] == t[pos] && pos < sz(t)) pos++;
+            if (pos != sz(t)) continue;
             cout << "YES\n";
             cout << t;
             return;
