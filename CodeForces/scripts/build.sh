@@ -1,1 +1,1 @@
-g++ -static -lm -s -x c++ -Wall -Wextra -O2 -Wshadow -g -Wconversion -std=c++20 -o $1 $1.cpp
+g++-10 -static -lm -s -x c++ -Wall -Wextra -O2 -Wshadow -g -Wconversion -std=c++20 -o $1 $1.cpp

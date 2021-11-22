@@ -2,17 +2,12 @@
 using namespace std;
 using ll = int64_t;
 
-template <bool b>
-auto binsearch(auto l, auto r, const auto &pred) {
+ll find_first_false(ll l, ll r, const auto &pred) {
     --l, ++r;
-    for (decltype(l) m; m = midpoint(l, r), r > l + 1;) (pred(m) ? l : r) = m;
-    return (b ? l : r);
+    for (ll m; m = (l + r) / 2, r > l + 1;) (pred(m) ? l : r) = m;
+    return r;
 }
 // returns first i in [l, r], p(i) false, and if none found, returns r + 1
-auto find_first_false(auto l, auto r, const auto &p) {
-    return binsearch<false>(l, r, p);
-}
-
 void Solution() {
     ll k, x;
     cin >> k >> x;
