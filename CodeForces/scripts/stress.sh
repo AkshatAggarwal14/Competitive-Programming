@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "$1" == "-h" ]; then
-  echo "Usage: stress.sh [solA] [solB] [gen] [numTests]"
+  echo "Usage: stress.sh [solA - wrong] [solB] [gen] [numTests]"
   echo "Runs solutionA and solutionB against test cases output by generator and outputs a test on which they give different results"
   exit 0
 fi
