@@ -56,20 +56,21 @@ vector<ll> prime_factorisation(ll n) {
 }
 
 // if N = p1^a*p2^b*.., Num of divisors = (a+1)(b+1)..
-// need !!compress and !!primeFactorise
-ll sum_of_divisors(ll n) {
+ll count_divisors(ll n) {
     if (n <= 2) return n;
     vector<pair<ll, ll>> compressed = compress(prime_factorisation(n));
     ll res = 1;
     for (auto &[x, y] : compressed) res *= (y + 1);
     return res;
 }
+// if N = p1^a*p2^b..
+// Sum of divisors = (p1^0 + p1^1 + .. p1^a)*()... -> GP
 
 void Solution() {
     ll n;
     cin >> n;
     ll ans = 0;
-    for (ll i = 1; i <= n; ++i) ans += sum_of_divisors(i);
+    for (ll i = 1; i <= n; ++i) ans += count_divisors(i);
     cout << ans << '\n';
 }
 
