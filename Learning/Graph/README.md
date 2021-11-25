@@ -669,6 +669,7 @@ This can be done by similarly creating a `"Need healthcare"` Node and connecting
 - Multisource BFS ` * ` - [CF - 1593E](https://codeforces.com/contest/1593/problem/E)
 - Multisource BFS ` * ` - [CF - 35C](https://codeforces.com/contest/35/problem/C)
 - Multisource BFS ` * ` - [CC - SNSOCIAL](https://www.codechef.com/problems/SNSOCIAL)
+- Multisource BFS ` *** ` - [CF - 1611E1](https://codeforces.com/contest/1611/problem/E1)
 - Multisource BFS twice (Invert Graph) ` *** ` - [CF - 1272E](https://codeforces.com/contest/1272/problem/E)
 - Multisource BFS and path` *** ` - [CSES - 1194](https://cses.fi/problemset/task/1194)
 - Multisource BFS ` **** ` - [CF - 986A](https://codeforces.com/contest/986/problem/A)
