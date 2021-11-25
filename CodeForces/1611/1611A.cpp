@@ -15,11 +15,12 @@ template <class T, class U = T>
 bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 
 void Solution() {
-    string s;
+    string s, t = "2468";
     cin >> s;
     if ((s.back() - '0') % 2 == 0) return void(cout << 0 << '\n');
     if ((s.front() - '0') % 2 == 0) return void(cout << 1 << '\n');
-    if (s.find('2') != string::npos || s.find('4') != string::npos || s.find('6') != string::npos || s.find('8') != string::npos) return void(cout << 2 << '\n');
+    for (auto &c : t)
+        if (s.find(c) != string::npos) return void(cout << 2 << '\n');
     cout << -1 << '\n';
 }
 

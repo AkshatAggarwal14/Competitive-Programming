@@ -20,13 +20,8 @@ void Solution() {
     vector<ll> a(n);
     for (ll &x : a) cin >> x;
     ll maxi = *ranges::max_element(a);
-    if (a[0] != maxi && a[n - 1] != maxi) return void(cout << "-1\n");
-    if (a[0] == maxi) {
-        for (ll i = n - 1; i >= 0; i--) cout << a[i] << ' ';
-    } else {
-        cout << maxi << ' ';
-        for (ll i = n - 2; i >= 0; i--) cout << a[i] << ' ';
-    }
+    if (a[0] != maxi && a[n - 1] != maxi) return void(cout << -1 << '\n');
+    for (ll i = n - 1; i >= 0; i--) cout << a[i] << ' ';
     cout << '\n';
 }
 

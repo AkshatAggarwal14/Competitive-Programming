@@ -17,10 +17,7 @@ bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 void Solution() {
     ll a, b;
     cin >> a >> b;
-    ll ans = (a + b) / 4;
-    if (a >= ans && b >= ans) return void(cout << ans << '\n');
-    ans = min(a, b);
-    cout << ans << '\n';
+    cout << min({a, b, (a + b) / 4}) << '\n';
 }
 
 // clang-format off
