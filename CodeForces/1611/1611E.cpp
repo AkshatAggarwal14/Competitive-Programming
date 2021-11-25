@@ -16,7 +16,7 @@ bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 
 void Solution() {
     // https://cses.fi/problemset/task/1194/
-    ll n, k, num, root = 0;
+    ll n, k, num;
     cin >> n >> k;
     queue<ll> friends;
     vector<ll> d(n, -1), deg(n, 0), d_f(n, -1);
@@ -26,7 +26,7 @@ void Solution() {
         friends.push(num);
         d_f[num] = 0;
     }
-    d[root] = 0;
+    d[0] = 0;  // Vlad
     vector<vector<ll>> g(n);
     for (ll i = 0; i < n - 1; ++i) {
         ll u, v;
@@ -46,18 +46,12 @@ void Solution() {
             }
         }
     };
-    BFS(friends, d_f);
+    BFS(friends, d_f);  // multisource bfs
     queue<ll> t;
-    t.push(root);
+    t.push(0);
     BFS(t, d);
-    dbg(d, d_f);
-    for (ll i = 1; i < n; ++i) {
-        if (deg[i] == 1) {
-            if (d_f[i] > d[i]) {
-                return void(cout << "YES\n");
-            }
-        }
-    }
+    for (ll i = 1; i < n; ++i)
+        if (deg[i] == 1 && d_f[i] > d[i]) return void(cout << "YES\n");
     cout << "NO\n";
 }
 
