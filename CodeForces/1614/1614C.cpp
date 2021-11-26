@@ -54,17 +54,17 @@ void Solution() {
             ll L = get<0>(v[j]);
             ll R = get<1>(v[j]);
             bool value = (get<2>(v[j])) & mask;
-            if (!value) cnt[L] += 1, cnt[R + 1] -= 1;
+            if (!value) cnt[L] += 1, cnt[R + 1] -= 1;  // to mark zero wali ranges with count >= 1
         }
-        for (ll j = 1; j <= n; ++j) cnt[j] += cnt[j - 1];
-        for (ll j = 0; j < n; ++j) a[j][i] = !(cnt[j]);
+        for (ll j = 1; j <= n; ++j) cnt[j] += cnt[j - 1];  // pref
+        for (ll j = 0; j < n; ++j) a[j][i] = !(cnt[j]);    // 0 count = set bit
         // debug statements.
-        for (ll j = 0; j < n; ++j) cerr << a[j][i] << ' ';
-        cerr << '\n';
+        // for (ll j = 0; j < n; ++j) cerr << a[j][i] << ' ';
+        // cerr << '\n';
     }
     vector<ll> seq(n);
     for (ll i = 0; i < n; ++i) seq[i] = a[i].to_ullong();
-    dbg(seq);
+    // dbg(seq);
     cout << xorSum(seq) << '\n';
 }
 
@@ -88,6 +88,6 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     ll tc; cin >> tc; while (tc--)
-    Better();
+    Solution();
     return 0;
 }
