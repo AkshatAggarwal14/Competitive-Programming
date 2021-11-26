@@ -33,7 +33,7 @@ ll xorSum(vector<ll> a) {
     ll ans = (bits % MOD) * (power(2LL, sz(a) - 1, MOD) % MOD);
     return (ans % MOD);
 }
-//https://www.geeksforgeeks.org/sum-xor-possible-subsets/
+
 const ll N = 30;
 void Solution() {
     ll n, m, l, r, val;
@@ -68,6 +68,8 @@ void Solution() {
     cout << xorSum(seq) << '\n';
 }
 
+//---------------------------------------------------------------------------
+//https://www.geeksforgeeks.org/sum-xor-possible-subsets/
 void Better() {
     ll n, m, l, r, val, or_all = 0;
     cin >> n >> m;
