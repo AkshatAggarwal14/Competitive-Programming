@@ -32,7 +32,7 @@ void Solution() {
             }
         }
     }
-    map<ll, set<ll>> mp;  // to store indices of a particular occurence
+    map<ll, set<ll>> mp;  // to store indices of a particular 3 letter substring
     for (ll i = 2; i < n; ++i) {
         string t = "";
         t += s[i - 2], t += s[i - 1], t += s[i];
