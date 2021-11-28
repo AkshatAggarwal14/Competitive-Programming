@@ -23,13 +23,13 @@ void Solution() {
     for (ll i = 0; i < n; ++i) {
         while (a[i] % 2 == 0) {
             a[i] /= 2;
-            ctr++;
+            ctr++;  // stores all the possible /2 count
         }
     }
     dbg(a, ctr);
     sort(all(a));
-    a.back() *= (1LL << ctr);
-    cout << accumulate(all(a), 0LL) << '\n';
+    a.back() *= (1LL << ctr);                 // multiply max odd number with 2^ctr
+    cout << accumulate(all(a), 0LL) << '\n';  //sum
 }
 
 // clang-format off

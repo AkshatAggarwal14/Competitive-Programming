@@ -28,15 +28,15 @@ void Solution() {
             for (char c = 'a'; c <= 'c'; ++c) {
                 string s2 = s1;
                 s2 += c;
-                idx[s2] = pos++;
+                idx[s2] = pos++;  // generate all 3 letter combo and assign index
             }
         }
     }
-    map<ll, set<ll>> mp;
+    map<ll, set<ll>> mp;  // to store indices of a particular occurence
     for (ll i = 2; i < n; ++i) {
         string t = "";
         t += s[i - 2], t += s[i - 1], t += s[i];
-        mp[idx[t]].insert(i - 1);  // middle char is idx
+        mp[idx[t]].insert(i - 1);  // middle char of 3 letter string is its index
     }
     while (q--) {
         ll I;
@@ -48,7 +48,7 @@ void Solution() {
             if (id >= 1 && id < n - 1) {
                 string temp = "";
                 temp += s[id - 1], temp += s[id], temp += s[id + 1];
-                mp[idx[temp]].erase(id);
+                mp[idx[temp]].erase(id);  // erase the index from curr 3 strings
             }
         }
         s[I] = C;
@@ -56,10 +56,10 @@ void Solution() {
             if (id >= 1 && id < n - 1) {
                 string temp = "";
                 temp += s[id - 1], temp += s[id], temp += s[id + 1];
-                mp[idx[temp]].insert(id);
+                mp[idx[temp]].insert(id);  // store index of modified strings
             }
         }
-        cout << sz(mp[idx["abc"]]) << '\n';
+        cout << sz(mp[idx["abc"]]) << '\n';  // abc can be changes to acc etc, so just need its count as output
     }
 }
 
