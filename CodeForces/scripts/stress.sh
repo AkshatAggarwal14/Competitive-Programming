@@ -17,6 +17,7 @@ do
     ./$1 < input > outWrong
     H1=`md5sum outWrong`
     H2=`md5sum outSlow`
+    echo "Passed Test $testNum"
     if !(cmp -s "outWrong" "outSlow")
     then
         echo "Error found!"
@@ -26,6 +27,7 @@ do
         cat outWrong
         echo "Slow Output:"
         cat outSlow
+        echo ""
         exit
     fi
 done
