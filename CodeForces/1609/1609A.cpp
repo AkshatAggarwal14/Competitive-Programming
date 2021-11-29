@@ -19,14 +19,12 @@ void Solution() {
     cin >> n;
     vector<ll> a(n);
     for (ll &x : a) cin >> x;
-    sort(all(a));
     for (ll i = 0; i < n; ++i) {
         while (a[i] % 2 == 0) {
             a[i] /= 2;
             ctr++;  // stores all the possible /2 count
         }
     }
-    dbg(a, ctr);
     sort(all(a));
     a.back() *= (1LL << ctr);                 // multiply max odd number with 2^ctr
     cout << accumulate(all(a), 0LL) << '\n';  //sum

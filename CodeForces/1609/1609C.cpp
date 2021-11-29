@@ -52,29 +52,25 @@ void Solution() {
     ll n, e, ctr = 0;
     cin >> n >> e;
     vector<ll> a(n), temp;
-    vector<vector<pair<ll, ll>>> choices;
+    vector<pair<ll, ll>> choice;
     for (ll &x : a) cin >> x;
     for (ll i = 0; i < e; ++i) {  // O(e*(n/e))
         temp.clear();
-        for (ll j = i; j < n; j += e) temp.push_back(a[j]);
-        choices.push_back(compress(temp));  // generating all the possible jumps and storing
-    }
-    for (auto &choice : choices) {
-        // now working with consecutive numbers in each choice
-        // prime product if (1, P), (P, 1), (1, P, 1)
+        choice.clear();
+        for (ll j = i; j < n; j += e) temp.push_back(a[j]);  // jumps with gap e
+
+        choice = compress(temp);
+        //! calculate for each choice
         for (ll i = 0; i < sz(choice) - 1; ++i) {
             pair<ll, ll> c1 = choice[i], c2 = choice[i + 1];
-            if (c1.first == 1 &&                                   // 1s
-                isPrime(c2.first) && c2.second == 1 &&             // 1 prime
-                i + 2 < sz(choice) && choice[i + 2].first == 1) {  // 1s
-                ctr += (choice[i].second * choice[i + 2].second);
-            }
-            if (c1.first == 1 && isPrime(c2.first)) {  // (1, P)
-                ctr += (c1.second);
-            }
-            if (isPrime(c1.first) && c2.first == 1) {  // (P, 1)
-                ctr += (c2.second);
-            }
+            // now working with consecutive numbers in each choice
+            // (1, P) -> only first P used
+            if (c1.first == 1 && isPrime(c2.first)) ctr += (c1.second);
+            // (P, 1) -> only last P used
+            if (isPrime(c1.first) && c2.first == 1) ctr += (c2.second);
+            // (1, P, 1) -> ones should have only 1 Prime in between
+            if (c1.first == 1 && isPrime(c2.first) && c2.second == 1 && i + 2 < sz(choice) && choice[i + 2].first == 1)
+                ctr += (c1.second * choice[i + 2].second);  // 1s before * 1s after
         }
     }
     cout << ctr << '\n';

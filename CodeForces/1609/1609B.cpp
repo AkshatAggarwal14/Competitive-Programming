@@ -63,6 +63,29 @@ void Solution() {
     }
 }
 
+// ----------------------------------------------------------------------------
+// only need count of "abc"s, others were unnecessary
+void Better() {
+    ll n, q, abc = 0, idx;
+    string s;
+    char ch;
+    cin >> n >> q >> s;
+    for (ll i = 2; i < n; i++)
+        if (s.substr(i - 2, 3) == "abc") ++abc;
+    for (ll i = 0; i < q; i++) {
+        cin >> idx >> ch;
+        idx--;
+        // remove the 3 abc's
+        for (ll l = max(0LL, idx - 2), r = l + 2; r < min(n, idx + 3); l++, r++)
+            if (s.substr(l, 3) == "abc") --abc;
+        s[idx] = ch;
+        // add the 3 abc's if present
+        for (ll l = max(0LL, idx - 2), r = l + 2; r < min(n, idx + 3); l++, r++)
+            if (s.substr(l, 3) == "abc") ++abc;
+        cout << abc << "\n";
+    }
+}
+
 // clang-format off
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -72,6 +95,6 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     // ll tc; cin >> tc; while (tc--)
-    Solution();
+    Better();
     return 0;
 }
