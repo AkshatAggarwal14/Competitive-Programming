@@ -1,89 +1,60 @@
-//**********************master._.mind**********************
-//-----------------Author: Akshat Aggarwal-----------------
-//If you don't understand the code below... dont worry, i didn't either
-#include <bits/stdc++.h>
+#ifdef LOCAL
+// https://github.com/AkshatAggarwal14/Competetive-Programming
+#include "Akshat.hpp"
+#else
+#include "bits/stdc++.h"
 using namespace std;
-
-#define ll long long
-#define lld long double
-#define ull unsigned long long
-#define fo(i, n) for (ll i = 0; i < n; i++)
-#define rep(i, k, n) for (ll i = k; k < n ? i < n : i > n; k < n ? i++ : i--)
-#define deb(x) cout << #x << "=" << x << endl
-#define deb2(x, y) cout << #x << "=" << x << "," << #y << "=" << y << endl
-#define pb push_back
-#define mp(x, y) make_pair(x, y)
-#define ub upper_bound
-#define lb lower_bound
-#define ff first
-#define ss second
+#define dbg(...)
+#endif
+using ll = int64_t;
+auto sz = [](const auto &container) -> ll { return container.size(); };
 #define all(x) (x).begin(), (x).end()
-#define uniq(x) (x).erase(unique(all(x)), (x).end())
-#define rall(x) (x).rbegin(), (x).rend()
-#define ps(x, y) fixed << setprecision(y) << x
-#define clr(x) memset(x, 0, sizeof(x))
-#define sortall(x) sort(all(x))
-#define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
-#define PI 3.1415926535897932384626
-#define sz(x) ((ll)(x).size())
-#define ln '\n'
-#define cy cout << "YES"
-#define cno cout << "NO"
-#define cn cout << '\n'
-#define re return
-//cin.tie(NULL) is used to read all input before displaying any output
-const ll mod = 1e9 + 7;  //1000000007
-const ll mod2 = 998244353;
-const ll inf = LLONG_MAX;
-const double eps = 1e-12;
-typedef pair<ll, ll> pl;
-typedef pair<double, double> pd;
-typedef vector<ll> vl;
-typedef vector<pl> vpl;
-typedef vector<vl> vvl;
+template <class T, class U = T>
+bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
+template <class T, class U = T>
+bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 
-//divisor_count(ll)
-//prime_facorisation(n)
-//primes_less_than(n)
+template <bool b>
+auto binsearch(auto l, auto r, const auto &pred) {
+    --l, ++r;
+    for (decltype(l) m; m = midpoint(l, r), r > l + 1;) (pred(m) ? l : r) = m;
+    return (b ? l : r);
+}
 
-class Task {
-   public:
-    void Perform() {
-        Read();
-        Solve();
-    }
+// returns first i in [l, r], p(i) false, and if none found, returns r + 1
+auto find_first_false(auto l, auto r, const auto &p) {
+    return binsearch<false>(l, r, p);
+}
 
-   private:
+// returns last i in [l, r], p(i) true, and if none found, returns l - 1
+auto find_last_true(auto l, auto r, const auto &p) {
+    return binsearch<true>(l, r, p);
+}
+
+void Solution() {
     ll n;
-    vl a;
-
-    void Read() {
-        cin >> n;
-        a.resize(n);
-        fo(i, n) cin >> a[i];
+    cin >> n;
+    vector<ll> a(n), b(n);
+    // we visit gate i at times i + tn
+    // i + tn > a_i
+    // bin search
+    for (ll i = 0; ll & x : a) {
+        cin >> x;
+        b[i] = find_first_false(0LL, (ll)1e9, [&](ll t) { return (i + 1) + t * n <= a[i]; });
+        ++i;
     }
+    cout << distance(b.begin(), min_element(all(b))) + 1 << '\n';
+}
 
-    void Solve() {
-        ll i;
-        for (i = 0;; ++i) {
-            if (a[i % n] <= i) break;
-        }
-        cout << i % n + 1;
-    }
-};
-
+// clang-format off
 int main() {
-#ifndef ONLINE_JUDGE
+    cin.tie(nullptr)->sync_with_stdio(false);
+#ifdef LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-
-    ios_base::sync_with_stdio(false), cin.tie(nullptr);
-    int tc = 1;
-    // cin >> tc;
-    while (tc--) {
-        Task t;
-        t.Perform();
-    }
+    cout << fixed << setprecision(12);
+    // ll tc; cin >> tc; while (tc--)
+    Solution();
     return 0;
 }
