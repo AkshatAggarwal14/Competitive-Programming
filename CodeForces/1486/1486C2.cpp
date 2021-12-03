@@ -32,7 +32,7 @@ auto find_last_true(auto l, auto r, const auto &p) {
 }
 
 ll query(ll l, ll r) {
-    if (l >= r) return -1;
+    if (l >= r) return -1;  // never equal
     cout << "? " << l << ' ' << r << endl;
     ll res;
     cin >> res;
@@ -45,7 +45,7 @@ void Solution() {
     ll n;
     cin >> n;
     ll smax = query(1, n), ans = -1;
-    if (smax == 1 || query(1, smax) != smax) {
+    if (query(1, smax) != smax) {
         /*
                         idx: smax, smax+1, smax+2,.., ... n
                         val: smax, ... ,.. ,..max, ... ,...
