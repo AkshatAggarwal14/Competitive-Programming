@@ -45,17 +45,13 @@ void Solution() {
         return true;
     };
     auto add = [&](const string &what, string &to) -> void {
-        if (what != "") to.append(what);
+        for (auto &c : what)
+            if (c != '\0') to += c;
         to += ',';
     };
     for (auto &tok : ans) valid(tok) ? add(tok, s1) : add(tok, s2);
-    string res1 = "", res2 = "";
-    for (char &c : s1)
-        if (c != '\0') res1 += c;
-    for (char &c : s2)
-        if (c != '\0') res2 += c;
-    cout << (res1.length() == 0 ? "-" : "\"" + res1.substr(0, res1.length() - 1) + "\"") << '\n';
-    cout << (res2.length() == 0 ? "-" : "\"" + res2.substr(0, res2.length() - 1) + "\"") << '\n';
+    cout << (s1 == "" ? "-" : "\"" + s1.substr(0, s1.length() - 1) + "\"") << '\n';
+    cout << (s2 == "" ? "-" : "\"" + s2.substr(0, s2.length() - 1) + "\"") << '\n';
 }
 
 // clang-format off
