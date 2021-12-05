@@ -12,7 +12,7 @@ string to_string(tuple<A, B, C, D> p);
 // basic
 string to_string(const string& s) { return '"' + s + '"'; }
 string to_string(const char* s) { return to_string((string)s); }
-string to_string(bool b) { return (b ? "true" : "false"); }
+string to_string(bool b) { return (b ? "T" : "F"); }
 
 // others
 string to_string(vector<bool> v) {
@@ -61,6 +61,20 @@ string to_string(tuple<A, B, C, D> p) { return "(" + to_string(get<0>(p)) + ", "
 string to_string(char ch) {
     string s(1, ch);
     return '\'' + s + '\'';
+}
+
+template <typename T>
+string to_string(queue<T> q) {
+    bool first = true;
+    string res = "{";
+    while (!q.empty()) {
+        if (!first) res += ", ";
+        first = false;
+        res += to_string(q.front());
+        q.pop();
+    }
+    res += '}';
+    return res;
 }
 
 #define beauty(...) pretty_print(#__VA_ARGS__, __VA_ARGS__)
