@@ -67,6 +67,6 @@ def getFiles():
 if __name__ == "__main__":
     makeFolders()
     # getFiles()
-    os.system('git add -A')
+    os.system('git add ./')
     os.system('git commit -m "'+sys.argv[1]+'"')
     os.system('git push')
