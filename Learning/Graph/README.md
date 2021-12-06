@@ -442,7 +442,7 @@ We consider an imaginary node "rot" and connect all rotten oranges to it. Now BF
 
 The maximum distance gives the time taken.
 
-Thus BFS only once, so `O(NM)`
+Thus BFS only once, so `O(NM)` or `O(V + E)`
 
 > When this is done, instead of pushing extra node in graph, we can instead push the rotten nodes in queue intially. [Because this will happen anyway after "rot" is popped.]
 
@@ -588,8 +588,9 @@ int main() {
 }
 ```
 
-The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `m > n`, thus `O(mlogn)` [`FASTER` than Multisource bfs]
-<br><br>For each edge we are pushing something in set, thus `nlogm`(Because of set operations) and for each vertex we are poppong something out which gives `mlogn`.
+The time complexity of dijkstra's algorithm is `O(nlogm + mlogn)`, but usually `m > n`, thus `O(mlogn)` 
+
+For each edge we are pushing something in set, thus `nlogm`(Because of set operations) and for each vertex we are poppong something out which gives `mlogn`.
 
 - Each node visited once.
 - Each edge visited twice.
@@ -623,7 +624,42 @@ Finally we have, `dis[] = {0, 100, 200, 100, 300}`
 
 This can be done by similarly creating a `"Need healthcare"` Node and connecting all patients to it, with `weight 0`. And now Dijkstra can be used with this as a source for all hospitals. [All patients can be inserted in the set already]
 
+# Cyclic and Acyclic Graphs:
 
+If A, B are 2 nodes in a cycle, then there are atleast 2 paths such that **_every_** nodes in these paths are unique.
+
+<p align="center">
+    <img src="Images/cycle.png" alt="Cycles"/>
+</p>
+
+If there are no cycles in a graph, there will be a unique path between any 2 nodes.
+
+A cycle with `N` vertices has `N` edges.
+
+Important points:
+* A Tree is a connected acyclic graph.
+* A Tree with `N` Vertices has `N - 1` edges.
+* An Acyclic graph with many components is called a forest, as it has many trees.
+
+# Spanning tree:
+
+* A spanning tree is a tree that connects all the vertices of a graph with the minimum possible number of edges. 
+
+* Thus, a spanning tree is always connected. Also, a spanning tree never contains a cycle. 
+
+* A spanning tree is always defined for a graph and it is always a subset of that graph. Thus, a disconnected graph can never have a spanning tree.
+
+* Can be made using BFS/DFS. As in BFS/DFS already visited nodes are not visited again, this it can be used to generate the spanning tree, which will be called BFS tree/DFS tree.
+
+* One graph can have many spanning trees, thus `NOT UNIQUE`.
+
+### Minimum Spanning tree:
+
+* A minimum spanning tree is defined for a weighted graph. A spanning tree having minimum weight is defined as a minimum spanning tree. This weight depends on the weight of the edges.
+
+Two algorithms are used to find MST:
+1. Prim's Algorithm
+2. Kruskal Algorithm
 
 
 
