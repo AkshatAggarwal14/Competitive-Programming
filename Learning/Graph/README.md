@@ -719,6 +719,7 @@ Two algorithms are used to find MST:
 - Floyd Warshall or DFS ` ** ` - [CC - ACM14KG3](https://www.codechef.com/LRNDSA08/problems/ACM14KG3)
 - Floyd Warshall ` ** ` - [FB - HCQualification21B](https://www.facebook.com/codingcompetitions/hacker-cup/2021/qualification-round/problems/A2)
 - Floyd Warshall ` *** ` - [CF - 33B](https://codeforces.com/contest/33/problem/B)
+- Floyd Warshall ` *** ` - [CF - 25C](https://codeforces.com/contest/25/problem/C)
 - DFS + BFS ` ** ` - [CC - INOI2001](https://www.codechef.com/LRNDSA08/problems/INOI2001)
 - DFS or BFS ` ** ` - [CSES - 1668](https://cses.fi/problemset/task/1668)
 - DFS or BFS ` ** ` - [AC - abc226_c](https://atcoder.jp/contests/abc226/tasks/abc226_c)
