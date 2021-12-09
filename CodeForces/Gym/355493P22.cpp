@@ -74,6 +74,29 @@ void Solution() {
     cout << ans << '\n';
 }
 
+//---------------------------------------------------------------------------------
+void Better1() {
+    ll n;
+    cin >> n;
+    ll ans = 0;
+    for (ll i = 1; i <= n; ++i) ans += n / i;
+    cout << ans << '\n';
+    /*This works because there are N/2 multiples of 2 in [1, N] thus there are N/2 numbers whose divisor is 2, and so on..*/
+}
+
+// now task of finding sum n/i can also be done in sqrt n
+void Better2() {
+    ll n;
+    cin >> n;
+    ll ans = 0;
+    for (ll i = 1; i * i <= n; ++i) ans += (n / i - i + 1LL) * 2LL - 1LL;
+    cout << ans << '\n';
+}
+// - i to avoid overcounting lower values
+// + 1 to allowe squares
+// x 2 so that what goes around can come around
+// - 1 for the square
+
 // clang-format off
 int main() {
     fill();
@@ -84,6 +107,8 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     // ll tc; cin >> tc; while (tc--)
-    Solution();
+    // Solution();
+    // Better1();
+    Better2();
     return 0;
 }
