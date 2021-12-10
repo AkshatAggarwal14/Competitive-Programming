@@ -690,6 +690,7 @@ Two algorithms are used to find MST:
 - DFS on Grid ` * ` - [CSES - 1192](https://cses.fi/problemset/task/1192)
 - DFS on Grid ` * ` - [CF - 1033A](https://codeforces.com/contest/1033/problem/A)
 - DFS on Grid ` ** ` - [CC - MARLA](https://www.codechef.com/LRNDSA08/problems/MARLA)
+- DFS on Grid ` ** ` - [CF - 616C](https://codeforces.com/contest/616/problem/C)
 - DFS and Find Path ` ** ` - [CF - 1057A](https://codeforces.com/contest/1057/problem/A)
 - DFS and Graph Coloring ` * ` - [CF - 902B](https://codeforces.com/contest/902/problem/B)
 - DFS and Graph Coloring ` *** ` - [CF - 1167C](https://codeforces.com/contest/1167/problem/C)
