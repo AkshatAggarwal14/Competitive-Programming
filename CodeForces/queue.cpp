@@ -8,15 +8,15 @@ int main() {
     // Elements are inserted at the back (end) and are deleted from the front.
     queue<int> q;  //? declare empty queue
     q.push(100);
-    show(q);
+    show(q);  // 100
     q.push(120);
-    show(q);
+    show(q);  // 100 120
 
     q.pop();
-    show(q);
+    show(q);  // 120
     cout << q.size() << '\n';
     q.push(200);
-    q.push(4);
+    q.push(4);  // 120 200 4
     cout << q.front() << ' ' << q.back() << '\n';
     return 0;
 }

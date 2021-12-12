@@ -9,8 +9,12 @@ int main() {
     // The objects in a map are of type ‘pair’ by default in which all the ‘first’ elements are unique keys associated with their ‘second’ value objects.
 
     //? insert in map
-    mp.insert(make_pair(1, "one"));
+    mp.insert(make_pair(1, "one"));  // {{1, "one"}}
     mp[2] = "two";
+    mp[3] = "three";
+
+    //? erase
+    mp.erase(2);
 
     //? printing map
     for (auto itr = mp.begin(); itr != mp.end(); ++itr) {

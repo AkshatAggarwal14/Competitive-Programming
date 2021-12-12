@@ -3,10 +3,9 @@ using namespace std;
 void show(deque<int> g);
 
 int main() {
-    // Double ended queues are sequence containers with the feature of expansion and contraction on both the ends.
+    // Double ended queues -> push, pop both ends -> more efficient
     // queue from both ends
-    deque<int> dq;  //? declare deque
-    // They are similar to vectors, but are more efficient in case of insertion and deletion of elements. Unlike vectors, contiguous storage allocation may not be guaranteed.
+    deque<int> dq;     //? declare deque
     dq.push_back(10);  // 10
     show(dq);
     dq.push_front(20);  // 20 10
