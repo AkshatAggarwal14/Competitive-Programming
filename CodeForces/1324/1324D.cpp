@@ -14,14 +14,6 @@ bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
 template <class T, class U = T>
 bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 
-void Math() {
-    ll n, k;
-    cin >> n >> k;
-    ll ans = (k - 1) / (n - 1);
-    ans = ans * n + k - ans * (n - 1);
-    cout << ans;
-}
-
 template <bool b>
 auto binsearch(auto l, auto r, const auto &pred) {
     --l, ++r;
@@ -39,16 +31,23 @@ auto find_last_true(auto l, auto r, const auto &p) {
     return binsearch<true>(l, r, p);
 }
 
-void BS() {
-    ll n, k;
-    cin >> n >> k;
-    // kth element not divisible by N
-    // first element such that numbers not divisible by N >= K
-    cout << find_first_false(0LL, n * k, [&](ll num) {
-        ll divisible = num / n;
-        ll not_div = num - divisible;
-        return not_div < k;
-    }) << '\n';
+void Solution() {
+    ll n;
+    cin >> n;
+    vector<ll> a(n), b(n);
+    for (ll &x : a) cin >> x;
+    for (ll &x : b) cin >> x;
+    vector<ll> res(n);
+    for (ll i = 0; i < n; ++i) res[i] = a[i] - b[i];
+    // res[i] + res[j] > 0
+    // res[j] > -res[i]
+    ll ans = 0;
+    sort(all(res), greater<>());
+    for (ll i = 0; i < n - 1; ++i) {  // BS from i + 1 to end
+        ll last = find_last_true(i + 1, n - 1, [&](ll m) { return (res[i] + res[m] > 0); });
+        ans += (last - i);
+    }
+    cout << ans << '\n';
 }
 
 // clang-format off
@@ -59,7 +58,7 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
     cout << fixed << setprecision(12);
-    ll tc; cin >> tc; while (tc--)
-    BS();
+    // ll tc; cin >> tc; while (tc--)
+    Solution();
     return 0;
 }

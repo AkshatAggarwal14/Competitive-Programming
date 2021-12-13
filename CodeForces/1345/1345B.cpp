@@ -14,14 +14,6 @@ bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
 template <class T, class U = T>
 bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 
-void Math() {
-    ll n, k;
-    cin >> n >> k;
-    ll ans = (k - 1) / (n - 1);
-    ans = ans * n + k - ans * (n - 1);
-    cout << ans;
-}
-
 template <bool b>
 auto binsearch(auto l, auto r, const auto &pred) {
     --l, ++r;
@@ -39,16 +31,20 @@ auto find_last_true(auto l, auto r, const auto &p) {
     return binsearch<true>(l, r, p);
 }
 
-void BS() {
-    ll n, k;
-    cin >> n >> k;
-    // kth element not divisible by N
-    // first element such that numbers not divisible by N >= K
-    cout << find_first_false(0LL, n * k, [&](ll num) {
-        ll divisible = num / n;
-        ll not_div = num - divisible;
-        return not_div < k;
-    }) << '\n';
+void Solution() {
+    // 2    ,7     ,15
+    // 3 - 1, 7 - 2, 18 - 3 (from figure)
+    // 1 * 3 - 1, 3 * 3 - 2, 6 * 3 - 3
+    // 1 * 3 - 1, (1 + 2) * 3 - 2, (1 + 2 + 3) * 3 - 3,..
+    ll n;
+    cin >> n;
+    ll ans = 0;
+    while (n >= 2) {  // as 2 is minimum needed for constructing
+        ll last = find_last_true(0LL, ll(1e9), [&](ll m) { return ((m * (m + 1)) / 2) * 3 - m <= n; });
+        last = ((last * (last + 1)) / 2) * 3 - last;  // size of largest <= n
+        n -= last, ans++;
+    }
+    cout << ans << '\n';
 }
 
 // clang-format off
@@ -60,6 +56,6 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     ll tc; cin >> tc; while (tc--)
-    BS();
+    Solution();
     return 0;
 }
