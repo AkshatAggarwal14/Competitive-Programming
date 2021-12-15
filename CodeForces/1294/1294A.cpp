@@ -37,7 +37,7 @@ using namespace std;
     cin.tie(0);                   \
     cout.tie(0)
 //cin.tie(NULL) is used to read all input before displaying any output
-const ll mod = 1e9 + 7; //1000000007
+const ll mod = 1e9 + 7;  //1000000007
 const ll mod2 = 998244353;
 const ll inf = LLONG_MAX;
 const double eps = 1e-12;
@@ -75,8 +75,7 @@ void _print(multiset<T> v);
 //prime_facorisation(n)
 //primes_less_than(n)
 
-void solve()
-{
+void solve() {
     //*********************CODE STARTS HERE*********************
 
     ll a, b, c, n;
@@ -86,22 +85,19 @@ void solve()
     a = maxi - a, b = maxi - b, c = maxi - c;
     ll atleast = a + b + c;
 
-    if (n >= atleast)
-    {
+    if (n >= atleast) {
         n -= atleast;
         if (n % 3 == 0)
             cy;
         else
             cno;
-    }
-    else
+    } else
         cno;
     //**********************CODE ENDS HERE**********************
     re;
-} //todo solve
+}  //todo solve
 
-int main()
-{
+int main() {
     fast_io();
 #ifndef ONLINE_JUDGE
     freopen("error.txt", "w", stderr);
@@ -114,8 +110,7 @@ int main()
     ll testcases = 1;
     //todo testcases
     cin >> testcases;
-    while (testcases--)
-    {
+    while (testcases--) {
         solve();
         cn;
     }
@@ -125,12 +120,11 @@ int main()
     double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
     cerr << "\nTime taken:" << ln << ps(time_taken, 6) << " sec\n";
     re 0;
-} //todo main
+}  //todo main
 
 //* ------function definitions------
 template <class T, class V>
-void _print(pair<T, V> p)
-{
+void _print(pair<T, V> p) {
     cerr << "{";
     _print(p.ff);
     cerr << ",";
@@ -138,44 +132,36 @@ void _print(pair<T, V> p)
     cerr << "}";
 }
 template <class T>
-void _print(vector<T> v)
-{
+void _print(vector<T> v) {
     cerr << "[ ";
-    for (T i : v)
-    {
+    for (T i : v) {
         _print(i);
         cerr << " ";
     }
     cerr << "]";
 }
 template <class T>
-void _print(set<T> v)
-{
+void _print(set<T> v) {
     cerr << "[ ";
-    for (T i : v)
-    {
+    for (T i : v) {
         _print(i);
         cerr << " ";
     }
     cerr << "]";
 }
 template <class T>
-void _print(multiset<T> v)
-{
+void _print(multiset<T> v) {
     cerr << "[ ";
-    for (T i : v)
-    {
+    for (T i : v) {
         _print(i);
         cerr << " ";
     }
     cerr << "]";
 }
 template <class T, class V>
-void _print(map<T, V> v)
-{
+void _print(map<T, V> v) {
     cerr << "[ ";
-    for (auto i : v)
-    {
+    for (auto i : v) {
         _print(i);
         cerr << " ";
     }
