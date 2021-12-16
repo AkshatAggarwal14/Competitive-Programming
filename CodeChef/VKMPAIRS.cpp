@@ -14,19 +14,42 @@ bool amin(T &a, U &&b) { return b < a ? a = std::forward<U>(b), true : false; }
 template <class T, class U = T>
 bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 
+// const ll MOD = 1e9 + 7;
+ll power(ll x, ll y, ll p) {
+    ll res = 1;
+    x %= p;
+    if (x == 0) return 0;  //! important
+    while (y > 0) {
+        if (y & 1)
+            res = (res * x) % p;
+        y = y >> 1;
+        x = (x * x) % p;
+    }
+    return res;
+}
+
 void Solution() {
-    ll n;
-    cin >> n;
-    vector<ll> a(n);
+    // (ai * (ai^bj) - 1) mod p = 0
+    // (ai^bj) < p
+    //? ai mod p != 0
+    // ai *(ai^bj) mod p = 1
+    // ai^bj mod p = a-1i mod p
+    // ai^bj = a-1i mod p
+    // ai^a-1modp = bj
+
+    ll n, m, p;
+    cin >> n >> m >> p;
+    vector<ll> a(n), b(m);
+    map<ll, ll> cnt;
     for (ll &x : a) cin >> x;
-    ll maxi = *max_element(all(a));
-    if (count(all(a), maxi) == n)
-        cout << 0;              // already equal
-    else if (a.back() == maxi)  // 1 move of 1st type
-        cout << 1;
-    else
-        cout << 2;  // shift max to end -> 2nd type, then 1st type move
-    cout << '\n';
+    for (ll &x : b) cin >> x, ++cnt[x];
+    ll ans = 0;
+    for (ll &x : a) {
+        if (x % p == 0) continue;  // -1 mod P = 0. not possible
+        ll inv = power(x, p - 2, p);
+        ans += cnt[inv ^ x];
+    }
+    cout << ans << '\n';
 }
 
 // clang-format off

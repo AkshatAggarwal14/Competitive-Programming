@@ -28,6 +28,7 @@ ll power(ll x, ll y, ll p) {
 }
 
 // 1 2 4 7 8 8 8 15 16 16 16..
+// Observe pattern after brute force
 const ll MOD = 1e9 + 7;
 void Solution() {
     ll n;

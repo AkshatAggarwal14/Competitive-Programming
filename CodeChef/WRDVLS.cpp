@@ -17,6 +17,7 @@ bool amax(T &a, U &&b) { return a < b ? a = std::forward<U>(b), true : false; }
 /*
 3 choose krne hai
 indices with 3 = 2, 6, 8, 11, 14
+(0, 8) ..
 (2, 8)
 (2, 9)
 (2, 10)
@@ -26,7 +27,7 @@ indices with 3 = 2, 6, 8, 11, 14
 (6, 13)
 (3, 11)
 (4, 11)
-(5, 11)
+(5, 11)...
 
 .. so on
 */
@@ -35,30 +36,25 @@ void Solution() {
     ll n;
     cin >> n;
     vector<ll> v(n);
-    unordered_map<ll, vector<ll>> orig;
+    unordered_map<ll, vector<ll>> idx;  // store indexes of all
     for (int i = 0; i < n; i++) {
         cin >> v[i];
-        orig[v[i]].push_back(i);
+        idx[v[i]].push_back(i);
     }
     ll sum = 0;
-    for (const auto &val : orig) {
+    for (const auto &[i, _] : idx) {
         // Let's Work on every i
-        ll i = val.first;
-        for (ll j = 0; j < sz(orig[i]) - i + 1; ++j) {
-            // suppose for i = 1
-            // i will se
-            // ok ye index
-            // is se +1 index aur uske beech mai diff
-            ll tt;
+        for (ll j = 0; j < sz(idx[i]) - i + 1; ++j) {
+            ll front;
             if (j == 0) {
-                tt = orig[i][j] + 1;
+                front = idx[i][j] + 1;  // 0 -> first idx
             } else {
-                tt = orig[i][j] - orig[i][j - 1];
+                front = idx[i][j] - idx[i][j - 1];  // first -> second idx
             }
-            if (j == sz(orig[i]) - i) {
-                sum += (n - orig[i][j + i - 1]) * tt * i;
+            if (j == sz(idx[i]) - i) {
+                sum += (n - idx[i][j + i - 1]) * front * i;  // last idx -> n
             } else {
-                sum += tt * i * (orig[i][j + i] - orig[i][j + i - 1]);
+                sum += front * i * (idx[i][j + i] - idx[i][j + i - 1]);  // second last -> last idx
             }
         }
     }
