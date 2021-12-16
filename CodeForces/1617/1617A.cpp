@@ -40,6 +40,23 @@ void Solution() {
     cout << '\n';
 }
 
+// ------------------------------------------------------------------------------
+void Better() {
+    string s, t;
+    cin >> s >> t;
+    sort(all(s));
+    if (t == "abc" && count(all(s), 'a')) {
+        sort(all(s), [&](char a, char b) {
+            if (a == 'b' and b == 'c') return false;
+            if (a == 'c' and b == 'b') return true;
+            return a < b;
+        });
+        cout << s << '\n';
+    } else {
+        cout << s << '\n';
+    }
+}
+
 // clang-format off
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -49,6 +66,7 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     ll tc; cin >> tc; while (tc--)
-    Solution();
+    Better();
+    // Solution();
     return 0;
 }
