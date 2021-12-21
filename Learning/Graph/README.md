@@ -702,6 +702,7 @@ Two algorithms are used to find MST:
 - BFS with priority_queue ` ** ` - [CF - 1106D](https://codeforces.com/contest/1106/problem/D)
 - BFS on Grid ` * ` - [CF - 57A](https://codeforces.com/contest/57/problem/A)
 - BFS on Grid ` *** ` - [CF - 329B](https://codeforces.com/contest/329/problem/B)
+- BFS on Grid ` *** ` - [AC - abc232_d](https://atcoder.jp/contests/abc232/tasks/abc232_d)
 - BFS on Grid ` **** ` - [CF - 377A](https://codeforces.com/contest/377/problem/A)
 - Reorder then BFS ` *** ` - [CF - 1037D](https://codeforces.com/contest/1037/problem/D)
 - BFS and Find Path (Grid) ` *** ` [CSES - 1193](https://cses.fi/problemset/task/1193)
