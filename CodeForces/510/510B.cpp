@@ -19,31 +19,30 @@ void Solution() {
     ll dx[] = {1, 0, -1, 0}, dy[] = {0, 1, 0, -1};
     ll n, m;
     cin >> n >> m;
-    auto get = [&](ll x, ll y) { return x * m + y; };
-    auto getX = [&](ll d) { return d / m; };
-    auto getY = [&](ll d) { return d % m; };
     vector<string> g(n, string(m, '.'));
-    vector<bool> vis(n * m, false);
+    vector<vector<bool>> vis(n, vector<bool>(m, false));
     for (auto &x : g) cin >> x;
-    auto dfs = [&](const auto &self, ll node, ll p, char color) -> void {
-        vis[node] = true;
+    auto dfs = [&](const auto &self, ll X, ll Y, ll Px, ll Py, char color) -> void {
+        vis[X][Y] = true;
         for (ll k = 0; k < 4; ++k) {
-            ll nx = getX(node) + dx[k];
-            ll ny = getY(node) + dy[k];
-            ll n_node = get(nx, ny);
-            if (nx < 0 || ny < 0 || nx >= n || ny >= m || n_node == p || g[nx][ny] != color)
+            ll nx = X + dx[k];
+            ll ny = Y + dy[k];
+            if (nx < 0 || ny < 0 || nx >= n || ny >= m || (nx == Px && ny == Py) || g[nx][ny] != color)
                 continue;
-            if (vis[n_node]) {
+            if (vis[nx][ny]) {
                 cout << "Yes\n";
                 exit(0);
             }
-            self(self, n_node, node, color);
+            self(self, nx, ny, X, Y, color);
         }
     };
     //! O(n * m * n * m)
-    for (ll i = 0; i < n * m; ++i) {
-        fill(all(vis), false);
-        dfs(dfs, i, -1, g[getX(i)][getY(i)]);
+    for (ll i = 0; i < n; ++i) {
+        for (ll j = 0; j < m; ++j) {
+            for (ll k = 0; k < n; ++k)
+                for (ll l = 0; l < m; ++l) vis[k][l] = false;
+            dfs(dfs, i, j, -1, -1, g[i][j]);
+        }
     }
     cout << "No\n";
 }
