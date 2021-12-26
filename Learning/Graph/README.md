@@ -679,6 +679,7 @@ Two algorithms are used to find MST:
 - DFS ` ** ` - [CF - 445B](https://codeforces.com/contest/445/problem/B)
 - DFS ` ** ` - [CF - 1020B](https://codeforces.com/contest/1020/problem/B)
 - DFS ` ** ` - [CF - 598D](https://codeforces.com/contest/598/problem/D)
+- DFS ` ** ` - [CF - 510B](https://codeforces.com/contest/510/problem/B)
 - DFS ` *** ` - [CF - 580C](https://codeforces.com/contest/580/problem/C)
 - DFS ` *** ` - [CF - 884C](https://codeforces.com/contest/884/problem/C)
 - DFS ` *** ` - [CF - 1609D](https://codeforces.com/contest/1609/problem/D)
