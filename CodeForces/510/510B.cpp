@@ -36,12 +36,10 @@ void Solution() {
             self(self, nx, ny, X, Y, color);
         }
     };
-    //! O(n * m * n * m)
+    //! O(n * m)
     for (ll i = 0; i < n; ++i) {
         for (ll j = 0; j < m; ++j) {
-            for (ll k = 0; k < n; ++k)
-                for (ll l = 0; l < m; ++l) vis[k][l] = false;
-            dfs(dfs, i, j, -1, -1, g[i][j]);
+            if (!vis[i][j]) dfs(dfs, i, j, -1, -1, g[i][j]);
         }
     }
     cout << "No\n";
