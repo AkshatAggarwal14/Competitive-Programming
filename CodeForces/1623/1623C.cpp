@@ -37,18 +37,15 @@ void Solution() {
     cin >> n;
     vector<ll> a(n);
     for (ll &A : a) cin >> A;
-    cout << find_last_true(*min_element(all(a)), *max_element(all(a)), [&](ll goal) {
-        vector<ll> t(a);
-        for (ll i = n - 1; i >= 0; i--) {
-            if (t[i] < goal) return false;
-            ll d = min(t[i] - goal, a[i]) / 3;
-            if (i >= 2) {
-                t[i] -= 3 * d;
-                t[i - 1] += d;
-                t[i - 2] += 2 * d;
-            }
+    cout << find_last_true(*min_element(all(a)), *max_element(all(a)), [&](ll mid) {
+        vector<ll> b(a);
+        for (ll i = n - 1; i >= 2; --i) {
+            ll d = min(max(b[i] - mid, 0LL), a[i]) / 3;
+            b[i] -= 3 * d;
+            b[i - 1] += d;
+            b[i - 2] += 2 * d;
         }
-        return true;
+        return *min_element(all(b)) >= mid;
     }) << '\n';
 }
 
