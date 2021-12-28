@@ -40,6 +40,7 @@ void Solution() {
     cout << find_last_true(*min_element(all(a)), *max_element(all(a)), [&](ll mid) {
         vector<ll> b(a);
         for (ll i = n - 1; i >= 2; --i) {
+            // a[i] is upperbound as here we are iterating from right to left but in reality we iterate from left to right
             ll d = min(max(b[i] - mid, 0LL), a[i]) / 3;
             b[i] -= 3 * d;
             b[i - 1] += d;
