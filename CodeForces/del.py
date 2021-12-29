@@ -12,7 +12,7 @@ def fileUTIL(filename: str):
 
 def deleter():
     if '--help' in sys.argv or '-h' in sys.argv:
-        print('Usage:\npython .\\del.py [extensions (- for no extension)]')
+        print('Usage:\npython .\\del.py <extensions> (- for no extension)]')
         return
     need = ['.' + _ for _ in sys.argv[1:]]
     files = [f for f in os.listdir(mypath) if os.path.isfile(
