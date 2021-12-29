@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 import sys
-mypath = 'D:/NITH/CP/CodeForces/'
+mypath = os.getcwd()
 
 
 def fileUTIL(filename: str):
