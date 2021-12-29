@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 import sys
-mypath = 'D:/NITH/CP/CodeForces/'
+mypath = os.getcwd()
 
 
 def getContestName(problem: str):
@@ -38,14 +38,18 @@ def makeFolders():
         try:
             os.mkdir(os.path.join(mypath, contest))
             for code in contests[contest]:
-                os.rename('D:/NITH/CP/CodeForces/'+code,
-                          'D:/NITH/CP/CodeForces/'+contest+'/'+code)
+                os.rename(os.path.join(mypath, code),
+                          os.path.join(mypath, contest, code))
+                # os.rename('D:/NITH/CP/CodeForces/'+code,
+                #   'D:/NITH/CP/CodeForces/'+contest+'/'+code)
         except:
             print(contest, 'Already exists!')
             for code in contests[contest]:
                 try:
-                    os.rename('D:/NITH/CP/CodeForces/'+code,
-                              'D:/NITH/CP/CodeForces/'+contest+'/'+code)
+                    os.rename(os.path.join(mypath, code),
+                              os.path.join(mypath, contest, code))
+                    # os.rename('D:/NITH/CP/CodeForces/'+code,
+                    #   'D:/NITH/CP/CodeForces/'+contest+'/'+code)
                 except:
                     print(contest, '/', code, 'Already exists!')
 
@@ -56,12 +60,12 @@ def getFiles():
     # print(folders)
     for contest in folders:
         files = [f for f in os.listdir(
-            mypath+contest) if os.path.isfile(os.path.join(mypath+contest, f)) and f[0].isdigit()]
+            os.path.join(mypath, contest)) if os.path.isfile(os.path.join(mypath, contest, f)) and f[0].isdigit()]
         # print(files)
         for code in files:
-            # print(contest+'/'+code)
-            os.rename(mypath+contest+'/'+code, mypath+code)
-        os.rmdir(mypath+contest)
+            os.rename(os.path.join(mypath, contest, code),
+                      os.path.join(mypath, code))
+        os.rmdir(os.path.join(mypath, contest))
 
 
 if __name__ == "__main__":
