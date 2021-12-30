@@ -16,32 +16,22 @@ constexpr bool amax(T &a, U &&b) { return a < b && (a = std::forward<U>(b), true
 const ll MOD = 1e9 + 7;
 
 void Solution() {
-    ll n;
-    cin >> n;
-    vector<ll> a(n);
-    for (ll &x : a) cin >> x;
-    ll sum_alice = 0, sum_bob = 0, pre_alice = 0, pre_bob = 0;
-    ll moves = 0;
-    ll l = 0, r = n - 1;
-    while (l <= r) {
-        if (moves % 2 == 0) {
-            pre_alice = 0;
-            while (l <= r && pre_alice <= pre_bob) {
-                pre_alice += a[l];
-                sum_alice += a[l];
-                l++;
-            }
-        } else {
-            pre_bob = 0;
-            while (l <= r && pre_bob <= pre_alice) {
-                pre_bob += a[r];
-                sum_bob += a[r];
-                r--;
-            }
-        }
-        moves++;
+    ll n, v, a, b;
+    cin >> n >> v;
+    vector<ll> cnt(3003, 0);
+    for (ll i = 0; i < n; ++i) cin >> a >> b, cnt[a] += b;
+    ll ans = 0;
+    for (ll i = 1; i <= 3001; ++i) {
+        // previous day
+        ll used = min(cnt[i - 1], v);
+        ans += used;
+        cnt[i - 1] -= used;
+        // this day
+        used = min(cnt[i], v - used);
+        ans += used;
+        cnt[i] -= used;
     }
-    cout << moves << ' ' << sum_alice << ' ' << sum_bob << '\n';
+    cout << ans << '\n';
 }
 
 int main() {
@@ -52,7 +42,7 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    cin >> tc;
+    // cin >> tc;
     while (tc--) {
         Solution();
     }

@@ -1,135 +1,38 @@
-#ifndef ONLINE_JUDGE
+#ifdef LOCAL
+// https://github.com/AkshatAggarwal14/Competetive-Programming
 #include "Akshat.hpp"
 #else
 #include "bits/stdc++.h"
 using namespace std;
 #define dbg(...)
-#define debug(...)
 #endif
-
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-template <typename T>
-using o_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-//member functions :
-//1. order_of_key(k) : number of elements strictly lesser than k
-//2. find_by_order(k) : k-th element in the set
-
-#define ll long long
-#define db double
-#define str string
-#define ull unsigned long long
-#define fo(i, n) for (ll i = 0; i < n; i++)
-#define ln '\n'
-#define rep(i, k, n) for (ll i = k; k < n ? i < n : i > n; k < n ? i++ : i--)
-#define deb(x) cout << "[" << #x << "]: " << x << ln
-#define deb2(x, y) cout << "[" << #x << "]: " << x << ", [" << #y << "]: " << y << ln
-#define bit(x) __builtin_popcount(x)
-#define bitll(x) __builtin_popcountll(x)
-#define pb push_back
-#define eb emplace_back
-#define ff first
-#define ss second
+using ll = long long;
+constexpr auto sz = [](const auto &container) -> ll { return ll(container.size()); };
 #define all(x) (x).begin(), (x).end()
-#define uniq(x) (x).erase(unique(all(x)), (x).end())
-#define rall(x) (x).rbegin(), (x).rend()
-#define ps(x, y) fixed << setprecision(y) << x
-#define clr(x) memset(x, 0, sizeof(x))
-#define tr(it, a) for (auto it = a.begin(); it != a.end(); it++)
-#define PI 3.1415926535897932384626
-#define sz(x) ((ll)(x).size())
-#define present(b, a) ((a).find((b)) != (a).end())
-#define yes() cout << "YES\n"
-#define no() cout << "NO\n"
-const ll mod = 1e9 + 7;  //1000000007
-const ll mod2 = 998244353;
-const ll inf = LLONG_MAX;
-const db eps = 1e-12;
-typedef pair<ll, ll> pl;
-typedef pair<int, int> pi;
-typedef pair<db, db> pd;
-typedef vector<ll> vl;
-typedef vector<pl> vpl;
-typedef vector<vl> vvl;
-typedef vector<int> vi;
-typedef vector<pi> vpi;
-typedef vector<vi> vvi;
-
-template <typename T, typename T1>
-T amax(T &a, T1 b) {
-    if (b > a) a = b;
-    return a;
-}
-template <typename T, typename T1>
-T amin(T &a, T1 b) {
-    if (b < a) a = b;
-    return a;
-}
-
-//*Operator overloads
-template <typename T1, typename T2>  // cin >> pair<T1, T2>
-istream &operator>>(istream &istream, pair<T1, T2> &p) { return (istream >> p.first >> p.second); }
-template <typename T>  // cin >> vector<T>
-istream &operator>>(istream &istream, vector<T> &v) {
-    for (auto &it : v) cin >> it;
-    return istream;
-}
-template <typename T1, typename T2>  // cout << pair<T1, T2>
-ostream &operator<<(ostream &ostream, const pair<T1, T2> &p) { return (ostream << p.first << " " << p.second); }
-template <typename T>  // cout << vector<T>
-ostream &operator<<(ostream &ostream, const vector<T> &c) {
-    for (auto &it : c) cout << it << " ";
-    return ostream;
-}
-
-template <typename T>
-void print(T &&t) { cout << t << "\n"; }
-template <typename T, typename... Args>
-void print(T &&t, Args &&...args) {
-    cout << t << " ";
-    print(forward<Args>(args)...);
-}
+template <class T, class U = T>
+constexpr bool amin(T &a, U &&b) { return b < a && (a = std::forward<U>(b), true); }
+template <class T, class U = T>
+constexpr bool amax(T &a, U &&b) { return a < b && (a = std::forward<U>(b), true); }
+const ll MOD = 1e9 + 7;
 
 void Solution() {
-    // storing sum of all subsets and binary search will give MLE
-    // lets store in array
     int n;
     cin >> n;
-    vl a(n);
-    ll mp[8005]{};  //because maps have logn lookup
-    fo(i, n) cin >> a[i], ++mp[a[i]];
-    ll ans = 0;
-    fo(i, n) {
-        ll sum = a[i];
-        rep(j, i + 1, n) {
-            sum += a[j];
-            if (sum <= n) {
-                ans += mp[sum];
-                mp[sum] = 0;
-            }
-        }
+    vector<int> a(n);
+    vector<int> cnt(n + 1, 0);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        ++cnt[a[i]];
     }
-    print(ans);
-}
-//*read stuff at the bottom
-
-void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n + 1);
-    vector<int> values(8005);
-    rep(i, 1, n + 1) cin >> a[i], values[a[i]]++;
-    vector<int> pref(n + 1);
-    rep(i, 1, n + 1) pref[i] = pref[i - 1] + a[i];
     int ans = 0;
-    rep(i, 1, n + 1) {
-        rep(j, i + 1, n + 1) {
-            int sum = pref[j] - pref[i - 1];
-            if (sum > 8000) break;
-            if (values[sum]) {
-                ans += values[sum];
-                values[sum] = 0;
+    for (int i = 0; i < n - 1; ++i) {
+        int sum = a[i];
+        for (int j = i + 1; j < n; ++j) {
+            sum += a[j];  // sum of 2 or more consecutive
+            if (sum > n) continue;
+            if (cnt[sum]) {
+                ans += cnt[sum];  // count all together
+                cnt[sum] = 0;     // make 0 so we dont recount
             }
         }
     }
@@ -137,32 +40,16 @@ void solve() {
 }
 
 int main() {
-#ifndef ONLINE_JUDGE
+    cin.tie(nullptr)->sync_with_stdio(false);
+#ifdef LOCAL
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    ios_base::sync_with_stdio(false), cin.tie(nullptr);
-
-    ll tc = 1;
+    cout << fixed << setprecision(12);
+    int tc = 1;
     cin >> tc;
     while (tc--) {
-        solve();
+        Solution();
     }
-
-    cerr << (float)clock() / CLOCKS_PER_SEC << " secs" << endl;
     return 0;
 }
-
-/*
-    ? Stuff to look for ->
-    * stay organised
-    * int overflows, array bounds, etc.
-    * special cases (n=1)?
-    * do something instead of nothing
-    * modulo of negative numbers is not a%b, it is a%b + abs(b)
-    * When using a set, lower_bound(all(set),l) is slower than set.lower_bound(l) because of random iterators
-    * string .append() or += is O1, but s = s + s is On (as it creates a copy first), use wisely
-    * DONT GET STUCK ON ONE APPROACH
-    * use __lg(n) instead of log2(n), int: 32 - __builtin_clz(n), ll: 63 - __builtin_clzll(n), https://codeforces.com/blog/entry/45966
-    * string.rfind() finds first occurence from end
-*/
