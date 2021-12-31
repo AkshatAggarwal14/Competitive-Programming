@@ -20,9 +20,7 @@ void Solution() {
     vector<ll> a(n);
     for (ll &x : a) cin >> x;
     // find expected value of (a[0] + a[n-1])/2
-    // fix 1st element -> a[i] * (n - 1)!
-    // for all -> S * (n - 1)!
-    // expected = S / n
+    // using linearity of expectation E(a[0]) = E(a[n-1]) = S
     cout << (accumulate(all(a), 0LL)) / n << '\n';
 }
 
