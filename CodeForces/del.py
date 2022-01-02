@@ -20,7 +20,7 @@ def deleter():
         os.path.join(mypath, f)) and fileUTIL(f) in need]
     if '.-' in need:
         for f in os.listdir(mypath):
-            if os.path.isfile(os.path.join(mypath, f)) and fileUTIL(f) == None:
+            if os.path.isfile(os.path.join(mypath, f)) and fileUTIL(f) == None and f != 'Makefile':
                 files.append(f)
     for file in files:
         print('Removed', os.path.join(mypath, file))
