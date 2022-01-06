@@ -34,26 +34,35 @@ struct Matrix {
                     res.mat[i][j] += mat[i][k] * b.mat[k][j];
         return res;
     }
-    Matrix power(ll p) {
-        assert(n == m);             // square matrix
-        Matrix res(n, m, 0, true);  // identical matrix
-        Matrix o = (*this);
-        while (p) {
-            if (p & 1) res = o * res;
-            p /= 2;
-            o = o * o;
-        }
+    Matrix operator+(const Matrix &b) {
+        assert(n == b.n && m == b.m);
+        Matrix res(n, m);
+        for (ll i = 0; i < n; ++i)
+            for (ll j = 0; j < m; ++j)
+                res.mat[i][j] = mat[i][j] + b.mat[i][j];
         return res;
     }
+    friend Matrix power(Matrix a, ll p);
     friend string to_string(const Matrix &a);
 };
+
+Matrix power(Matrix a, ll p) {
+    assert(a.n == a.m);             // square matrix
+    Matrix res(a.n, a.m, 0, true);  // identical matrix
+    while (p) {
+        if (p & 1) res = a * res;
+        p /= 2;
+        a = a * a;
+    }
+    return res;
+}
 
 string to_string(const Matrix &a) {
     string res = "\n";
     for (ll i = 0; i < a.n; ++i) {
         res += '{';
         for (ll j = 0; j < a.m; ++j) {
-            res += to_string(a.mat[i][j]);
+            res += std::to_string(a.mat[i][j]);
             if (j != a.m - 1) res += ", ";
         }
         res += "}\n";
@@ -63,15 +72,14 @@ string to_string(const Matrix &a) {
 }
 
 // [1 an-1 an] = [1 an-2 an-1]* [P]
+// [1 an a(n+1)] = [1 a0 a1]* [P]^n
 void Solution() {
     ll n;
     cin >> n;
     Matrix base(1, 3), transform(3, 3);
     base.mat = {{1, 2, 3}};  // 1 a0 a1
     transform.mat = {{1, 0, 2}, {0, 0, -1}, {0, 1, 2}};
-    transform = transform.power(n);
-    Matrix ans = base * transform;
-    cout << ans.mat[0][1] << '\n';
+    cout << (base * power(transform, n)).mat[0][1] << '\n';  // an
 }
 
 int main() {
