@@ -13,6 +13,10 @@ string to_string(tuple<A, B, C, D> p);
 string to_string(const string& s) { return '"' + s + '"'; }
 string to_string(const char* s) { return to_string((string)s); }
 string to_string(bool b) { return (b ? "T" : "F"); }
+string to_string(char ch) {
+    string s(1, ch);
+    return '\'' + s + '\'';
+}
 
 // others
 string to_string(vector<bool> v) {
@@ -50,18 +54,6 @@ string to_string(A v) {
     res += "}";
     return res;
 }
-template <typename A, typename B>
-string to_string(pair<A, B> p) { return "(" + to_string(p.first) + ", " + to_string(p.second) + ")"; }
-template <typename A, typename B, typename C>
-string to_string(tuple<A, B, C> p) { return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ")"; }
-
-template <typename A, typename B, typename C, typename D>
-string to_string(tuple<A, B, C, D> p) { return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ", " + to_string(get<3>(p)) + ")"; }
-
-string to_string(char ch) {
-    string s(1, ch);
-    return '\'' + s + '\'';
-}
 
 template <typename T>
 string to_string(queue<T> q) {
@@ -90,6 +82,14 @@ string to_string(priority_queue<T, vector<T>, U> q) {
     res += '}';
     return res;
 }
+
+template <typename A, typename B>
+string to_string(pair<A, B> p) { return "(" + to_string(p.first) + ", " + to_string(p.second) + ")"; }
+template <typename A, typename B, typename C>
+string to_string(tuple<A, B, C> p) { return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ")"; }
+
+template <typename A, typename B, typename C, typename D>
+string to_string(tuple<A, B, C, D> p) { return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ", " + to_string(get<3>(p)) + ")"; }
 
 #define beauty(...) pretty_print(#__VA_ARGS__, __VA_ARGS__)
 
