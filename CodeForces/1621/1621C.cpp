@@ -31,11 +31,10 @@ void Solution() {
 
     for (int i = 0; i < n; ++i) {
         if (ans[i] != -1) continue;  // already visited
-        prev = ask(i);               // ask prev
-        while (ans[prev] == -1) {    // until ans[prev] is not set
-            nxt = ask(i);            // ask next
-            ans[prev] = nxt;         // set nxt
-            if (prev == nxt) break;  // if both equal then cycle ends
+        prev = ask(i);
+        while (ans[prev] == -1) {  // until ans[prev] is not set
+            nxt = ask(i);          // ask next
+            ans[prev] = nxt;       // set nxt
             prev = nxt;
         }
     }
