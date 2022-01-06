@@ -16,44 +16,39 @@ constexpr bool amax(T &a, U &&b) { return a < b && (a = std::forward<U>(b), true
 const ll MOD = 1e9 + 7;
 
 void Solution() {
-    ll n, m;
-    string S;
-    cin >> n >> m >> S;
     map<char, ll> value;
     for (ll i = 2; i <= 9; ++i) value[char(i) + '0'] = i;
     value['A'] = 1;
-    value['T'] = 10;
-    value['J'] = value['K'] = value['Q'] = 10;
-    auto dfs = [&](const auto &self, string s) -> void {
-        ll val = 0;
-        bool flag = true;
-        for (ll i = 0; i < n; ++i) {
-            if (s[i] == '*')
-                flag = false;
-            else
-                val += value[s[i]];
-        }
-        if (flag && val == m) {
-            cout << "YES\n", cout << s << '\n';
-            exit(0);
-        }
-        for (ll i = 0; i < n; ++i) {
-            if (s[i] == '*') {
-                for (char j = '2'; j <= '9'; ++j) {
-                    s[i] = j;
-                    self(self, s);
-                }
-                s[i] = 'A';
-                self(self, s);
-                s[i] = 'T';
-                self(self, s);
-                s[i] = 'J';  // as J, K, Q have same value
-                self(self, s);
-            }
-        }
-    };
-    dfs(dfs, S);
-    cout << "NO\n";
+    value['T'] = value['J'] = value['K'] = value['Q'] = 10;
+
+    ll n, m;
+    string S;
+    cin >> n >> m >> S;
+    vector<ll> starIdx;
+    ll otherChars = 0;
+    for (ll i = 0; i < n; ++i) {
+        if (S[i] == '*')
+            starIdx.push_back(i);
+        else
+            otherChars += value[S[i]];
+    }
+    ll left = m - otherChars;
+    ll cnt = count(all(S), '*');
+    left -= cnt;
+    if (left < 0 || left > 9 * cnt) return void(cout << "NO\n");
+    while (!starIdx.empty()) {
+        ll reduce = min(left, 9LL);
+
+        char ch = char(reduce) + '1';
+        if (ch == '1') ch = 'A';
+        if (ch == char('9' + 1)) ch = 'T';
+        S[starIdx.back()] = ch;
+
+        left -= reduce;
+        starIdx.pop_back();
+    }
+    cout << "YES\n";
+    cout << S << '\n';
 }
 
 int main() {
