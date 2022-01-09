@@ -37,27 +37,17 @@ void Solution() {
     cin >> n >> s;
     vector<ll> a(n);
     for (ll &A : a) cin >> A;
-    sort(all(a));
-    ll S = 0;
-    for (ll i = 0; i < n; ++i) {
-        S += a[i];
-        if (S >= s) return void(cout << n << '\n');  // if sum already > s return n
-    }
-    //! Binary search
-    ll cnt = find_first_false(1LL, 4294967295LL, [&](ll m) {  // max n for storable n*(n+1)/2
-        ll ss = m * (m + 1) / 2;                              // 1, 2, .. m
-
-        if (ss >= s) return false;  // already >= so false
+    ll cnt = find_first_false(0LL, ll(sqrt(2 * s)) + 100, [&](ll m) {
+        ll ss = (m * (m + 1)) / 2;  // 1, 2, .. m
         for (ll i = 0; i < n; ++i) {
-            if (a[i] < m) continue;  // smaller terms already counted from 1 to n
+            if (a[i] <= m) continue;  // smaller terms already counted from 1 to n
             ss += a[i];
-            if (ss >= s) return false;
         }
         return ss < s;
     });
     ll ans = cnt;
-    for (ll i = 0; i < n; ++i)
-        if (a[i] > cnt) ++ans;  // count leftover terms > than cnt == max element counted yet
+    // count leftover terms > than cnt == max element counted yet
+    for (ll i = 0; i < n; ++i) ans += (a[i] > cnt);
     cout << ans << '\n';
 }
 

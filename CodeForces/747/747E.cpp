@@ -32,28 +32,45 @@ vector<string> split(const string &s, const string &delims = " ") {
     return res;
 }
 
-const ll MX = 3;
-vector<vector<string>> ans(MX);
+const ll MAX_DEPTH = 1e6;
+vector<vector<string>> ans(MAX_DEPTH + 1);
 
 void Solution() {
+    // read
     string s;
     cin >> s;
     vector<string> v(split(s, ","));
-    vector<pair<string, ll>> st;  // use as stack
-    for (ll i = sz(v) - 1; i >= 1; i -= 2) st.push_back({v[i - 1], stoll(v[i])});
+    vector<pair<string, ll>> a;
+    for (ll i = 0; i < sz(v) - 1; i += 2)
+        a.push_back({v[i], stoll(v[i + 1])});
+    // calculate
+    ll mx_depth = 0, n = sz(a), pos = 0;
+    vector<ll> depth(n, -1);  // use as visited
 
-    dbg(st);
-    // ll n = sz(st);
-    // auto dfs = [&](const auto &self, ll lvl) -> void {
-    //     if (st.empty()) return;
-    //     if (st.back().second == 0) {
-    //         ans[lvl].push_back(st.back().first);
-    //         st.pop_back();
-    //     }
-    //     ll cnt = st.back().second;
-    //     while (cnt-- > 0) self(self, lvl + 1);
-    // };
-    // dfs(dfs, 0);
+    auto dfs = [&](const auto &self, ll parent) {
+        if (pos >= n) return;
+        while (a[parent].second--) {
+            ++pos;
+            depth[pos] = depth[parent] + 1;
+            self(self, pos);  // go deeper (dfs), then come back when a[idx].second == 0
+        }
+    };
+    for (ll i = 0; i < n; ++i) {
+        if (depth[i] == -1) {
+            depth[i] = 1;
+            dfs(dfs, i);
+            ++pos;  // covers one tree thingy in one go, then move to next index
+        }
+        amax(mx_depth, depth[i]);
+        ans[depth[i]].push_back(a[i].first);
+    }
+
+    // print
+    cout << mx_depth << '\n';
+    for (ll i = 1; i <= mx_depth; ++i) {
+        for (auto &x : ans[i]) cout << x << ' ';
+        cout << '\n';
+    }
 }
 
 int main() {
