@@ -69,6 +69,20 @@ string to_string(queue<T> q) {
     return res;
 }
 
+template <typename T>
+string to_string(stack<T> q) {
+    bool first = true;
+    string res = "{";
+    while (!q.empty()) {
+        if (!first) res += ", ";
+        first = false;
+        res += to_string(q.top());
+        q.pop();
+    }
+    res += '}';
+    return res;
+}
+
 template <typename T, typename U>
 string to_string(priority_queue<T, vector<T>, U> q) {
     bool first = true;
