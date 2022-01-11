@@ -731,6 +731,7 @@ Two algorithms are used to find MST:
 - DFS or BFS ` ** ` - [CSES - 1668](https://cses.fi/problemset/task/1668)
 - DFS or BFS ` ** ` - [AC - abc226_c](https://atcoder.jp/contests/abc226/tasks/abc226_c)
 - DFS or BFS ` *** ` - [CF - 1613E](https://codeforces.com/contest/1613/problem/E)
+- DFS or BFS ` *** ` - [CF - 1624G](https://codeforces.com/contest/1624/problem/G)
 - Graph Coloring ` *** ` - [CF - 246D](https://codeforces.com/contest/246/problem/D)
 - Cycles (DFS) ` *** ` [AC - abc226_e](https://atcoder.jp/contests/abc226/tasks/abc226_e)
 - Trees ` ** ` [CF - 1433D](https://codeforces.com/contest/1433/problem/D)
