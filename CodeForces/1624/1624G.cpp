@@ -9,11 +9,6 @@ using namespace std;
 using ll = int;
 constexpr auto sz = [](const auto &container) -> ll { return ll(container.size()); };
 #define all(x) (x).begin(), (x).end()
-template <class T, class U = T>
-constexpr bool amin(T &a, U &&b) { return b < a && (a = std::forward<U>(b), true); }
-template <class T, class U = T>
-constexpr bool amax(T &a, U &&b) { return a < b && (a = std::forward<U>(b), true); }
-const ll MOD = 1e9 + 7;
 
 void Solution() {
     ll n, m;
@@ -21,22 +16,21 @@ void Solution() {
     vector<array<ll, 3>> edges(m);
     for (auto &[u, v, w] : edges) cin >> u >> v >> w, --u, --v;
     vector<bool> vis(n, false);
-    vector<vector<ll>> g(n);
+    vector<basic_string<ll>> g(n);
     // to check connected
-    auto connected = [&](vector<array<ll, 3>> &Edges) -> bool {
-        g.clear(), g.resize(n);
-        for (auto &[u, v, w] : Edges) g[u].push_back(v), g[v].push_back(u);
+    vector<ll> bfs(n, -1);  // FASTER
+    auto connected = [&](const vector<array<ll, 3>> &Edges) -> bool {
+        for (auto &x : g) x.clear();  // faster
+        for (const auto &[u, v, w] : Edges) g[u].push_back(v), g[v].push_back(u);
         fill(all(vis), false);
-        queue<ll> bfs;
-        bfs.push(0);
-        vis[0] = true;
-        while (!bfs.empty()) {
-            ll node = bfs.front();
-            bfs.pop();
+        ll curr = 0, end = 0;
+        bfs[end++] = 0, vis[0] = true;
+        while (curr < end) {
+            ll node = bfs[curr++];
             for (ll &child : g[node]) {
                 if (vis[child]) continue;
                 vis[child] = true;
-                bfs.push(child);
+                bfs[end++] = child;
             }
         }
         return (count(all(vis), true) == n);
@@ -48,11 +42,11 @@ void Solution() {
         vector<array<ll, 3>> n_edges;
         // remove edges with w & (1LL << bit)
         for (auto &[u, v, w] : edges)
-            if (!(w & (1LL << bit))) n_edges.push_back({u, v, w});
+            if (!(w & (1 << bit))) n_edges.push_back({u, v, w});
         if (connected(n_edges)) {
             edges = n_edges;  // removed
         } else {
-            ans |= (1LL << bit);
+            ans |= (1 << bit);
         }
     }
     cout << ans << '\n';
