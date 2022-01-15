@@ -15,6 +15,7 @@ template <class T, class U = T>
 constexpr bool amax(T &a, U &&b) { return a < b && (a = std::forward<U>(b), true); }
 const ll MOD = 1e9 + 7;
 
+//! DFS doesnt work because the vis can be visited in smaller time from some other node!
 void BFS() {
     map<ll, ll> operations;
     ll a, n;
@@ -30,37 +31,12 @@ void BFS() {
             bfs.push(n1), operations[n1] = operations[node] + 1;
         string S = to_string(node);
         if (S.back() != '0' && sz(S) >= 2) {
-            string S_ = "";
-            S_ += S.back();
-            S_ += S.substr(0, sz(S) - 1);
-            ll n2 = stoll(S_);
+            rotate(S.begin(), S.begin() + (sz(S) - 1), S.end());
+            ll n2 = stoll(S);
             if (!operations.count(n2) && sz(to_string(n2)) <= sz(to_string(n)))
                 bfs.push(n2), operations[n2] = operations[node] + 1;
         }
     }
-    if (!operations.count(n)) return void(cout << "-1\n");
-    cout << operations[n] << '\n';
-}
-
-void DFS() {
-    map<ll, ll> operations;
-    ll a, n;
-    cin >> a >> n;
-    auto dfs = [&](const auto &self, ll N, ll ops) {
-        if (operations.count(N)) return;
-        operations[N] = ops;
-        ll n1 = N * a;
-        if (sz(to_string(n1)) <= sz(to_string(n))) self(self, n1, ops + 1);
-        string S = to_string(N);
-        if (S.back() != '0' && sz(S) >= 2 && sz(S) <= sz(to_string(n))) {
-            string S_ = "";
-            S_ += S.back();
-            S_ += S.substr(0, sz(S) - 1);
-            ll n2 = stoll(S_);
-            self(self, n2, ops + 1);
-        }
-    };
-    dfs(dfs, 1, 0);
     if (!operations.count(n)) return void(cout << "-1\n");
     cout << operations[n] << '\n';
 }
@@ -75,8 +51,7 @@ int main() {
     int tc = 1;
     // cin >> tc;
     while (tc--) {
-        DFS();
-        // BFS();
+        BFS();
     }
     return 0;
 }
