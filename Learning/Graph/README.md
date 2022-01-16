@@ -703,6 +703,8 @@ Two algorithms are used to find MST:
 - BFS ` ** ` - [CC - DIGJUMP](https://www.codechef.com/LRNDSA08/problems/DIGJUMP)
 - BFS ` *** ` - [CF - 404C](https://codeforces.com/contest/404/problem/C)
 - BFS ` *** ` - [CF - 954D](https://codeforces.com/contest/954/problem/D)
+- BFS ` *** ` - [CF - 1627C](https://codeforces.com/contest/1627/problem/C)
+- BFS ` *** ` - [AC - abc235_d](https://atcoder.jp/contests/abc235/tasks/abc235_d)
 - BFS with priority_queue ` ** ` - [CF - 1106D](https://codeforces.com/contest/1106/problem/D)
 - BFS on Grid ` * ` - [CF - 57A](https://codeforces.com/contest/57/problem/A)
 - BFS on Grid ` *** ` - [CF - 329B](https://codeforces.com/contest/329/problem/B)

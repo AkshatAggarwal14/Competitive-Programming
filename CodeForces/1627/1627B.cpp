@@ -39,37 +39,11 @@ void Solution() {
     vector<vector<ll>> d(n, vector<ll>(m, -1));
     ll sx = -1, sy = -1;
     queue<pair<ll, ll>> bfs;
-    if (n % 2 == 0) {
-        if (m % 2 == 0) {
-            sx = n / 2 - 1, sy = m / 2 - 1;
-            bfs.push({sx, sy});
-            d[sx][sy] = 0;
-            bfs.push({sx, sy + 1});
-            d[sx][sy + 1] = 0;
-            bfs.push({sx + 1, sy});
-            d[sx + 1][sy] = 0;
-            bfs.push({sx + 1, sy + 1});
-            d[sx + 1][sy + 1] = 0;
-        } else {
-            sx = n / 2 - 1, sy = m / 2;
-            bfs.push({sx, sy});
-            d[sx][sy] = 0;
-            bfs.push({sx + 1, sy});
-            d[sx + 1][sy] = 0;
-        }
-    } else {
-        if (m % 2 == 0) {
-            sx = n / 2, sy = m / 2 - 1;
-            bfs.push({sx, sy});
-            d[sx][sy] = 0;
-            bfs.push({sx, sy + 1});
-            d[sx][sy + 1] = 0;
-        } else {
-            sx = n / 2, sy = m / 2;
-            bfs.push({sx, sy});
-            d[sx][sy] = 0;
-        }
-    }
+    // Handle centre points for odd and even cases
+    for (ll i = (n - 1) / 2; i <= n / 2; ++i)
+        for (ll j = (m - 1) / 2; j <= m / 2; ++j)
+            sx = i, sy = j, bfs.push({i, j}), d[i][j] = 0;
+    // bfs from centre points
     while (!bfs.empty()) {
         ll nx = bfs.front().first;
         ll ny = bfs.front().second;
@@ -84,24 +58,15 @@ void Solution() {
         }
     }
     map<ll, ll> cnt;
-    for (ll i = 0; i < n; ++i) {
-        for (ll j = 0; j < m; ++j) {
-            cnt[d[i][j]]++;
-        }
-    }
-    dbg(cnt);
+    for (ll i = 0; i < n; ++i)
+        for (ll j = 0; j < m; ++j)
+            ++cnt[d[i][j]];
     ll min_dis = 0;
-    for (ll i = 0; i < n; ++i) {
-        for (ll j = 0; j < m; ++j) {
-            ll dist = abs(i - sx) + abs(j - sy);
-            amax(min_dis, dist);
-        }
-    }
-    vector<ll> ans;
-    for (auto &[x, y] : cnt) {
-        while (y--) ans.push_back(x + min_dis);
-    }
-    for (ll &gg : ans) cout << gg << ' ';
+    for (ll i = 0; i < n; ++i)
+        for (ll j = 0; j < m; ++j)
+            amax(min_dis, abs(i - sx) + abs(j - sy));  // distance
+    for (auto &[x, y] : cnt)
+        while (y--) cout << (x + min_dis) << ' ';
     cout << '\n';
 }
 
@@ -115,8 +80,8 @@ int main() {
     int tc = 1;
     cin >> tc;
     while (tc--) {
-        Better();
-        // Solution();
+        // Better();
+        Solution();
     }
     return 0;
 }
