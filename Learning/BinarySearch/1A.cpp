@@ -19,15 +19,21 @@ void Solution() {
     cin >> n >> k;
     vector<ll> a(n);
     for (ll &x : a) cin >> x;
+
     while (k--) {
         ll N;
         cin >> N;
-        ll L = -1, R = n;
-        while (R > L + 1) {
-            ll m = (R + L) / 2;
-            ((a[m] <= N) ? L : R) = m;
+        auto can = [&](ll m) -> bool { return a[m] <= N; };
+
+        ll l = -1, r = n;
+        while (r > l + 1) {
+            ll m = l + (r - l) / 2;
+            if (can(m))
+                l = m;
+            else
+                r = m;
         }
-        if (L == -1 || a[L] != N)
+        if (l == -1 || a[l] != N)
             cout << "NO\n";
         else
             cout << "YES\n";
