@@ -99,7 +99,7 @@ struct Matrix {
 // Similar = https://www.codechef.com/problems/ECODOWN
 
 /*
-    f(x) = c ^ (2x - 6) * f(mat - 1) * f(mat - 2) * f(mat - 3)
+    f(x) = c ^ (2x - 6) * f(x - 1) * f(x - 2) * f(x - 3)
     
     ! M1
     if g(x) = c^x f(x), then g(x) = g(x-1)*g(x-2)*g(x-3)..
