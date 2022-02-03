@@ -40,34 +40,24 @@ void Solution() {
     string s;
     cin >> s;
     vector<string> v(split(s, ","));
-    vector<pair<string, ll>> a;
-    for (ll i = 0; i < sz(v) - 1; i += 2)
-        a.push_back({v[i], stoll(v[i + 1])});
+    stack<pair<string, ll>> st;
+    for (ll i = sz(v) - 2; i >= 0; i -= 2)
+        st.push({v[i], stoll(v[i + 1])});
     // calculate
-    ll mx_depth = 0, n = sz(a), pos = 0;
-    vector<ll> depth(n, -1);  // use as visited
-
-    auto dfs = [&](const auto &self, ll parent) {
-        if (pos >= n) return;
-        while (a[parent].second--) {
-            ++pos;
-            depth[pos] = depth[parent] + 1;
-            self(self, pos);  // go deeper (dfs), then come back when a[idx].second == 0
+    ll res = 0;
+    auto dfs = [&](const auto &self, ll curr_depth) -> void {
+        auto parent = st.top();
+        st.pop();
+        ans[curr_depth].push_back(parent.first);
+        amax(res, curr_depth);
+        while (parent.second--) {
+            self(self, curr_depth + 1);
         }
     };
-    for (ll i = 0; i < n; ++i) {
-        if (depth[i] == -1) {
-            depth[i] = 1;
-            dfs(dfs, i);
-            ++pos;  // covers one tree thingy in one go, then move to next index
-        }
-        amax(mx_depth, depth[i]);
-        ans[depth[i]].push_back(a[i].first);
-    }
-
-    // print
-    cout << mx_depth << '\n';
-    for (ll i = 1; i <= mx_depth; ++i) {
+    // for different components.
+    while (!st.empty()) dfs(dfs, 1LL);
+    cout << res << '\n';
+    for (ll i = 1; i <= res; ++i) {
         for (auto &x : ans[i]) cout << x << ' ';
         cout << '\n';
     }
@@ -79,9 +69,7 @@ int main() {
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-    cout << fixed << setprecision(12);
     int tc = 1;
-    // cin >> tc;
     while (tc--) {
         Solution();
     }
