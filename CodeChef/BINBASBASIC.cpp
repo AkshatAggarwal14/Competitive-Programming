@@ -14,20 +14,22 @@ constexpr bool amin(T &a, U &&b) { return b < a && (a = std::forward<U>(b), true
 template <class T, class U = T>
 constexpr bool amax(T &a, U &&b) { return a < b && (a = std::forward<U>(b), true); }
 const ll MOD = 1e9 + 7;
-const double EPS = 1e-6;
 
 void Solution() {
-    double c;
-    cin >> c;
-    auto can = [&](double x) -> bool {
-        return x * x + sqrt(x) - c <= EPS;  // 1 1 1 0 0
-    };
-    double l = 0, r = 1e5;
-    for (ll _ = 0; _ < 100; ++_) {
-        double m = (l + r) / 2;
-        (can(m) ? l : r) = m;
+    ll n, k;
+    string s;
+    cin >> n >> k >> s;
+    ll unequal = 0;
+    for (ll i = 0; i < n; ++i) unequal += (s[i] != s[n - 1 - i]);
+    unequal /= 2;
+    dbg(unequal, k);
+    if (k < unequal) return void(cout << "NO\n");
+    ll left = k - unequal;
+    // even me toggle 2 bits, odd me toggle 1 bit
+    if (left) {
+        if (n % 2 == 0 && left % 2 != 0) return void(cout << "NO\n");
     }
-    cout << l << '\n';
+    cout << "YES\n";
 }
 
 int main() {
@@ -38,7 +40,7 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    // cin >> tc;
+    cin >> tc;
     while (tc--) {
         Solution();
     }
