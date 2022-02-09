@@ -24,30 +24,18 @@ void Solution() {
         cin >> type;
         if (type == 1) {
             cin >> u >> v >> w;
-            if (u > v) swap(u, v);  // v always larger
             while (u != v) {
-                if (v % 2 == 0) {
-                    mp[{v / 2, v}] += w;
-                    v = v / 2;
-                } else {
-                    mp[{(v - 1) / 2, v}] += w;
-                    v = (v - 1) / 2;
-                }
-                if (u > v) swap(u, v);
+                if (u > v) swap(u, v);  // v always larger
+                mp[{v / 2, v}] += w;
+                v = v / 2;
             }
         } else {
             cin >> u >> v;
             ll cost = 0;
-            if (u > v) swap(u, v);  // v always larger
             while (u != v) {
-                if (v % 2 == 0) {
-                    cost += mp[{v / 2, v}];
-                    v = v / 2;
-                } else {
-                    cost += mp[{(v - 1) / 2, v}];
-                    v = (v - 1) / 2;
-                }
-                if (u > v) swap(u, v);
+                if (u > v) swap(u, v);  // v always larger
+                cost += mp[{v / 2, v}];
+                v = v / 2;
             }
             cout << cost << '\n';
         }
