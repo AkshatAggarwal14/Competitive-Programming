@@ -16,35 +16,11 @@ constexpr bool amax(T &a, U &&b) { return a < b && (a = std::forward<U>(b), true
 const ll MOD = 1e9 + 7;
 
 void Solution() {
-    ll n;
-    cin >> n;
-    vector<ll> a(n);
-    for (ll &A : a) cin >> A;
-    set<ll> odds;
-    ll operations = 0;
-    while (true) {
-        odds.clear();
-        for (ll i = 1; i < n - 1; ++i)
-            if (a[i] & 1) odds.insert(i);
-        for (ll i = 1; i < n - 1; ++i) {
-            auto nxt = odds.upper_bound(i);
-            while (a[i] >= 2 && nxt != odds.end()) {
-                a[i] -= 2;
-                operations++;
-                a[0]++;
-                a[*nxt]++;
-                nxt = odds.erase(nxt);
-            }
-        }
-        dbg(a);
-        reverse(all(a));
-        if (odds.empty()) break;
-    }
-    for (ll i = 1; i < n - 1; ++i) {
-        if (a[i] & 1) return void(cout << "-1\n");
-        operations += a[i] / 2;
-    }
-    cout << operations << '\n';
+    ll n, p;
+    cin >> n >> p;
+    for (ll dist = 1, cnt = 0; dist <= n && cnt < 2 * n + p; ++dist)
+        for (ll i = 0; i < n && cnt < 2 * n + p; ++i, ++cnt)
+            cout << i + 1 << ' ' << (dist + i) % n + 1 << '\n';
 }
 
 int main() {
