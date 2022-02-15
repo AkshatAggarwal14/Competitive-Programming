@@ -41,7 +41,7 @@ int main() {
     while (!bfs.empty()) {
         auto [i, j] = bfs.front();
         bfs.pop();
-        for (int dx = -1; dx <= 0; ++dx)
+        for (int dx = -1; dx <= 0; ++dx)  // all 2x2 squares containing i, j
             for (int dy = -1; dy <= 0; ++dy)
                 insert(i + dx, j + dy);
     }
