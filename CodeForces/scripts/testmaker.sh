@@ -6,8 +6,8 @@ if [ "$1" == "-h" ]; then
   exit 0
 fi
 
-bb.sh $1
-bb.sh $2
+build.sh $1
+build.sh $2
 
 for ((testNum=0;testNum<$3;testNum++))
 do
