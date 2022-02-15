@@ -31,7 +31,8 @@ int main() {
         ans.push_back({i, j, *st.begin()});  // push in ans
         for (int dx = 0; dx <= 1; ++dx)
             for (int dy = 0; dy <= 1; ++dy)
-                bfs.emplace(i + dx, j + dy), grid[i + dx][j + dy] = SPECIAL;
+                if (grid[i + dx][j + dy] != SPECIAL)  //!
+                    bfs.emplace(i + dx, j + dy), grid[i + dx][j + dy] = SPECIAL;
     };
 
     for (int i = 0; i < n - 1; ++i)
