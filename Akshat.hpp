@@ -32,26 +32,13 @@ string to_string(vector<bool> v) {
     res += "}";
     return res;
 }
+
 template <size_t N>
 string to_string(bitset<N> v) {
     string res = "";
     for (size_t i = 0; i < N; i++) {
         res += static_cast<char>('0' + v[i]);
     }
-    return res;
-}
-template <typename A>
-string to_string(A v) {
-    bool first = true;
-    string res = "{";
-    for (const auto& x : v) {
-        if (!first) {
-            res += ", ";
-        }
-        first = false;
-        res += to_string(x);
-    }
-    res += "}";
     return res;
 }
 
@@ -94,6 +81,32 @@ string to_string(priority_queue<T, vector<T>, U> q) {
         q.pop();
     }
     res += '}';
+    return res;
+}
+
+template <typename T, typename = void>
+struct is_iterable : std::false_type {};
+
+// this gets used only when we can call std::begin() and std::end() on that type
+template <typename T>
+struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<T>())), decltype(std::end(std::declval<T>()))> > : std::true_type {};
+// Here is a helper:
+template <typename T>
+constexpr bool is_iterable_v = is_iterable<T>::value;
+
+template <typename A>
+string to_string(A v) {
+    assert(is_iterable_v<A>);
+    bool first = true;
+    string res = "{";
+    for (const auto& x : v) {
+        if (!first) {
+            res += ", ";
+        }
+        first = false;
+        res += to_string(x);
+    }
+    res += "}";
     return res;
 }
 
