@@ -12,7 +12,7 @@ const ll MOD = 1e9 + 7;
 const ll INF = 1e18;
 
 void Solution() {
-    cout << "OK\n";
+    // code here
 }
 
 int main() {
