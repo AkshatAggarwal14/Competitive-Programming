@@ -11,6 +11,8 @@ auto sz = [](const auto &container) -> ll { return ll(container.size()); };
 const ll MOD = 1e9 + 7;
 const ll INF = 1e18;
 
+// triangle should be inverted, with horizontal line above for the unsafe segment
+
 void Solution() {
     ll x[3], y[3];
     for (ll i = 0; i < 3; ++i) cin >> x[i] >> y[i];

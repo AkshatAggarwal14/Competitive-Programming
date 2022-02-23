@@ -11,6 +11,8 @@ auto sz = [](const auto &container) -> ll { return ll(container.size()); };
 const ll MOD = 1e9 + 7;
 const ll INF = 1e18;
 
+// until k = number of distinct elements we can keep the ans = number of distinct elements, after that as we seperate 1, ans increases by 1 everytime
+
 void Solution() {
     map<ll, ll> cnt;
     ll n;
