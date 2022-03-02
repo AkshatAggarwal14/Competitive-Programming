@@ -26,8 +26,8 @@ string randomString(ll length) {
 
 void Solution() {
     cout << "1\n";
-    ll n = uid(1, 10);
-    ll m = uid(1, n * (n - 1) / 2);
+    ll n = uid(10, 20);
+    ll m = uid(2, n);
     set<pair<ll, ll>> st;
     cout << n << ' ' << m << '\n';
     while (sz(st) < m) {
