@@ -77,6 +77,48 @@ void Solution() {
     cout << d[cc_no[n - 1]] << '\n';
 }
 
+void USING_DIJKSTRA() {
+    ll n, m;
+    cin >> n >> m;
+    vector<vector<pair<ll, ll>>> g(n);
+    set<pair<ll, ll>> added;
+    for (ll i = 0, u, v; i < m; ++i) {
+        cin >> u >> v, --u, --v;
+        g[u].push_back({v, 0});
+        g[v].push_back({u, 0});
+        added.insert({min(u, v), max(u, v)});
+    }
+    /*
+    add all edges of form {i, i + 1} with 1 cost, calculate min using dijkstra.
+    */
+    for (ll i = 0; i < n - 1; ++i) {
+        if (!added.count({i, i + 1})) {
+            g[i].push_back({i + 1, 1});
+            g[i + 1].push_back({i, 1});
+            added.insert({i, i + 1});
+        }
+    }
+    set<pair<ll, ll>> s;
+    vector<ll> d(n, INF);
+    s.insert({0, 0});
+    d[0] = 0;
+    while (!s.empty()) {
+        ll dis = s.begin()->first;
+        ll vertex = s.begin()->second;
+        s.erase(s.begin());
+        for (pair<ll, ll> x : g[vertex]) {
+            ll newDis = dis + x.second;
+            ll newVer = x.first;
+            if (newDis < d[newVer]) {
+                s.erase({d[newVer], newVer});  // erase old distance
+                d[newVer] = newDis;            // update
+                s.insert({d[newVer], newVer});
+            }
+        }
+    }
+    cout << d[n - 1] << '\n';
+}
+
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
 #ifdef LOCAL
@@ -87,7 +129,8 @@ int main() {
     int tc = 1;
     cin >> tc;
     while (tc--) {
-        Solution();
+        // Solution();
+        USING_DIJKSTRA();
     }
     return 0;
 }
