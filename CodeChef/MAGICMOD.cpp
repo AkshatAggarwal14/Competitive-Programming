@@ -33,10 +33,10 @@ void Solution() {
     vector<ll> facs;
     for (ll i = 1; i * i <= sum; ++i) {
         if (sum % i == 0) {
-            if (i <= ll(2e7))
+            if (i <= ll(2e7) && i > n)
                 facs.push_back(i);
             if (i != sum / i) {
-                if (sum / i <= ll(2e7))
+                if (sum / i <= ll(2e7) && sum / i > n)
                     facs.push_back(sum / i);
             }
         }
