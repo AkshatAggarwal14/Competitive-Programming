@@ -12,7 +12,18 @@ const ll MOD = 1e9 + 7;
 const ll INF = 1e18;
 
 void Solution() {
-    cout << "test"s << '\n';
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    for (ll &A : a) cin >> A;
+    sort(all(a));
+    ll sumRed = 0, sumBlue = a[0];
+    ll i = 1, j = n - 1;
+    while (i < j) {
+        sumRed += a[j--], sumBlue += a[i++];
+        if (sumRed > sumBlue) return void(cout << "YES\n");
+    }
+    cout << "NO\n";
 }
 
 int main() {
@@ -23,7 +34,7 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    // cin >> tc;
+    cin >> tc;
     while (tc--) {
         Solution();
     }

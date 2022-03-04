@@ -12,7 +12,9 @@ const ll MOD = 1e9 + 7;
 const ll INF = 1e18;
 
 void Solution() {
-    cout << "test"s << '\n';
+    ll n, s;
+    cin >> n >> s;
+    cout << s / (n * n) << '\n';
 }
 
 int main() {
@@ -23,7 +25,7 @@ int main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    // cin >> tc;
+    cin >> tc;
     while (tc--) {
         Solution();
     }
