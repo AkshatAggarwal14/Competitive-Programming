@@ -8,32 +8,27 @@ using namespace std;
 using ll = long long;
 auto sz = [](const auto &container) -> ll { return ll(container.size()); };
 #define all(x) (x).begin(), (x).end()
+const ll MOD = 1e9 + 7;
 const ll INF = 1e18;
 
 void Solution() {
-    int n;
-    int m;
-    cin >> n >> m;
-    int k = 1;
-
-    const int MOD = 1e9 + 7;
-    vector<int> OLD(10, 0), NEW(10, 0);
-    while (n) {
-        ++OLD[n % 10];
-        n /= 10;
+    ll n, c;
+    cin >> n >> c;
+    vector<ll> a(n), cnt(c + 1), pref(c + 2, 0);
+    for (ll &A : a) cin >> A, ++cnt[A];
+    pref[0] = cnt[0];
+    for (ll i = 1; i <= c; ++i) pref[i] += pref[i - 1] + cnt[i];
+    for (ll x = 1; x <= c; ++x) {
+        if (!cnt[x]) continue;
+        // z is y/x
+        for (ll z = 1; z * x <= c; ++z) {
+            ll L = x * z;
+            ll R = min(x * (z + 1) - 1, c);
+            if (pref[R] - pref[L - 1] > 0 && cnt[z] == 0)
+                return void(cout << "No\n");
+        }
     }
-    for (int i = 1; i <= m; ++i) {
-        for (int j = 0; j <= 9; ++j) NEW[j] = 0;
-        for (int j = 0; j <= 9; ++j)
-            for (char &digit : to_string(j + k))
-                NEW[digit - '0'] = (NEW[digit - '0'] + OLD[j]) % MOD;
-        OLD = NEW;
-    }
-    ll ans = 0;
-    for (ll i = 0; i <= 9; ++i) ans = (ans + NEW[i]) % MOD;
-    // return ans;
-
-    cout << ans << '\n';
+    cout << "Yes\n";
 }
 
 int main() {
