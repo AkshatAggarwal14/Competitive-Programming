@@ -2,11 +2,11 @@
 using namespace std;
 
 // forward declarations
-template <typename A, typename B>
+template <class A, class B>
 string to_string(pair<A, B> p);
-template <typename A, typename B, typename C>
+template <class A, class B, class C>
 string to_string(tuple<A, B, C> p);
-template <typename A, typename B, typename C, typename D>
+template <class A, class B, class C, class D>
 string to_string(tuple<A, B, C, D> p);
 
 // basic
@@ -42,7 +42,7 @@ string to_string(bitset<N> v) {
     return res;
 }
 
-template <typename T>
+template <class T>
 string to_string(queue<T> q) {
     bool first = true;
     string res = "{";
@@ -56,7 +56,7 @@ string to_string(queue<T> q) {
     return res;
 }
 
-template <typename T>
+template <class T>
 string to_string(stack<T> q) {
     bool first = true;
     string res = "{";
@@ -70,7 +70,7 @@ string to_string(stack<T> q) {
     return res;
 }
 
-template <typename T, typename U>
+template <class T, class U>
 string to_string(priority_queue<T, vector<T>, U> q) {
     bool first = true;
     string res = "{";
@@ -84,17 +84,17 @@ string to_string(priority_queue<T, vector<T>, U> q) {
     return res;
 }
 
-template <typename T, typename = void>
+template <class T, class = void>
 struct is_iterable : std::false_type {};
 
 // this gets used only when we can call std::begin() and std::end() on that type
-template <typename T>
+template <class T>
 struct is_iterable<T, std::void_t<decltype(std::begin(std::declval<T>())), decltype(std::end(std::declval<T>()))> > : std::true_type {};
 // Here is a helper:
-template <typename T>
+template <class T>
 constexpr bool is_iterable_v = is_iterable<T>::value;
 
-template <typename A>
+template <class A>
 string to_string(A v) {
     assert(is_iterable_v<A>);
     bool first = true;
@@ -110,24 +110,22 @@ string to_string(A v) {
     return res;
 }
 
-template <typename A, typename B>
+template <class A, class B>
 string to_string(pair<A, B> p) { return "(" + to_string(p.first) + ", " + to_string(p.second) + ")"; }
-template <typename A, typename B, typename C>
+template <class A, class B, class C>
 string to_string(tuple<A, B, C> p) { return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ")"; }
 
-template <typename A, typename B, typename C, typename D>
+template <class A, class B, class C, class D>
 string to_string(tuple<A, B, C, D> p) { return "(" + to_string(get<0>(p)) + ", " + to_string(get<1>(p)) + ", " + to_string(get<2>(p)) + ", " + to_string(get<3>(p)) + ")"; }
 
-#define beauty(...) pretty_print(#__VA_ARGS__, __VA_ARGS__)
-
 // base case for template recursion when one argument remains
-template <typename Arg1>
+template <class Arg1>
 void pretty_print(const char* name, Arg1&& arg1) {
     cerr << name << " = ";
     cerr << "\033[33m" << to_string(arg1) << "\033[39m" << '\n';
 }
 // recursive variadic template for multiple arguments
-template <typename Arg1, typename... Args>
+template <class Arg1, class... Args>
 void pretty_print(const char* names, Arg1&& arg1, Args&&... args) {
     const char* comma = strchr(names + 1, ',');
 
@@ -135,29 +133,8 @@ void pretty_print(const char* names, Arg1&& arg1, Args&&... args) {
     cerr << "\033[33m" << to_string(arg1) << "\033[39m";
     pretty_print(comma, args...);
 }
-
 #define dbg(...)                        \
     cerr << "\033[34m"                  \
          << "Line " << __LINE__ << ": " \
          << "\033[39m";                 \
-    beauty(__VA_ARGS__)
-
-#define debug(...)                       \
-    cerr << "Line " << __LINE__ << ": "; \
-    debug_out(#__VA_ARGS__, __VA_ARGS__)
-
-// base case for template recursion when one argument remains
-template <typename Arg1>
-void debug_out(const char* name, Arg1&& arg1) {
-    cerr << name << " = ";
-    cerr << to_string(arg1) << '\n';
-}
-// recursive variadic template for multiple arguments
-template <typename Arg1, typename... Args>
-void debug_out(const char* names, Arg1&& arg1, Args&&... args) {
-    const char* comma = strchr(names + 1, ',');
-
-    cerr.write(names, comma - names) << " = ";
-    cerr << to_string(arg1);
-    debug_out(comma, args...);
-}
+    pretty_print(#__VA_ARGS__, __VA_ARGS__)
