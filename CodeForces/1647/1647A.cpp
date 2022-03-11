@@ -18,7 +18,7 @@ void Solution() {
     for (ll i = 0; i < (n / 3); ++i) s += "21";
     if (n % 3 == 2) {
         s = s + "2";
-    } else {
+    } else if (n % 3 == 1) {
         s = "1" + s;
     }
     cout << s << '\n';
