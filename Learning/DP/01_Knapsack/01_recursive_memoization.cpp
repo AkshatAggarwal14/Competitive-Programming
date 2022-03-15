@@ -1,3 +1,11 @@
+/*
+Choice Diagram:
+
+Item, I1 (W1) -> W1 > W -> cant choose
+              -> W1<= W -> can choose -> Chosen?
+                                      -> Not chosen.
+*/
+
 #ifdef LOCAL
 #include "Akshat.hpp"
 #else
