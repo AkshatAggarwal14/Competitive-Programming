@@ -18,8 +18,10 @@ void test() {
     for (int i = 0; i < n; ++i) cin >> arr[i];
 
     vector<vector<int>> dp(n + 1, vector<int>(sum + 1, 0));
-    for (int i = 0; i <= n; ++i) dp[i][0] = 1;    // true
-    for (int j = 1; j <= sum; ++j) dp[0][j] = 0;  // false
+    for (int i = 1, cnt = 0; i <= n; ++i) {
+        if (i > 0 && arr[i - 1] == 0) ++cnt;
+        dp[i][0] = (1LL << cnt);
+    }
 
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= sum; ++j) {
@@ -43,4 +45,11 @@ int32_t main() {
 /*
 6 10
 2 3 5 6 8 10
+
+ans: 3
+
+6 0
+0 0 0 0 0 0
+
+ans: 64
 */
