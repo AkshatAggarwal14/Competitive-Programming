@@ -10,21 +10,16 @@ const ll N = 1005;
 const ll INF = 1e18;
 
 ll knapsack(ll W, vector<ll> wt, vector<ll> val) {
-    dbg(W, wt, val);
     int n = int(wt.size());
     assert(int(val.size()) == n);
-    vector<vector<ll>> dp(2, vector<ll>(W + 1, -1));
-    for (int i = 0; i <= n; ++i) {
+    // already initalise 0 for i = 0, also as wt[i] can be whole number cant initalise for it
+    vector<vector<ll>> dp(2, vector<ll>(W + 1, 0));
+    for (int i = 1; i <= n; ++i) {
         for (int w = 0; w <= W; ++w) {
-            if (i == 0) {  //! as items can have weight 0, so cant initalise w to 0
-                dp[i % 2][w] = 0;
-            } else {
-                dp[i % 2][w] = dp[(i - 1) % 2][w];
-                if (wt[i - 1] <= w)
-                    dp[i % 2][w] = max(val[i - 1] + dp[(i - 1) % 2][w - wt[i - 1]], dp[i % 2][w]);
-            }
+            dp[i % 2][w] = dp[(i - 1) % 2][w];
+            if (wt[i - 1] <= w)
+                dp[i % 2][w] = max(val[i - 1] + dp[(i - 1) % 2][w - wt[i - 1]], dp[i % 2][w]);
         }
-        dbg(i, dp);
     }
     return dp[n % 2][W];
 }
