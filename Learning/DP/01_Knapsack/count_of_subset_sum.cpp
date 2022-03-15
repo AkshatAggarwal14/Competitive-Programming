@@ -18,18 +18,16 @@ void test() {
     for (int i = 0; i < n; ++i) cin >> arr[i];
 
     vector<vector<int>> dp(n + 1, vector<int>(sum + 1, 0));
-    for (int i = 1, cnt = 0; i <= n; ++i) {
+    for (int i = 0, cnt = 0; i <= n; ++i) {
         if (i > 0 && arr[i - 1] == 0) ++cnt;
-        dp[i][0] = (1LL << cnt);
+        dp[i][0] = (1LL << cnt);  // can get large, thus %MOD is used
     }
 
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= sum; ++j) {
-            if (arr[i - 1] <= j) {                                    // will include
-                dp[i][j] = dp[i - 1][j] + dp[i - 1][j - arr[i - 1]];  // count subset of both types
-            } else {                                                  // cant include
-                dp[i][j] = dp[i - 1][j];                              // count of previous only
-            }
+            dp[i][j] = dp[i - 1][j];  // subsets with sum = j, without ith element
+            if (arr[i - 1] <= j)
+                dp[i][j] += dp[i - 1][j - arr[i - 1]];  // add subsets with ith element
         }
     }
 
