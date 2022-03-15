@@ -35,8 +35,9 @@ void test() {
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= sum; ++j) {
             // choice diagram - to include or not
-            dp[i][j] = dp[i - 1][j];                                              // dont include or cant include
-            if (arr[i - 1] <= j) dp[i][j] = dp[i][j] || (dp[i][j - arr[i - 1]]);  // include it
+            dp[i][j] = dp[i - 1][j];  // dont include or cant include
+            if (arr[i - 1] <= j)
+                dp[i][j] = dp[i][j] || (dp[i - 1][j - arr[i - 1]]);  // include it
         }
     }
 
