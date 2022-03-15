@@ -20,10 +20,10 @@ void test() {
     for (int i = 0; i < n; ++i) cin >> val[i];
 
     vector<vector<int>> dp(n + 1, vector<int>(W + 1, -1));
-    auto dfs = [&](const auto &self, int N, int weight) {
+    auto dfs = [&](const auto &self, int N, int weight) {  // N is number of items, W is remaining capacity of bag
         int &ans = dp[N][weight];
         if (ans != -1) return ans;
-        if (N == 0 || weight == 0) return ans = 0;
+        if (N == 0 || weight == 0) return ans = 0;  // if no items, then 0
         // choice diagram
         if (wt[N] <= W) {  // included or not?
             ans = max(val[N] + self(self, N - 1, weight - wt[N]), self(self, N - 1, weight));
