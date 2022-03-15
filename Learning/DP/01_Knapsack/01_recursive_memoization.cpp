@@ -1,7 +1,9 @@
+// 0-1 Knapsack means either we keep the item in knapsack or not [1 - occurence]
+
 // Choice Diagram:
-// Item, I1 (W1) -> W1 > W -> cant choose
-//               -> W1<= W -> can choose -> Chosen?
-//                                       -> Not chosen.
+// Item, I1 (W1) -> W1 > W -> cant choose (call without subtracting on i - 1)
+//               -> W1<= W -> can choose -> Chosen? (call after subtracting on i - 1)
+//                                       -> Not chosen. (call without subtracting on i - 1)
 
 #ifdef LOCAL
 #include "Akshat.hpp"
