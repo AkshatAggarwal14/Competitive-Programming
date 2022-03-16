@@ -39,10 +39,6 @@ void test() {
 
 int32_t main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-#ifdef LOCAL
-    [[maybe_unused]] FILE *in = freopen("input.txt", "r", stdin);
-    [[maybe_unused]] FILE *out = freopen("output.txt", "w", stdout);
-#endif
     cout << fixed << setprecision(12);
     int tc = 1;
     cin >> tc;
