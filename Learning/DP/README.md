@@ -17,4 +17,8 @@
             2. [Coin Change I](./unbounded_knapsack/coin_change.cpp) - Total ways to get given sum
             3. [Coin Change II](./unbounded_knapsack/coin_change_2.cpp) - Minimum number of coins needed for given sum
 
-2. Longest Common Subsequence
+2. Longest Common Subsequence type DP
+    - LCS
+        - Length of LCS
+            1. [Recursive (Top - Down)](./LCS/LCS_recursive.cpp)
+            1. [Tabulation (Bottom up)](./LCS/LCS_iterative.cpp)
