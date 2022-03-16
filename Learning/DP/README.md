@@ -21,4 +21,8 @@
     - LCS
         - Length of LCS
             1. [Recursive (Top - Down)](./LCS/LCS_recursive.cpp)
-            1. [Tabulation (Bottom up)](./LCS/LCS_iterative.cpp)
+            2. [Tabulation (Bottom up)](./LCS/LCS_iterative.cpp)
+            3. [Space optimised tabulation](./LCS/LCS_iterative_space.cpp)
+        - [Print LCS](./LCS/LCS_print.cpp)
+    - [Longest Common Subtring](./LCS/Longest_common_substring.cpp)
+
