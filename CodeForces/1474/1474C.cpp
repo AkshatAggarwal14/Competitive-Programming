@@ -5,7 +5,7 @@
 using namespace std;
 #define dbg(...)
 #endif
-using ll = long long;
+using ll = int;
 auto sz = [](const auto &container) { return int(container.size()); };
 #define all(x) begin(x), end(x)
 
@@ -22,7 +22,7 @@ void test() {
     for (ll &A : a) cin >> A;
     sort(all(a));
     map<ll, ll> mp;
-    vector<pair<ll, ll>> pairs;
+    vector<array<ll, 2>> pairs;
 
     auto remove = [&](ll element) {
         --mp[element];
@@ -49,7 +49,7 @@ void test() {
         }
         if (flag) {
             cout << "YES\n";
-            cout << pairs[0].first + pairs[0].second << '\n';
+            cout << pairs[0][0] + pairs[0][1] << '\n';
             for (auto &[x, y] : pairs) cout << x << ' ' << y << '\n';
             return;
         }
