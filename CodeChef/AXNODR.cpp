@@ -14,11 +14,9 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    cout << "Sdsd"s;
 }
 
-int32_t
-main() {
+int32_t main() {
     cin.tie(nullptr)->sync_with_stdio(false);
 #ifdef LOCAL
     [[maybe_unused]] FILE *in = freopen("input.txt", "r", stdin);

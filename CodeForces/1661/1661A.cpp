@@ -19,14 +19,11 @@ void test() {
     vector<ll> a(n), b(n);
     for (ll &A : a) cin >> A;
     for (ll &B : b) cin >> B;
-    for (ll i = 0; i < n; ++i) {
-        ll t1 = a[i], t2 = b[i];
-        a[i] = min(t1, t2);
-        b[i] = max(t1, t2);
-    }
-    ll ans = 0;
-    for (ll i = 1; i < n; ++i) ans += abs(a[i] - a[i - 1]) + abs(b[i] - b[i - 1]);
-    cout << ans << '\n';
+    ll res = 0;
+    for (ll i = 1; i < n; i++)
+        res += min(abs(a[i] - a[i - 1]) + abs(b[i] - b[i - 1]),
+                   abs(a[i] - b[i - 1]) + abs(b[i] - a[i - 1]));
+    cout << res << '\n';
 }
 
 int32_t main() {
