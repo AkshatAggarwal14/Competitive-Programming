@@ -25,4 +25,9 @@
             3. [Space optimised tabulation](./LCS/LCS_iterative_space.cpp)
         - [Print LCS](./LCS/LCS_print.cpp)
     - [Longest Common Subtring](./LCS/Longest_common_substring.cpp)
+    - [Shortest Common Supersequence](./LCS/SCS.cpp)
+    - [Minimum Insertions/Deletions to convert A to B](./LCS/min_insert_delete.cpp)
+    - [Longest Palindromic Subsequence](./LCS/LPS.cpp)
+    - [Print SCS](./LCS/SCS_print.cpp)
+    - [Longest Repeating Subsequence](./LCS/LRepeatingS.cpp)
 

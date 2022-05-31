@@ -1,13 +1,16 @@
 /*
-    LCS = Longest Common Subsequence
+    SCS = Shortest Common Supersequence
+    Generate shortest string that contains both as subsequences
 
-    Base condition: if any string empty return 0
-    Choice Diagram:
-    if(s[1..n] == t[1..m]) call for n-1 and m-1
-    else call for n-1 and m
-         call for n and m-1
+    Ex:
+        s: "geek"
+        t: "eke"
+        SCS: "geeke"
 
-    ! Length of LCS can be from [0, min(n, m)], THUS if len(LCS) == min(n, m) then one string is subseq of other
+    In worst case: len(SCS) = len(s) + len(t)
+                            = m + n
+    LCS is common to both and thus we can take advantage of characters in LCS.
+    So, len(SCS) = m + n - len(LCS(s, t))
 */
 
 #ifdef LOCAL
@@ -38,7 +41,8 @@ void test() {
         if (s[i - 1] == t[j - 1]) return ans = 1 + self(self, i - 1, j - 1);  // as char common to both
         return ans = max(self(self, i - 1, j), self(self, i, j - 1));         // remove one letter both strings
     };
-    cout << dfs(dfs, n, m) << '\n';
+    // SCS
+    cout << n + m - dfs(dfs, n, m) << '\n';
 }
 
 int32_t main() {
