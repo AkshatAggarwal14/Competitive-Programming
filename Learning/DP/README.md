@@ -26,8 +26,18 @@
         - [Print LCS](./LCS/LCS_print.cpp)
     - [Longest Common Subtring](./LCS/Longest_common_substring.cpp)
     - [Shortest Common Supersequence](./LCS/SCS.cpp)
-    - [Minimum Insertions/Deletions to convert A to B](./LCS/min_insert_delete.cpp)
+    - [Minimum Insertions OR Deletions to convert A to B](./LCS/min_insert_delete.cpp)
     - [Longest Palindromic Subsequence](./LCS/LPS.cpp)
     - [Print SCS](./LCS/SCS_print.cpp)
     - [Longest Repeating Subsequence](./LCS/LRepeatingS.cpp)
+    - [Minimum Insertions to make string Palindrome](./LCS/insert_palin.cpp)
+    - [Longest Increasing Subsequence](./LCS/LIS.cpp)
 
+3. Matrix Chain Multiplication
+    - MCM
+    - Print MCM
+    - Evaluate Expression to true / boolean paranthesis
+    - Min / Max value of an expression
+    - Palindrome Partitioning
+    - Scramble string
+    - Egg Dropping Problem
