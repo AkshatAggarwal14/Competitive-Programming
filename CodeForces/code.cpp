@@ -13,20 +13,12 @@ const ll INF = 1e18;
 const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
-struct {
-    template <class T>
-    operator T() {
-        T x;
-        std::cin >> x;
-        return x;
-    }
-} in;
-
 void test() {
-    ll n = in;
-    vector<ll> a(n);
-    for (ll &x : a) x = in;
-    dbg(a);
+    string s;
+    cin >> s;
+    ll cnt = -1;
+    for (auto &x : s) cnt += x == s.back();
+    cout << cnt << '\n';
 }
 
 int32_t main() {
@@ -37,7 +29,7 @@ int32_t main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    cin >> tc;
+    // cin >> tc;
     for (int tt = 1; tt <= tc; ++tt) {
         test();
     }
