@@ -93,9 +93,7 @@ void test() {
     for (ll i = 0; i < n - 1; ++i) d[i] = abs(a[i + 1] - a[i]);
     SegTree<ll> GCD(
         d,
-        [](const ll &i, const ll &j) {
-            return gcd(i, j);
-        },
+        [](const ll &i, const ll &j) { return gcd(i, j); },
         []() { return 0LL; });
     ll ans = 1;
     for (ll i = 0; i < n - 1; ++i) {
