@@ -33,6 +33,7 @@ void test() {
                 ans = max(ans, self(self, pos + 1, 1 - player) + b[pos]);
             } else {
                 // if bob takes, subtracted from answer
+                // bob is trying to minimize the value
                 ans = min(ans, self(self, pos + 1, 1 - player) - b[pos]);
             }
         }
