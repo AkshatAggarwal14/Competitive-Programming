@@ -16,31 +16,28 @@ const ll MOD = 1e9 + 7;  // 998244353
 void test() {
     ll n;
     cin >> n;
-    vector<ll> a(n), b(n);
-    for (auto &it : a) cin >> it, it %= 2;
-    for (auto &it : b) cin >> it;
+    vector<ll> C(n);
+    for (auto &it : C) cin >> it;
+    vector<ll> V;
+    for (ll i = 0, num; i < n; i++) {
+        cin >> num;
+        if (C[i] % 2 == 1) V.push_back(num);
+    }
+    n = sz(V);
     vector<vector<ll>> dp(2, vector<ll>(n, -1));
-    // dp[player][position]
-    auto dfs = [&](const auto &self, ll pos = 0, ll player = 0) -> ll {
+    function<ll(ll, ll)> dfs = [&](ll pos, ll player) -> ll {
         if (pos == n) return 0;
         ll &ans = dp[player][pos];
         if (ans != -1) return ans;
-        ans = 0;
-        ans = max(ans, self(self, pos + 1, player));
-        if (a[pos]) {  // if odd, then only taking this can be beneficial
-            if (player == 0) {
-                // if alice takes, added to answer
-                ans = max(ans, self(self, pos + 1, 1 - player) + b[pos]);
-            } else {
-                // if bob takes, subtracted from answer
-                // bob is trying to minimize the value
-                ans = min(ans, self(self, pos + 1, 1 - player) - b[pos]);
-            }
-        }
+        ans = dfs(pos + 1, player);
+        if (player == 0)  // alice is trying to maximise her value
+            ans = max(ans, dfs(pos + 1, 1) + V[pos]);
+        else  // bob is trying to minimize alice's value
+            ans = min(ans, dfs(pos + 1, 0) - V[pos]);
         return ans;
     };
+    cout << dfs(0, 0) << '\n';
     dbg(dp);
-    cout << dfs(dfs) << '\n';
 }
 
 int32_t main() {
