@@ -69,6 +69,10 @@ void test() {
 
 /**
  * either move k from [i, j - 1] and break into [i, k] and [k + 1, j]
+ * ^ Here first partition is [i, k] as if k is i, we still have one matrix in left partition
+ * second partition is [k + 1, j] as if k is j - 1, as j is atmost n - 1, we still have one matrix in right partition
+ *
+ *
  * either move k from [i + 1, j] and break into [i, k - 1] and [k, j]
  */
 
