@@ -35,9 +35,17 @@
 
 3. Matrix Chain Multiplication
     - MCM
-    - Print MCM
-    - Evaluate Expression to true / boolean paranthesis
+        - [Recursive](./MCM/MCM_recursive.cpp)
+        - [Memoized](./MCM/MCM_memoized.cpp)
+        - [Tabulation / Iterative](./MCM/MCM_iterative.cpp)
+    - [Palindrome Partitioning](./MCM/palindrome_partitioning.cpp)
+    - [Evaluate Expression to true / boolean paranthesis](./MCM/boolean_paranthesis.cpp)
     - Min / Max value of an expression
-    - Palindrome Partitioning
-    - Scramble string
-    - Egg Dropping Problem
+    - [Scramble string](./MCM/scrambled_string.cpp)
+    - [Egg Dropping Problem](./MCM/egg_dropping_problem.cpp)
+
+4. DP on Trees
+    - [Diameter of Binary Tree](./dp_on_trees/diameter_of_tree.cpp)
+    - [Maximum Path sum from any node to any other node](./dp_on_trees/maximum_path_sum.cpp)
+    - [Maximum Path sum from leaf to leaf](./dp_on_trees/maximum_path_sum_from_leaf_to_leaf.cpp)
+    - Diameter of N-ary Tree
