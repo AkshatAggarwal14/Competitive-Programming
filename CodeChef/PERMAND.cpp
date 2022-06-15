@@ -23,18 +23,11 @@ void test() {
     vector<ll> b(n + 1, 0);
     for (ll i = n; i >= 1; i--) {
         if (b[i] == 0) {
-            ll x = 0, bit = -1;
-            for (ll j = 28; j >= 0; j--) {
-                if (i & (1 << j)) {
-                    bit = j;
-                    break;
-                }
-            }
-            for (ll j = 0; j < bit; j++) {
-                if (i & (1 << j)) continue;
-                x |= (1 << j);
-            }
-            b[i] = x, b[x] = i;
+            ll bit = -1;
+            for (ll j = 0; j <= 30; ++j)
+                if (i & (1 << j)) bit = j;
+            ll all1s = (1 << (bit + 1)) - 1;
+            b[i] = (all1s ^ i), b[all1s ^ i] = i;
         }
     }
     for (ll i = 1; i <= n; ++i) cout << b[i] << ' ';
