@@ -20,33 +20,24 @@ void test() {
     if (n & 1) return void(cout << "-1\n");
     for (ll i = 1; i <= n; ++i) cout << i << ' ';
     cout << '\n';
-    // 2 1
-    // 4 3 2 1
-    // 6 5 4 3 2 1
-    // 6 5 4 3 2 1 8 7
-    // 2 1 4 3 10 9 8 7 6 5
-    // 2 1 12 11 10 9 8 7 6 5 4 3
-    ll i = n;
-    vector<array<ll, 2>> ans;
-    while (true) {
-        if (i <= 0) break;
-        ll maxi = 1;
-        while ((maxi | i) != maxi) maxi = 2 * maxi + 1;
-        ll j = maxi ^ i;
-        dbg(j, i, maxi);
-        if (j > i) break;
-        // dbg(j, i);
-        ans.push_back({j, i});
-        i = j - 1;
+    vector<ll> b(n + 1, 0);
+    for (ll i = n; i >= 1; i--) {
+        if (b[i] == 0) {
+            ll x = 0, bit = -1;
+            for (ll j = 28; j >= 0; j--) {
+                if (i & (1 << j)) {
+                    bit = j;
+                    break;
+                }
+            }
+            for (ll j = 0; j < bit; j++) {
+                if (i & (1 << j)) continue;
+                x |= (1 << j);
+            }
+            b[i] = x, b[x] = i;
+        }
     }
-    reverse(all(ans));
-    dbg(ans);
-    vector<ll> b;
-    for (auto &x : ans)
-        for (ll k = x[1]; k >= x[0]; --k) b.push_back(k);
-    dbg(b);
-    for (ll k = 0; k < n; ++k) assert((b[k] & (k + 1)) == 0);
-    for (ll k = 0; k < n; ++k) cout << b[k] << ' ';
+    for (ll i = 1; i <= n; ++i) cout << b[i] << ' ';
     cout << '\n';
 }
 
