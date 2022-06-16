@@ -2,6 +2,7 @@
 import os
 import sys
 mypath = os.getcwd()
+from collections import defaultdict
 
 
 def getContestName(problem: str):
@@ -12,6 +13,26 @@ def getContestName(problem: str):
         contest_name += c
     return contest_name
 
+def get(path=mypath, dirs:bool = False, files:bool = False):
+    if dirs:
+        return [f for f in os.listdir(path) if os.path.isdir(
+        os.path.join(path, f)) and f.isdecimal()]
+    else:
+        return [f for f in os.listdir(path) if os.path.isfile(
+            os.path.join(path, f))]
+
+# Removes contest number from problem file name
+def restructure():
+    dirs = get(dirs=True)
+    print(dirs)
+    res = {}
+    for d in dirs:
+        files = get(files=True, path=os.path.join(mypath, d))
+        
+        for f in files:
+            print(os.path.join(mypath, d, f))
+            os.rename(os.path.join(mypath, d, f),
+                      os.path.join(mypath,d, f.lower()))
 
 def makeFolders():
     onlyfiles = [f for f in os.listdir(mypath) if os.path.isfile(
@@ -69,8 +90,11 @@ def getFiles():
 
 
 if __name__ == "__main__":
-    makeFolders()
+    # makeFolders()
     # getFiles()
     os.system('git add ./')
-    os.system('git commit -m "'+sys.argv[1]+'"')
+    try:
+        os.system('git commit -m "'+sys.argv[1]+'"')
+    except:
+        os.system('git commit -m "auto-commit"')
     os.system('git push')
