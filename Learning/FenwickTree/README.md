@@ -60,6 +60,49 @@ Example:
 Example:
 $01001$ `->` $01010$ `->`$01100$ `->` $10000$
 
-# How to find lowest set bit?
+## How to find lowest set bit?
 
 Use bitwise `AND` operation and do $i$ `&` $(-i)$
+
+# Snippet
+```cpp
+template <class T>
+class BIT {
+   public:
+    vector<T> tree;
+    int n;
+
+    BIT(int _n) : n(_n + 1) { tree.resize(n); }
+    BIT(const vector<T> &a) : BIT(int(a.size()) + 1) {
+        for (int i = 0; i < int(a.size()); ++i) add(i, a[i]);
+    }
+
+    void add(int i, T delta) {
+        ++i;
+        while (i < n) {
+            tree[i] += delta;
+            i += (i & -i);
+        }
+    }
+
+    T get(int i) {
+        ++i;
+        assert(i >= 1 && i <= _n);
+        T sum{};
+        while (i > 0) {
+            sum += tree[i];
+            i -= (i & -i);
+        }
+        return sum;
+    }
+    T get(int l, int r) { return get(r + 1) - get(l); }
+};
+```
+
+# Backwards BIT
+- Range updates - Add a given value to entire range
+- Point query - query value at a given index
+
+This can be done with normal BIT operations
+- Range update to $[l, r]$ can be done by `BIT.add(delta, l)`, `BIT.add(-delta, r + 1)`.
+- Point query can be done by `BIT.get(i)`.

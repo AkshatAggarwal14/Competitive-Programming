@@ -17,22 +17,31 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    ll n;
+    int n;
     cin >> n;
-    vector<ll> a(n);
-    for (ll &A : a) cin >> A;
-    auto b = a;
-    ll ans = 0;
-    for (ll i = 0; i < 250; ++i) {
-        set<ll> st;
-        ll xr = a[0];
-        st.insert(xr);
-        for (ll j = 1; j < n; ++j) {
-            xr ^= a[j];
-            st.insert(xr);
+    vector<int> a(n);
+    for (int &i : a) {
+        cin >> i;
+    }
+    for (int i = 0; i < n; ++i) {
+        a.push_back(a[i]);
+    }
+    vector<int> pre(2 * n + 1);
+    for (int i = 0; i < 2 * n; ++i) {
+        pre[i + 1] = (pre[i] ^ a[i]);
+    }
+    map<int, int> mp;
+    for (int i = 1; i <= n; ++i) {
+        mp[pre[i]]++;
+    }
+    int ans = mp.size();
+    for (int i = n + 1; i <= 2 * n; ++i) {
+        mp[pre[i - n]]--;
+        if (mp[pre[i - n]] == 0) {
+            mp.erase(pre[i - n]);
         }
-        rotate(a.begin(), 1 + a.begin(), a.end());
-        ans = max(ans, ll(sz(st)));
+        mp[pre[i]]++;
+        ans = max(ans, (int)mp.size());
     }
     cout << ans << '\n';
 }
