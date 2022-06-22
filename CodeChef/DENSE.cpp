@@ -14,35 +14,20 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    set<ll> vis;
-    ll n, k;
-    cin >> n >> k;
-    queue<ll> bfs;
-
-    auto get_rev = [&](ll K) {
-        string t = to_string(K);
-        reverse(all(t));
-        return stoll(t);
-    };
-    auto add = [&](ll E) {
-        if (vis.count(E)) return;
-        if (E <= n && E >= k) {
-            bfs.push(E);
-            vis.insert(E);
-        }
-    };
-
-    if (get_rev(k) < k) return void(cout << "0\n");
-    add(k);
-    while (!bfs.empty()) {
-        ll curr = bfs.front();
-        bfs.pop();
-        ll op1 = get_rev(curr);
-        ll op2 = curr * 10;
-        add(op1);
-        add(op2);
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    int i = 0, j = n - 1, ans = 0;
+    while (i <= j) {
+        if (s[i] == '(' && s[j] == ')')
+            ++i, --j;
+        else if (s[i] == ')')
+            ++ans, ++i;
+        else if (s[j] == '(')
+            ++ans, --j;
     }
-    cout << sz(vis) << '\n';
+    cout << ans;
 }
 
 int32_t main() {
@@ -53,7 +38,7 @@ int32_t main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    // cin >> tc;
+    cin >> tc;
     for (int tt = 1; tt <= tc; ++tt) {
         test();
     }
