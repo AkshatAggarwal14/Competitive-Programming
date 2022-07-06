@@ -21,14 +21,10 @@ int32_t main() {
     for (int i = 0; i <= sum; ++i) dp[0][i] = INF;
     for (int i = 0; i <= n; ++i) dp[i][0] = 0;
 
-    // need minimum number of coins
-    // minimum after taking or not
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= sum; ++j) {
-            dp[i][j] = dp[i - 1][j];
-            // 1 + dp[i][j - coins[i - 1]] means coin is included
-            // dp[i - 1][j] means coin was not included
-            if (coins[i - 1] <= j)
+            dp[i][j] = dp[i - 1][j];  // coin not included
+            if (coins[i - 1] <= j)    // coin included
                 dp[i][j] = min(1 + dp[i][j - coins[i - 1]], dp[i][j]);
         }
     }

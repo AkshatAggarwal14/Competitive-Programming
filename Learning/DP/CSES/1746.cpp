@@ -14,28 +14,26 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    // dp[i][j] = number of array until index i matching description with last element being j
     ll n, m;
     cin >> n >> m;
     vector<ll> a(n);
     for (ll &A : a) cin >> A;
     vector<vector<ll>> dp(n, vector<ll>(m + 1, -1));
-    auto dfs = [&](const auto &self, ll i, ll last) -> ll {
-        if (last <= 0 || last > m) return 0;
-        ll &ans = dp[i][last];
-        if (ans != -1) return dp[i][last];
-        if (i == 0) {
-            if (a[i] == 0 || a[i] == last) return ans = 1;
-            return ans = 0;
+    // dp[i][j] = number of array until index i matching description with last element being j
+    function<ll(ll, ll)> dfs = [&](ll idx, ll last) {
+        if (last <= 0 || last > m) return 0LL;  // as we can fill from [1, m]
+        ll &ans = dp[idx][last];
+        if (ans != -1) return dp[idx][last];
+        if (a[idx] != 0 && a[idx] != last) return ans = 0;
+        if (idx == 0) {
+            return ans = 1;
+        } else {
+            return (ans = dfs(idx - 1, last - 1) + dfs(idx - 1, last) + dfs(idx - 1, last + 1)) %= MOD;
         }
-        if (a[i] != 0 && a[i] != last) return ans = 0;
-        return (ans = self(self, i - 1, last - 1) +
-                      self(self, i - 1, last) +
-                      self(self, i - 1, last + 1)) %= MOD;
     };
 
     ll ans = 0;
-    for (ll i = 1; i <= m; ++i) (ans += dfs(dfs, n - 1, i)) %= MOD;
+    for (ll i = 1; i <= m; ++i) (ans += dfs(n - 1, i)) %= MOD;
     cout << ans << '\n';
 }
 

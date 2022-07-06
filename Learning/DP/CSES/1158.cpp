@@ -22,10 +22,12 @@ void test() {
     for (int &S : s) cin >> S;
 
     vector<vector<int>> dp(n + 1, vector<int>(x + 1, 0));
+    // dp[i][j] = maximum number of pages we can buy using first i books and with j money
     for (int i = 1; i <= n; ++i) {
         for (int j = 1; j <= x; ++j) {
-            dp[i][j] = dp[i - 1][j];
-            if (h[i - 1] <= j) dp[i][j] = max(dp[i][j], s[i - 1] + dp[i - 1][j - h[i - 1]]);
+            dp[i][j] = dp[i - 1][j];  // not buy
+            if (h[i - 1] <= j)        // bought
+                dp[i][j] = max(dp[i][j], s[i - 1] + dp[i - 1][j - h[i - 1]]);
         }
     }
     cout << dp[n][x] << '\n';

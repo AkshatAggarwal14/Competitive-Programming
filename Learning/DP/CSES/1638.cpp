@@ -20,6 +20,7 @@ void test() {
     for (auto &x : grid)
         for (auto &y : x) cin >> y;
     vector<vector<ll>> dp(n, vector<ll>(n, 0));
+    // dp[i][j] = number of ways to move to (i, j) going only down or right
     for (ll i = 0; i < n && grid[i][0] == '.'; ++i) dp[i][0] = 1;
     for (ll i = 0; i < n && grid[0][i] == '.'; ++i) dp[0][i] = 1;
     for (ll i = 1; i < n; ++i) {

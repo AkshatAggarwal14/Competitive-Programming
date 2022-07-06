@@ -17,6 +17,7 @@ void test() {
     ll n;
     cin >> n;
     vector<ll> dp(n + 1, INF);
+    // dp[i] = minimum number of steps to get i
     dp[0] = 0;
     for (ll i = 1; i <= n; ++i) {
         ll temp = i;

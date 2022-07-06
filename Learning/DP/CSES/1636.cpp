@@ -8,37 +8,25 @@ void test() {
     vector<int> coins(n);  // unique coins?
     for (int i = 0; i < n; ++i) cin >> coins[i];
 
-    vector<vector<int>> dp(2, vector<int>(sum + 1, -1));
+    vector<vector<int>> dp(n + 1, vector<int>(sum + 1, -1));
     // unbound coin change 1 knapsack
     // dp[i][j] = ways to create sum j using first i coins
 
     for (int i = 0; i <= n; ++i) {
         for (int j = 0; j <= sum; ++j) {
             if (j == 0)
-                dp[i % 2][j] = 1;
+                dp[i][j] = 1;
             else if (i == 0)
-                dp[i % 2][j] = 0;
+                dp[i][j] = 0;
             else {
-                dp[i % 2][j] = dp[(i - 1) % 2][j] % MOD;  // didnt pick coin
+                dp[i][j] = dp[i - 1][j];  // didnt pick coin
                 if (coins[i - 1] <= j)
-                    (dp[i % 2][j] += dp[i % 2][j - coins[i - 1]]) %= MOD;  // picked coin
+                    (dp[i][j] += dp[i][j - coins[i - 1]]) %= MOD;  // picked coin
             }
         }
     }
 
-    cout << dp[n % 2][sum] << '\n';
-
-    // auto dfs = [&](const auto& self, int i, int rem) -> int {
-    //     int& ans = dp[i][rem];
-    //     if (ans != -1) return ans;
-    //     if (rem == 0) return ans = 1;  // sum 0 has 1 way only
-    //     if (i == 0) return ans = 0;    // no way for non zero sum, with no elements
-    //     ans = self(self, i - 1, rem) % MOD;
-    //     if (coins[i - 1] <= rem) (ans += self(self, i, rem - coins[i - 1])) %= MOD;
-    //     return ans;
-    // };
-
-    // cout << dfs(dfs, n, sum) << '\n';
+    cout << dp[n][sum] << '\n';
 }
 
 int32_t main() {

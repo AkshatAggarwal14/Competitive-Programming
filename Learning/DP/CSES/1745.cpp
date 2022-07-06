@@ -18,8 +18,8 @@ void test() {
     cin >> n;
     vector<int> arr(n);
     for (int i = 0; i < n; ++i) cin >> arr[i], sum += arr[i];
-
     vector<vector<bool>> dp(n + 1, vector<bool>(sum + 1));
+    // dp[i][j] = true if we can create sum j using first i elements
     for (int i = 0; i <= n; ++i) dp[i][0] = true;
     for (int j = 1; j <= sum; ++j) dp[0][j] = false;
 

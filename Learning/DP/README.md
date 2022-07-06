@@ -31,7 +31,9 @@
     - [Print SCS](./LCS/SCS_print.cpp)
     - [Longest Repeating Subsequence](./LCS/LRepeatingS.cpp)
     - [Minimum Insertions to make string Palindrome](./LCS/insert_palin.cpp)
-    - [Longest Increasing Subsequence](./LCS/LIS.cpp)
+    - [Longest Increasing Subsequence](./LCS/LIS.cpp) $(O(n^2))$
+    - [Longest Increasing Subsequence](./LCS/LIS_efficient.cpp) $(O(n log(n)))$
+    - [Longest Increasing Subsequence](./LCS/LIS_best.cpp) $(O(nlog(n)))$ and shorter code
 
 3. Matrix Chain Multiplication
     - MCM
@@ -49,3 +51,7 @@
     - [Maximum Path sum from any node to any other node](./dp_on_trees/maximum_path_sum.cpp)
     - [Maximum Path sum from leaf to leaf](./dp_on_trees/maximum_path_sum_from_leaf_to_leaf.cpp)
     - Diameter of N-ary Tree
+
+5. Misc
+    - [Kadane's Algorithm](./Kadane.cpp)
+    - [Interview Problem](./interview_problem.cpp)

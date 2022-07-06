@@ -9,6 +9,7 @@ void test() {
     for (int i = 0; i < n; ++i) cin >> coins[i];
 
     vector<long long> dp(sum + 1, 0);
+    // dp[i] = ways to make sum = i
     dp[0] = 1;
     for (int i = 1; i <= sum; ++i) {
         for (int& c : coins) {
