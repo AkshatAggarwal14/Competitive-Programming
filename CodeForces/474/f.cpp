@@ -14,22 +14,22 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 // can use decltype while initialising to make a little bit faster
-template <class T, class op = function<T(const T &, const T &)>, class id = function<T()>>
+template <class T>
 class SegTree {
    public:
     SegTree() = default;
-    SegTree(int n, op operation_, id identity_)
-        : SegTree(vector<T>(n, identity_()), operation_, identity_) {}
+    SegTree(int n)
+        : SegTree(vector<T>(n, T())) {}
     int ceil_pow2(int n) {
         int x = 0;
         while ((1U << x) < (unsigned int)(n)) x++;
         return x;
     }
-    SegTree(const vector<T> &v, op operation_, id identity_)
-        : operation(operation_), initialize(identity_), _n(int(v.size())) {
+    SegTree(const vector<T> &v)
+        : _n(int(v.size())) {
         height = ceil_pow2(_n);
         size = (1 << height);
-        tree.resize(2 * size, initialize());
+        tree.resize(2 * size, T());
         for (int i = 0; i < _n; i++) tree[size + i] = v[i];
         for (int i = size - 1; i >= 1; i--) {
             calc(i);
@@ -41,10 +41,10 @@ class SegTree {
         if (q_lo <= node_lo && node_hi <= q_hi)
             return tree[node];
         if (node_hi < q_lo || q_hi < node_lo)
-            return initialize();  // if disjoint ignore
+            return T();  // if disjoint ignore
         int last_in_left = (node_lo + node_hi) / 2;
-        return operation(_query(2 * node, node_lo, last_in_left, q_lo, q_hi),
-                         _query(2 * node + 1, last_in_left + 1, node_hi, q_lo, q_hi));
+        return T::merge(_query(2 * node, node_lo, last_in_left, q_lo, q_hi),
+                        _query(2 * node + 1, last_in_left + 1, node_hi, q_lo, q_hi));
     }
 
     void _update(int node, int node_lo, int node_hi, int q_lo, int q_hi, T value) {
@@ -79,44 +79,39 @@ class SegTree {
 
    private:
     vector<T> tree;
-    void calc(int k) { tree[k] = operation(tree[2 * k], tree[2 * k + 1]); }
-    op operation;
-    id initialize;
+    void calc(int k) { tree[k] = T::merge(tree[2 * k], tree[2 * k + 1]); }
     int _n, size, height;
 };
 
 void test() {
-    string s;
-    cin >> s;
-    int n = sz(s);
-    vector<int> a(n);
-    for (int i = 0; i < n; ++i) a[i] = (1 << (s[i] - 'a'));
-    SegTree<int> st(
-        a,
-        [](const int &i, const int &j) { return i | j; },
-        []() { return 0; });
+    struct Node {
+        int Gcd, cnt;
+        Node() : Node(0) {}
+        Node(int v) : Gcd(v), cnt(1) {}
+        Node(int g, int c) : Gcd(g), cnt(c) {}
+        static Node merge(const Node &i, const Node &j) {
+            int g = gcd(i.Gcd, j.Gcd);
+            int c = 0;
+            if (i.Gcd == g) c += i.cnt;
+            if (j.Gcd == g) c += j.cnt;
+            return Node(g, c);
+        }
+    };
+
+    int n;
+    cin >> n;
+    SegTree<Node> st(n);
+    for (int i = 0, num; i < n; ++i) {
+        cin >> num;
+        st.update(i, Node(num));
+    }
+    // ans[l, r] = length[l, r] - cnt[gcd[l, r]]
     int q;
     cin >> q;
     while (q--) {
-        int type;
-        cin >> type;
-        if (type == 1) {
-            int pos;
-            char c;
-            cin >> pos >> c, --pos;
-            a[pos] = (1 << (c - 'a'));
-            st.update(pos, a[pos]);
-        } else {
-            int l, r;
-            cin >> l >> r, --l, --r;
-            int val = st.query(l, r);
-            int ans = 0;
-            while (val) {
-                ans += val & 1;
-                val >>= 1;
-            }
-            cout << ans << '\n';
-        }
+        int l, r;
+        cin >> l >> r, --l, --r;
+        cout << r - l + 1 - st.query(l, r).cnt << '\n';
     }
 }
 
