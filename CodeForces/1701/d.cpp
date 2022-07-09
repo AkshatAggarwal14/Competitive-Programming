@@ -28,7 +28,8 @@ void test() {
     set<ll> unvis;
     for (ll i = 1; i <= n; ++i) unvis.insert(i);
     sort(all(LR), [](const auto &i, const auto &j) {
-        return i[1] < j[1];  //! sort by R
+        //! sort by R as we need to use up all smaller values earlier
+        return i[1] < j[1];
     });
     vector<ll> ans(n, -1);
     for (auto &[L, R, i] : LR) {
