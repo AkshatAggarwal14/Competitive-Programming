@@ -45,6 +45,6 @@ void test() {
 
 int32_t main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    test();    
+    test();
     return 0;
 }

@@ -50,6 +50,7 @@
     - [Diameter of Binary Tree](./dp_on_trees/diameter_of_tree.cpp)
     - [Maximum Path sum from any node to any other node](./dp_on_trees/maximum_path_sum.cpp)
     - [Maximum Path sum from leaf to leaf](./dp_on_trees/maximum_path_sum_from_leaf_to_leaf.cpp)
+    - [Binary Lifting](./dp_on_trees/binary_lifting.cpp)
     - Diameter of N-ary Tree
 
 5. Misc
