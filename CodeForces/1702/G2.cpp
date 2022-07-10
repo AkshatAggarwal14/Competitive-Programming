@@ -1,5 +1,3 @@
-//! M2 - check each node, check how many subtrees contain given elements
-
 #ifdef LOCAL
 #include "Akshat.hpp"
 #else
