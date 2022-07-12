@@ -51,8 +51,10 @@
     - [Maximum Path sum from any node to any other node](./dp_on_trees/maximum_path_sum.cpp)
     - [Maximum Path sum from leaf to leaf](./dp_on_trees/maximum_path_sum_from_leaf_to_leaf.cpp)
     - [Binary Lifting](./dp_on_trees/binary_lifting.cpp)
+        - [LCA](./dp_on_trees/lca_using_binary_lifting.cpp)
     - Diameter of N-ary Tree
 
 5. Misc
     - [Kadane's Algorithm](./Kadane.cpp)
     - [Interview Problem](./interview_problem.cpp)
+    - [Leetcode Problems](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Minimum-(Maximum)-Path-to-Reach-a-Target)
