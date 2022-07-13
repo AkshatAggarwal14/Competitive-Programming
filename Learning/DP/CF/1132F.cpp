@@ -14,6 +14,7 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
+    // https://codeforces.com/contest/1132/problem/F
     ll n;
     string s;
     cin >> n >> s;
