@@ -15,25 +15,32 @@ const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
     // number of distict values decrease drastically
-    int n, x;
+    int n;
     cin >> n;
-    map<int, int> m;
-    while (n--) cin >> x, m[x]++;
-    while (m.size() > 1) {
-        map<int, int> q;
-        int prev = -1;
-        for (auto &[x, f] : m) {
-            if (prev != -1) q[x - prev]++;
-            if (f > 1) q[0] += f - 1;  // zeroes for equal elems
-            prev = x;
+    vector<ll> a(n);
+    for (int i = 0; i < n; ++i) cin >> a[i];
+    int cntZero = 0;
+    for (int step = 1; step < n; ++step) {
+        sort(a.begin(), a.end());
+        vector<ll> b;
+        if (cntZero > 0) {
+            cntZero--;
+            b.push_back(a[0]);
         }
-        m = q;
+        for (int i = 1; i < sz(a); ++i) {
+            if (a[i] == a[i - 1]) {
+                cntZero++;
+            } else {
+                b.push_back(a[i] - a[i - 1]);
+            }
+        }
+        a = b;
     }
-    auto &[res, f] = *m.begin();
-    if (f > 1)
-        cout << "0\n";  // as becomes 0 in end
-    else
-        cout << res << "\n";
+    if (cntZero) {
+        cout << "0\n";
+    } else {
+        cout << a[0] << "\n";
+    }
 }
 
 int32_t main() {
