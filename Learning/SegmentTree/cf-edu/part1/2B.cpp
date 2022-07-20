@@ -2,7 +2,6 @@
 using namespace std;
 using ll = long long;
 
-// can use decltype while initialising to make a little bit faster
 template <class T>
 class SegTree {
    public:
@@ -52,6 +51,13 @@ class SegTree {
         calc(node);
     }
 
+    int _kth_order(int node, int node_lo, int node_hi, int k) {
+        if (node_lo == node_hi) return node_lo;
+        int last_in_left = (node_lo + node_hi) >> 1;
+        if (tree[2 * node].sum >= k) return _kth_order(2 * node, node_lo, last_in_left, k);
+        return _kth_order(2 * node + 1, last_in_left + 1, node_hi, k - tree[2 * node].sum);
+    }
+
     T all_query() { return tree[1]; }
     T query(int p) {
         assert(0 <= p && p < _n);
@@ -65,6 +71,10 @@ class SegTree {
         assert(0 <= p && p < _n);
         _update(1, 0, size - 1, p, p, x);
     }
+    int kth_order(int k) {
+        assert(k <= tree[1].sum);
+        return _kth_order(1, 0, size - 1, k);
+    }
 
    private:
     vector<T> tree;
@@ -72,34 +82,36 @@ class SegTree {
     int _n, size, height;
 };
 
-const ll INF = 1e18;
-struct node {
-    ll num;
-    node(ll x = INF) : num(x) {}
-    static node merge(const node &i, const node &j) {
-        return node(min(i.num, j.num));
+struct Node {
+    int sum;
+    Node(int val = 0) : sum(val) {}
+    static Node merge(const Node &i, const Node &j) {
+        Node res;
+        res.sum = i.sum + j.sum;
+        return res;
     }
 };
 
-void Solution() {
-    ll n, m;
-    cin >> n >> m;
-    vector<node> a(n);
-    for (node &x : a) cin >> x.num;
-    SegTree<node> st(a);
-    while (m--) {
-        int t, u, v;
-        cin >> t >> u >> v;
-        if (t == 1) {
-            st.update(u, v);
-        } else {
-            cout << st.query(u, v - 1).num << '\n';
-        }
-    }
-}
-
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    Solution();
-    return 0;
+
+    int n, m;
+    cin >> n >> m;
+    SegTree<Node> st(n);
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        if (a[i]) st.update(i, a[i]);
+    }
+    while (m--) {
+        char type;
+        int i;
+        cin >> type >> i;
+        if (type == '1') {
+            a[i] ^= 1;
+            st.update(i, a[i]);
+        } else {
+            cout << st.kth_order(i + 1) << '\n';
+        }
+    }
 }

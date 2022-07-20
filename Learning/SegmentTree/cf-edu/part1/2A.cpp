@@ -72,34 +72,37 @@ class SegTree {
     int _n, size, height;
 };
 
-const ll INF = 1e18;
-struct node {
-    ll num;
-    node(ll x = INF) : num(x) {}
-    static node merge(const node &i, const node &j) {
-        return node(min(i.num, j.num));
+struct Node {
+    ll best, sum, pref, suff;
+    Node(ll val = 0) : sum(val) {
+        best = pref = suff = max(val, 0LL);
+    }
+    static Node merge(const Node &i, const Node &j) {
+        Node res;
+        res.pref = max(i.pref, i.sum + j.pref);
+        res.suff = max(j.suff, i.suff + j.sum);
+        res.sum = i.sum + j.sum;
+        res.best = max({i.best, j.best, i.suff + j.pref});
+        return res;
     }
 };
 
-void Solution() {
-    ll n, m;
-    cin >> n >> m;
-    vector<node> a(n);
-    for (node &x : a) cin >> x.num;
-    SegTree<node> st(a);
-    while (m--) {
-        int t, u, v;
-        cin >> t >> u >> v;
-        if (t == 1) {
-            st.update(u, v);
-        } else {
-            cout << st.query(u, v - 1).num << '\n';
-        }
-    }
-}
-
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    Solution();
-    return 0;
+
+    int n, m;
+    cin >> n >> m;
+    SegTree<Node> a(n);
+    for (int i = 0, num; i < n; ++i) {
+        cin >> num;
+        a.update(i, num);
+    }
+    cout << a.all_query().best << '\n';
+    while (m--) {
+        int i;
+        ll v;
+        cin >> i >> v;
+        a.update(i, v);
+        cout << a.all_query().best << '\n';
+    }
 }

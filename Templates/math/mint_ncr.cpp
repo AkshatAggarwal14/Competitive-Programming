@@ -1,30 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+
+const ll MOD = 1e9 + 7;
 template <int Modulus = MOD>
 struct Mint {
     int value;
-
-    Mint(long long v = 0) {
-        value = int(v % ll(Modulus));
+    Mint(ll v = 0) {
+        value = int(v % Modulus);
         if (value < 0) value += Modulus;
     }
-    Mint(long long a, long long b) : value(0) {
-        *this += a;
-        *this /= b;
+    friend ll& normalize(ll& x) {
+        while (x >= Modulus) x -= Modulus;
+        while (x < 0) x += Modulus;
     }
     friend string to_string(const Mint& a) { return to_string(a.value); }
     Mint& operator+=(Mint const& b) {
-        value = ((value + b.value) % Modulus + Modulus) % Modulus;
+        value += b.value;
+        normalize(value);
         return *this;
     }
     Mint& operator-=(Mint const& b) {
-        value = ((value - b.value) % Modulus + Modulus) % Modulus;
+        value -= b.value;
+        normalize(value);
         return *this;
     }
     Mint& operator*=(Mint const& b) {
-        value = (int((value * 1LL * b.value) % Modulus) + Modulus) % Modulus;
+        value = int((value * 1LL * b.value) % Modulus);
+        normalize(value);
         return *this;
     }
 
-    Mint mexp(Mint a, long long e) {
+    static Mint mexp(Mint a, long long e) {
         Mint res = 1;
         while (e) {
             if (e & 1) res *= a;
@@ -34,7 +41,7 @@ struct Mint {
         return res;
     }
 
-    Mint inverse(Mint a) { return mexp(a, Modulus - 2); }
+    static Mint inverse(Mint a) { return mexp(a, Modulus - 2); }
     Mint& operator/=(Mint const& b) { return *this *= inverse(b); }
     friend Mint operator+(Mint a, Mint const b) { return a += b; }
     friend Mint operator-(Mint a, Mint const b) { return a -= b; }

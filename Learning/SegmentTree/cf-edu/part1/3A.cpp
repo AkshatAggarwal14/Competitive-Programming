@@ -72,34 +72,28 @@ class SegTree {
     int _n, size, height;
 };
 
-const ll INF = 1e18;
-struct node {
-    ll num;
-    node(ll x = INF) : num(x) {}
-    static node merge(const node &i, const node &j) {
-        return node(min(i.num, j.num));
+struct Node {
+    int sum;
+    Node(int val = 0) : sum(val) {}
+    static Node merge(const Node &i, const Node &j) {
+        Node res;
+        res.sum = i.sum + j.sum;
+        return res;
     }
 };
 
-void Solution() {
-    ll n, m;
-    cin >> n >> m;
-    vector<node> a(n);
-    for (node &x : a) cin >> x.num;
-    SegTree<node> st(a);
-    while (m--) {
-        int t, u, v;
-        cin >> t >> u >> v;
-        if (t == 1) {
-            st.update(u, v);
-        } else {
-            cout << st.query(u, v - 1).num << '\n';
-        }
-    }
-}
-
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    Solution();
-    return 0;
+
+    int n;
+    cin >> n;
+    SegTree<Node> st(n);
+    for (int i = 0, u; i < n; ++i) {
+        cin >> u, --u;
+        st.update(u, 1);
+        if (u == n - 1)
+            cout << "0 ";
+        else
+            cout << st.query(u + 1, n - 1).sum << ' ';
+    }
 }

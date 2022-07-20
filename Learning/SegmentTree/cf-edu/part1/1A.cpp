@@ -1,32 +1,24 @@
-#ifdef LOCAL
-#include "Akshat.hpp"
-#else
-#include "bits/stdc++.h"
+#include <bits/stdc++.h>
 using namespace std;
-#define dbg(...)
-#endif
 using ll = long long;
-auto sz = [](const auto &container) -> ll { return ll(container.size()); };
-#define all(x) (x).begin(), (x).end()
-const ll MOD = 1e9 + 7;
-const ll INF = 1e18;
 
-template <class T, class op = function<T(const T &, const T &)>, class id = function<T()>>
+// can use decltype while initialising to make a little bit faster
+template <class T>
 class SegTree {
    public:
     SegTree() = default;
-    SegTree(int n, op operation_, id identity_)
-        : SegTree(vector<T>(n, identity_()), operation_, identity_) {}
+    SegTree(int n)
+        : SegTree(vector<T>(n, T())) {}
     int ceil_pow2(int n) {
         int x = 0;
         while ((1U << x) < (unsigned int)(n)) x++;
         return x;
     }
-    SegTree(const vector<T> &v, op operation_, id identity_)
-        : operation(operation_), initialize(identity_), _n(int(v.size())) {
+    SegTree(const vector<T> &v)
+        : _n(int(v.size())) {
         height = ceil_pow2(_n);
         size = (1 << height);
-        tree.resize(2 * size, initialize());
+        tree.resize(2 * size, T());
         for (int i = 0; i < _n; i++) tree[size + i] = v[i];
         for (int i = size - 1; i >= 1; i--) {
             calc(i);
@@ -38,10 +30,10 @@ class SegTree {
         if (q_lo <= node_lo && node_hi <= q_hi)
             return tree[node];
         if (node_hi < q_lo || q_hi < node_lo)
-            return initialize();  // if disjoint ignore
+            return T();  // if disjoint ignore
         int last_in_left = (node_lo + node_hi) / 2;
-        return operation(_query(2 * node, node_lo, last_in_left, q_lo, q_hi),
-                         _query(2 * node + 1, last_in_left + 1, node_hi, q_lo, q_hi));
+        return T::merge(_query(2 * node, node_lo, last_in_left, q_lo, q_hi),
+                        _query(2 * node + 1, last_in_left + 1, node_hi, q_lo, q_hi));
     }
 
     void _update(int node, int node_lo, int node_hi, int q_lo, int q_hi, T value) {
@@ -76,28 +68,24 @@ class SegTree {
 
    private:
     vector<T> tree;
-    void calc(int k) { tree[k] = operation(tree[2 * k], tree[2 * k + 1]); }
-    op operation;
-    id initialize;
+    void calc(int k) { tree[k] = T::merge(tree[2 * k], tree[2 * k + 1]); }
     int _n, size, height;
 };
 
 struct node {
     ll num;
-    node() = default;
-    node(ll x) : num(x) {}
+    node(ll x = 0) : num(x) {}
+    static node merge(const node &i, const node &j) {
+        return node(i.num + j.num);
+    }
 };
-auto operation = [](const node &x, const node &y) -> node {
-    return node{x.num + y.num};
-};
-auto initialize = []() -> node { return 0; };
 
 void Solution() {
     ll n, m;
     cin >> n >> m;
     vector<node> a(n);
     for (node &x : a) cin >> x.num;
-    SegTree<node> st(a, operation, initialize);
+    SegTree<node> st(a);
     while (m--) {
         int t, u, v;
         cin >> t >> u >> v;
@@ -111,11 +99,6 @@ void Solution() {
 
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    cout << fixed << setprecision(12);
-    int tc = 1;
-    // cin >> tc;
-    while (tc--) {
-        Solution();
-    }
+    Solution();
     return 0;
 }

@@ -72,34 +72,47 @@ class SegTree {
     int _n, size, height;
 };
 
-const ll INF = 1e18;
-struct node {
-    ll num;
-    node(ll x = INF) : num(x) {}
-    static node merge(const node &i, const node &j) {
-        return node(min(i.num, j.num));
+struct Node {
+    int freq[41];
+    ll inversions;
+    Node(int v = 0) {
+        inversions = 0;
+        for (int i = 1; i <= 40; ++i) freq[i] = 0;
+        ++freq[v];
+    }
+    static Node merge(const Node &i, const Node &j) {
+        Node res;
+        res.inversions = i.inversions + j.inversions;  // inversions of both segments
+        ll pre = 0;
+        for (int k = 40; k >= 1; --k) {
+            res.freq[k] = i.freq[k] + j.freq[k];  // greater in first segment * smaller in second segment
+            res.inversions += pre * j.freq[k];
+            pre += i.freq[k];
+        }
+        return res;
     }
 };
 
-void Solution() {
-    ll n, m;
-    cin >> n >> m;
-    vector<node> a(n);
-    for (node &x : a) cin >> x.num;
-    SegTree<node> st(a);
-    while (m--) {
-        int t, u, v;
-        cin >> t >> u >> v;
-        if (t == 1) {
-            st.update(u, v);
-        } else {
-            cout << st.query(u, v - 1).num << '\n';
-        }
-    }
-}
-
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-    Solution();
-    return 0;
+
+    int n, m;
+    cin >> n >> m;
+    SegTree<Node> st(n);
+    for (int i = 0, num; i < n; ++i) {
+        cin >> num;
+        st.update(i, num);
+    }
+    while (m--) {
+        char type;
+        int i, j;
+        cin >> type >> i >> j;
+        if (type == '2') {
+            --i;
+            st.update(i, j);
+        } else {
+            --i, --j;
+            cout << st.query(i, j).inversions << '\n';
+        }
+    }
 }
