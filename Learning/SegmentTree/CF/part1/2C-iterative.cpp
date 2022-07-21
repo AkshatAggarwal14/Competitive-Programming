@@ -1,4 +1,3 @@
-// 3A - CF EDU Part 1
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,6 +41,16 @@ class SegTree {
         return T::merge(ansl, ansr);
     }
 
+    int kth(int k) {  // returns -1 if not found
+        int p = 1;
+        if (k > tree[p].mx) return -1;
+        while (p < size) {
+            p <<= 1;
+            if (k > tree[p].mx) ++p;
+        }
+        return p - size;
+    }
+
     void update(int p, T value) {  // set value at position p
         assert(0 <= p && p < _n);
         for (tree[p += size] = value; p > 1; p >>= 1)
@@ -54,11 +63,11 @@ class SegTree {
 };
 
 struct Node {
-    int sum;
-    Node(int val = 0) : sum(val) {}
+    int mx;
+    Node(int val = 0) : mx(val) {}
     static Node merge(const Node &i, const Node &j) {
         Node res;
-        res.sum = i.sum + j.sum;
+        res.mx = max(i.mx, j.mx);
         return res;
     }
 };
@@ -66,15 +75,24 @@ struct Node {
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    int n;
-    cin >> n;
-    SegTree<Node> st(n + 5);
-    for (int i = 0, u; i < n; ++i) {
-        cin >> u, --u;
-        st.update(u, 1);
-        if (u == n - 1)
-            cout << "0 ";
-        else
-            cout << st.query(u + 1, n - 1).sum << ' ';
+    int n, m;
+    cin >> n >> m;
+    SegTree<Node> st(n);
+    vector<int> a(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        st.update(i, a[i]);
+    }
+    while (m--) {
+        char type;
+        int i, v;
+        cin >> type >> i;
+        if (type == '1') {
+            cin >> v;
+            a[i] = v;
+            st.update(i, a[i]);
+        } else {
+            cout << st.kth(i) << '\n';
+        }
     }
 }
