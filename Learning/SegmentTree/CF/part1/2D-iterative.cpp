@@ -59,7 +59,7 @@ class SegTree {
         // here we divide p by 2 atmost log(n) times and reach 1
         int p = l + size;
         while (p % 2 == 0) p /= 2;
-        while (p < 2 * size) {
+        do {
             // for a subtree
             if (tree[p].mx >= k) {  // answer in this subtree
                 while (p < size) {
@@ -70,9 +70,8 @@ class SegTree {
             } else {
                 ++p;  // move to next subtree
                 while (p % 2 == 0) p /= 2;
-                if (p == 1) break;  // reached last node of tree
             }
-        }
+        } while (p != 1);
         return -1;
     }
 
