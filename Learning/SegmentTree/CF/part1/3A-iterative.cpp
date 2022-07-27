@@ -42,6 +42,40 @@ class SegTree {
         return T::merge(ansl, ansr);
     }
 
+    int kth(int k) {  // returns -1 if not found
+        int p = 1;
+        if (k > tree[p].mx) return -1;
+        while (p < size) {
+            p <<= 1;
+            if (k > tree[p].mx) ++p;
+        }
+        return p - size;
+    }
+
+    int descent_right(int k, int l) {
+        // [l, n - 1] here the suffix is divided into various smaller binary trees, rooted at an odd root
+        // odd because if an even subtree was in range, then its right sibling would also be in range, thus making its parent to be in range -> thus has to be odd
+
+        // here we divide p by 2 atmost log(n) times and reach 1
+        assert(0 <= l && l < _n);
+        l += size;
+        do {
+            while (l % 2 == 0) l >>= 1;  // move up if on left child
+            if (tree[l].mx >= k) {       //? answer in this subtree
+                while (l < size) {
+                    l <<= 1;
+                    if (k > tree[l].mx) {  //? check sub-subtree
+                        ++l;               // move to right child
+                        //? update k
+                    }
+                }
+                return l - size;
+            }
+            ++l;  // move to next tree in forest
+        } while ((l & -l) != l);
+        return _n - 1;
+    }
+
     void update(int p, T value) {  // set value at position p
         assert(0 <= p && p < _n);
         for (tree[p += size] = value; p > 1; p >>= 1)

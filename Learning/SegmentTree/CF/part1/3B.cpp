@@ -1,4 +1,3 @@
-// 3A - CF EDU Part 1
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -44,36 +43,15 @@ class SegTree {
 
     int kth(int k) {  // returns -1 if not found
         int p = 1;
-        if (k > tree[p].mx) return -1;
+        if (k > tree[p].v) return -1;
         while (p < size) {
             p <<= 1;
-            if (k > tree[p].mx) ++p;
+            if (k > tree[p].v) {
+                k -= tree[p].v;
+                ++p;
+            }
         }
         return p - size;
-    }
-
-    int descent_right(int k, int l) {
-        // [l, n - 1] here the suffix is divided into various smaller binary trees, rooted at an odd root
-        // odd because if an even subtree was in range, then its right sibling would also be in range, thus making its parent to be in range -> thus has to be odd
-
-        // here we divide p by 2 atmost log(n) times and reach 1
-        assert(0 <= l && l < _n);
-        l += size;
-        do {
-            while (l % 2 == 0) l >>= 1;  // move up if on left child
-            if (tree[l].mx >= k) {       //? answer in this subtree
-                while (l < size) {
-                    l <<= 1;
-                    if (k > tree[l].mx) {  //? check sub-subtree
-                        ++l;               // move to right child
-                        //? update k
-                    }
-                }
-                return l - size;
-            }
-            ++l;  // move to next tree in forest
-        } while ((l & -l) != l);
-        return _n - 1;
     }
 
     void update(int p, T value) {  // set value at position p
@@ -88,13 +66,9 @@ class SegTree {
 };
 
 struct Node {
-    int sum;
-    Node(int val = 0) : sum(val) {}
-    static Node merge(const Node &i, const Node &j) {
-        Node res;
-        res.sum = i.sum + j.sum;
-        return res;
-    }
+    int v;
+    Node(int val = 0) : v(val) {}
+    static Node merge(const Node &i, const Node &j) { return Node{i.v + j.v}; }
 };
 
 int main() {
@@ -102,13 +76,16 @@ int main() {
 
     int n;
     cin >> n;
-    SegTree<Node> st(n + 5);
-    for (int i = 0, u; i < n; ++i) {
-        cin >> u, --u;
-        st.update(u, 1);
-        if (u == n - 1)
-            cout << "0 ";
-        else
-            cout << st.query(u + 1, n - 1).sum << ' ';
+    vector<int> a(n);
+    for (auto &A : a) cin >> A;
+    vector<Node> p(n, 1);
+    SegTree<Node> st(p);
+    vector<int> ans(n);
+    //! start from end
+    for (int i = n - 1; i >= 0; --i) {
+        int sum = st.all_query().v;
+        ans[i] = st.kth(sum - a[i]) + 1;
+        st.update(ans[i] - 1, 0);
     }
+    for (auto &P : ans) cout << P << ' ';
 }
