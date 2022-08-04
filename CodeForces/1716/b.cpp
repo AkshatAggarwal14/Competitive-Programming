@@ -14,23 +14,30 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    int n;
+    ll n;
     cin >> n;
-    vector<int> a(n);
-    for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
+    vector<ll> p(n);
+    iota(all(p), 1);
+    vector<vector<ll>> ans;
+    map<ll, ll> st;
+    for (ll rot = 0; rot < n; ++rot) {
+        auto b = p;
+        rotate(b.begin() + rot, b.begin() + rot + 1, b.end());
+        dbg(b);
+        ll res = 0;
+        for (ll i = 0; i < n; ++i) res += (b[i] == i + 1);
+        if (st.count(res)) continue;
+        st[res] = rot;
+        ans.push_back(b);
     }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
-        ++ans;
+    cout << sz(st) << '\n';
+    for (auto it = st.rbegin(); it != st.rend(); ++it) {
+        ll id = it->second;
+        for (auto &x : ans[id]) {
+            cout << x << ' ';
+        }
+        cout << '\n';
     }
-    cout << ans << '\n';
 }
 
 int32_t main() {

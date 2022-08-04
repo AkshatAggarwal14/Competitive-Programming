@@ -13,24 +13,21 @@ const ll INF = 1e18;
 const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
+// 98...1 take all you can and reverse
 void test() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
+    ll s;
+    cin >> s;
+    ll ans = 0;
+    for (ll i = 9; i >= 1; --i) {
+        if (s >= i) {
+            ans *= 10;
+            ans += i;
+            s -= i;
+        }
     }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
-        ++ans;
-    }
-    cout << ans << '\n';
+    string t = to_string(ans);
+    reverse(all(t));
+    cout << t << '\n';
 }
 
 int32_t main() {

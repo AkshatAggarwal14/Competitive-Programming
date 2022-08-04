@@ -13,24 +13,21 @@ const ll INF = 1e18;
 const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
+// start from behind and take all until repeats
 void test() {
-    int n;
+    ll n;
     cin >> n;
-    vector<int> a(n);
+    vector<ll> a(n);
+    ll ans = 0;
     for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
-    }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
+    reverse(all(a));
+    set<ll> st;
+    for (auto &A : a) {
+        if (st.contains(A)) break;
+        st.insert(A);
         ++ans;
     }
-    cout << ans << '\n';
+    cout << n - ans << '\n';
 }
 
 int32_t main() {

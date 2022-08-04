@@ -14,21 +14,22 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
+    ll n, m;
+    cin >> n >> m;
+    vector<vector<bool>> mat(n, vector<bool>(n));
+    for (ll i = 0, u, v; i < m; ++i) {
+        cin >> u >> v, --u, --v;
+        mat[u][v] = mat[v][u] = true;
     }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
-        ++ans;
+    ll ans = 0;
+    for (ll u = 0; u < n; ++u) {
+        for (ll v = u + 1; v < n; ++v) {
+            for (ll w = v + 1; w < n; ++w) {
+                if (mat[v][u] && mat[v][w] && mat[u][w]) {
+                    ++ans;
+                }
+            }
+        }
     }
     cout << ans << '\n';
 }
@@ -41,7 +42,7 @@ int32_t main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    cin >> tc;
+    // cin >> tc;
     for (int tt = 1; tt <= tc; ++tt) {
         test();
     }

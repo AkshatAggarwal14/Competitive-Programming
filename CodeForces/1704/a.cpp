@@ -14,23 +14,32 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
+    int n, m;
+    cin >> n >> m;
+    string a, b;
+    cin >> a >> b;
+    bool ok = true;
+    for (int i = 0; i < m - 1; i++) {  // last m - 1 same
+        if (b.back() != a.back()) {
+            ok = false;
+            break;
+        }
+        b.pop_back();
+        a.pop_back();
     }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
-        ++ans;
+    if (!ok) {
+        cout << "NO" << '\n';
+        return;
     }
-    cout << ans << '\n';
+    if (b == "0" && a == string(n - m + 1, '1')) {
+        cout << "NO" << '\n';
+        return;
+    }
+    if (b == "1" && a == string(n - m + 1, '0')) {
+        cout << "NO" << '\n';
+        return;
+    }
+    cout << "YES" << '\n';
 }
 
 int32_t main() {

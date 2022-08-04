@@ -14,23 +14,18 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
+    ll n, a, b;
+    cin >> n >> a >> b;
+    if (n < a) return void(cout << "0\n");
+    ll ans = 0;
+    if (a > b) {
+        ans += a - 1;                      // first a games won by 2nd player
+        ans += (n / a - 1) * (a - b);      // last a - b games won by 2nd in remaining groups
+        ans += max(0LL, n % a - (b - 1));  // leftover me a jeetega except first b - 1
+    } else {
+        ans = a - 1;
     }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
-        ++ans;
-    }
-    cout << ans << '\n';
+    cout << n - ans << '\n';
 }
 
 int32_t main() {
@@ -41,7 +36,7 @@ int32_t main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    cin >> tc;
+    // cin >> tc;
     for (int tt = 1; tt <= tc; ++tt) {
         test();
     }

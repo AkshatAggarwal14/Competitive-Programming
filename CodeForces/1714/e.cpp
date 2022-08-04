@@ -13,24 +13,27 @@ const ll INF = 1e18;
 const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
+// divide [0, 19] into 2 sets and handle 5 and 10 seperately
 void test() {
-    int n;
+    vector<ll> T = {-1, 1, 1, 2, 1, -1, 2, 2, 1, 2,
+                    -1, 2, 2, 1, 2, -1, 1, 1, 2, 1};
+    ll n;
     cin >> n;
-    vector<int> a(n);
-    for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
+    vector<ll> a(n);
+    bool flag = false;
+    for (auto &A : a) cin >> A, flag |= (A % 5 == 0);
+    if (flag) {
+        set<ll> st;
+        for (auto &A : a) A += (A % 10), st.insert(A);
+        cout << ((sz(st) > 1) ? "NO\n" : "YES\n");
+        return;
     }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
-        ++ans;
+    set<ll> st;
+    for (ll i = 0; i < n; ++i) {
+        st.insert(T[a[i] % 20]);
+        if (sz(st) > 1) return void(cout << "NO\n");
     }
-    cout << ans << '\n';
+    cout << "YES\n";
 }
 
 int32_t main() {

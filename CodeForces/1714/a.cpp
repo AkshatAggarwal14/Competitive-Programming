@@ -13,24 +13,29 @@ const ll INF = 1e18;
 const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
+// find first time greater than given, if doesnt exist use first
 void test() {
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (auto &A : a) cin >> A;
-    sort(all(a));
-    vector<ll> pref(n, 0);
-    for (ll i = 1; i < n; ++i) {
-        pref[i] = pref[i - 1];
-        pref[i] += (a[i] - a[i - 1]) * i;
+    ll n, h, m;
+    cin >> n >> h >> m;
+    ll init = h * 60 + m;
+    vector<ll> mins(n);
+    for (auto &M : mins) {
+        ll hh, mm;
+        cin >> hh >> mm;
+        M = hh * 60 + mm;
     }
-    ll ans = 0, sum = 0;
-    for (ll i = n - 1; i >= 0; --i) {
-        if (sum >= pref[i]) break;
-        sum += a[i];
-        ++ans;
+    sort(all(mins));
+    auto it = lower_bound(all(mins), init);
+    ll val = 0;
+    if (it == mins.end()) {
+        val = 24 * 60 + mins[0];
+    } else {
+        val = *it;
     }
-    cout << ans << '\n';
+    ll diff = val - init;
+    ll ansh = (diff / 60) % 24;
+    ll ansm = diff % 60;
+    cout << ansh << ' ' << ansm << '\n';
 }
 
 int32_t main() {
