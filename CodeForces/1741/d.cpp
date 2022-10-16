@@ -1,31 +1,37 @@
+#include "bits/stdc++.h"
+using namespace std;
 #ifdef LOCAL
 #include "Akshat.hpp"
 #else
-#include "bits/stdc++.h"
-using namespace std;
 #define dbg(...)
 #endif
 using ll = long long;
 auto sz = [](const auto &container) { return int(container.size()); };
 #define all(x) begin(x), end(x)
 
-const ll INF = 1e9;
+const ll INF = 1e18;
 const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    int n;
+    ll n;
     cin >> n;
-    vector<int> arr(n);
-    for (auto &it : arr) cin >> it;
-    vector<vector<int>> dp(n, vector<int>(n, INF));
-    for (int i = n - 2; i >= 0; --i) {
-        for (int j = i + 1; j < n; ++j) {
-            for (int k = i + 1; k < j; ++k)  // we break into 2 matrices [i, k - 1] and [k, j]
-                dp[i][j] = min(dp[i][j], dp[i][k] + arr[i] * arr[k] * arr[j] + dp[k][j]);
+    vector<ll> a(n);
+    for (auto &x : a) cin >> x;
+    ll ops = 0;
+    while (n != 1) {
+        vector<ll> temp;
+        for (ll i = 0; i < n; i += 2) {
+            ll A = (a[i] + 1) / 2;
+            ll B = (a[i + 1] + 1) / 2;
+            if (A != B) return void(cout << "-1\n");
+            if (a[i] > a[i + 1]) ++ops;
+            temp.push_back(A);
         }
+        n /= 2;
+        a.swap(temp);
     }
-    cout << dp[0][n - 1] << '\n';  // in this version A[i] -> arr[i] * arr[i + 1]
+    cout << ops << '\n';
 }
 
 int32_t main() {
@@ -36,7 +42,7 @@ int32_t main() {
 #endif
     cout << fixed << setprecision(12);
     int tc = 1;
-    // cin >> tc;
+    cin >> tc;
     for (int tt = 1; tt <= tc; ++tt) {
         test();
     }
