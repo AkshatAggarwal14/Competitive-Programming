@@ -1,7 +1,7 @@
 #include "bits/stdc++.h"
 using namespace std;
 #ifdef LOCAL
-#include "Akshat.hpp"
+#include "debug.hpp"
 #else
 #define dbg(...)
 #endif
@@ -14,19 +14,13 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    int n, k, r, c;
-    cin >> n >> k >> r >> c, --r, --c;
-    vector<string> grid(n, string(n, '.'));
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < n; ++j)
-            if ((i + j) % k == 0) grid[i][j] = 'X';
-    int col = int(grid[r].find('X'));
-    auto res = grid;
-    int diff = c - col;
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < n; ++j)
-            res[((i + diff) % n + n) % n][j] = grid[i][j];
-    for (auto &x : res) cout << x << '\n';
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    if (a < b && c < d && a < c && b < d) return void(cout << "YES\n");
+    if (c < a && d < b && c < d && a < b) return void(cout << "YES\n");
+    if (d < c && b < a && d < b && c < a) return void(cout << "YES\n");
+    if (b < d && a < c && b < a && d < c) return void(cout << "YES\n");
+    cout << "NO\n";
 }
 
 int32_t main() {

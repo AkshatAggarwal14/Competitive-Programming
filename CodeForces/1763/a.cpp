@@ -14,19 +14,27 @@ const ll N = 1e5 + 5;
 const ll MOD = 1e9 + 7;  // 998244353
 
 void test() {
-    int n, k, r, c;
-    cin >> n >> k >> r >> c, --r, --c;
-    vector<string> grid(n, string(n, '.'));
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < n; ++j)
-            if ((i + j) % k == 0) grid[i][j] = 'X';
-    int col = int(grid[r].find('X'));
-    auto res = grid;
-    int diff = c - col;
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < n; ++j)
-            res[((i + diff) % n + n) % n][j] = grid[i][j];
-    for (auto &x : res) cout << x << '\n';
+    int n;
+    vector<array<int, 2>> a(10);
+    cin >> n;
+    for (int i = 0; i < n; ++i) {
+        int num;
+        cin >> num;
+        for (int j = 0; j < 10; ++j) {
+            if ((num >> j) & 1) {
+                a[j][1] = 1;
+            } else {
+                a[j][0] = 1;
+            }
+        }
+    }
+    int mx = 0;
+    for (int i = 0; i < 10; ++i) {
+        if (a[i][0] && a[i][1]) {
+            mx += (1 << i);
+        }
+    }
+    cout << mx << '\n';
 }
 
 int32_t main() {
