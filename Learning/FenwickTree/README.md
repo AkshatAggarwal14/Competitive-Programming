@@ -104,5 +104,5 @@ class BIT {
 - Point query - query value at a given index
 
 This can be done with normal BIT operations
-- Range update to $[l, r]$ can be done by `BIT.add(delta, l)`, `BIT.add(-delta, r + 1)`.
+- Range update to $[l, r]$ can be done by `BIT.add(l, delta)`, `BIT.add(r + 1, -delta)`.
 - Point query can be done by `BIT.get(i)`.
