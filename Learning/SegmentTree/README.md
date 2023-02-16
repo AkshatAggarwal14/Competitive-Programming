@@ -181,3 +181,5 @@ Here when we want to update a range, we can just update the parents which contai
         self(self, 2 * node + 1, last_in_left + 1, node_hi, q_lo, q_hi, value);
     };
 ```
+
+Hard question: [Link - Similar to SPOJ GSS3](https://www.youtube.com/live/adNuHe1Z0cE?feature=share&t=1223)

@@ -1,30 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
 
 // can use decltype while initialising to make a little bit faster
-template <class T>
+template <class T, class op = function<T(const T &, const T &)>, class id = function<T()>>
 class SegTree {
    public:
     SegTree() = default;
-    SegTree(int n)
-        : SegTree(vector<T>(n, T())) {}
+    SegTree(int n, op operation_, id identity_)
+        : SegTree(vector<T>(n, identity_()), operation_, identity_) {}
     int ceil_pow2(int n) {
         int x = 0;
         while ((1U << x) < (unsigned int)(n)) x++;
         return x;
     }
-    SegTree(const string &v)
-        : _n(int(v.size())) {
+    SegTree(const vector<T> &v, op operation_, id identity_)
+        : operation(operation_), initialize(identity_), _n(int(v.size())) {
         height = ceil_pow2(_n);
         size = (1 << height);
-        tree.resize(2 * size, T());
-        for (int i = 0; i < _n; i++) {
-            if (v[i] == '(')
-                tree[size + i].unpaired_open = 1;
-            else
-                tree[size + i].unpaired_close = 1;
-        }
+        tree.resize(2 * size, initialize());
+        for (int i = 0; i < _n; i++) tree[size + i] = v[i];
         for (int i = size - 1; i >= 1; i--) {
             calc(i);
         }
@@ -35,10 +29,10 @@ class SegTree {
         if (q_lo <= node_lo && node_hi <= q_hi)
             return tree[node];
         if (node_hi < q_lo || q_hi < node_lo)
-            return T();  // if disjoint ignore
+            return initialize();  // if disjoint ignore
         int last_in_left = (node_lo + node_hi) / 2;
-        return T::merge(_query(2 * node, node_lo, last_in_left, q_lo, q_hi),
-                        _query(2 * node + 1, last_in_left + 1, node_hi, q_lo, q_hi));
+        return operation(_query(2 * node, node_lo, last_in_left, q_lo, q_hi),
+                         _query(2 * node + 1, last_in_left + 1, node_hi, q_lo, q_hi));
     }
 
     void _update(int node, int node_lo, int node_hi, int q_lo, int q_hi, T value) {
@@ -57,6 +51,13 @@ class SegTree {
         calc(node);
     }
 
+    T _kth_order(int node, int node_lo, int node_hi, T k) {
+        if (node_lo == node_hi) return node_lo;
+        int last_in_left = (node_lo + node_hi) >> 1;
+        if (tree[2 * node] >= k) return _kth_order(2 * node, node_lo, last_in_left, k);
+        return _kth_order(2 * node + 1, last_in_left + 1, node_hi, k - tree[2 * node]);
+    }
+
     T all_query() { return tree[1]; }
     T query(int p) {
         assert(0 <= p && p < _n);
@@ -70,37 +71,42 @@ class SegTree {
         assert(0 <= p && p < _n);
         _update(1, 0, size - 1, p, p, x);
     }
+    T kth_order(T k) {
+        assert(k <= tree[1]);
+        return _kth_order(1, 0, size - 1, k);
+    }
 
-   private:
+    //    private:
     vector<T> tree;
-    void calc(int k) { tree[k] = T::merge(tree[2 * k], tree[2 * k + 1]); }
+    void calc(int k) { tree[k] = operation(tree[2 * k], tree[2 * k + 1]); }
+    op operation;
+    id initialize;
     int _n, size, height;
 };
 
-struct Node {
-    int unpaired_open, unpaired_close, paired;
-    Node() = default;
-    static Node merge(const Node &i, const Node &j) {
-        Node res;
-        int has_pair = min(i.unpaired_open, j.unpaired_close);             // open in left, found close in right
-        res.paired = i.paired + j.paired + 2 * has_pair;                   // full pair -> including newly formed
-        res.unpaired_open = i.unpaired_open + j.unpaired_open - has_pair;  // total unpaired open brackets left in resultant sequence
-        res.unpaired_close = i.unpaired_close + j.unpaired_close - has_pair;
-        return res;
-    }
-};
-
 int main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
-
-    string s;
-    cin >> s;
-    SegTree<Node> st(s);
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int &x : a) cin >> x, x = (x & 1);
+    SegTree<int> st(
+        a,
+        [](const int &A, const int &B) { return A + B; },
+        []() { return 0; });
     int q;
     cin >> q;
     while (q--) {
-        int l, r;
-        cin >> l >> r, --l, --r;
-        cout << st.query(l, r).paired << '\n';
+        int type, l, r;
+        cin >> type >> l >> r, --l;
+        if (type == 0) {
+            a[l] = r;
+            st.update(l, (r & 1));
+        } else if (type == 1) {
+            --r;
+            cout << r - l + 1 - st.query(l, r) << '\n';
+        } else {
+            --r;
+            cout << st.query(l, r) << '\n';
+        }
     }
 }
