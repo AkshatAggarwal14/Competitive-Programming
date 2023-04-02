@@ -17,12 +17,12 @@ Now as $S \approx \sqrt n$, the number of `add()` and `remove()` calls become $O
 1. In odd blocks sort the right index in ascending order and in even blocks sort it in descending order. This will minimize the movement of right pointer, as the normal sorting will move the right pointer from the end back to the beginning at the start of every block. With the improved version this resetting is no more necessary.
 
     Code for this version of comparator is:
-    ```cpp
-    bool operator<(const Query &other) const {
-        if (l / block_size != other.l / block_size) return l < other.l;
-        return ((l / block_size) & 1) ? r < other.r : r > other.r;
-    }
-    ```
+```cpp
+bool operator<(const Query &other) const {
+    if (l / block_size != other.l / block_size) return l < other.l;
+    return ((l / block_size) & 1) ? r < other.r : r > other.r;
+}
+```
 
 2. Block size of precisely  $\sqrt{N}$  doesn't always offer the best runtime. For example, if  $\sqrt{N}=750$  then it may happen that block size of  $700$  or  $800$  may run better. More importantly, don't compute the block size at runtime - make it const. Division by constants is well optimized by compilers.
 
