@@ -1,4 +1,4 @@
-// https://codeforces.com/contest/221/problem/D
+// https://codeforces.com/contest/221/problem/D or 220B
 // Mo's + compression
 // WAIT! This doesnt even need compression as values greater than MAXN can never have count equal to them.
 #include <bits/stdc++.h>

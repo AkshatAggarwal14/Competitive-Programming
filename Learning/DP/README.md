@@ -54,7 +54,11 @@
         - [LCA](./dp_on_trees/lca_using_binary_lifting.cpp)
     - Diameter of N-ary Tree
 
-5. Misc
+5. DP with bitmasking
+    - [Job Assignment - Easy](./Bitmasking/JobAssignment.cpp)
+    - [Travelling Salesman Problem](./Bitmasking/TSP.cpp)
+
+6. Misc
     - [Kadane's Algorithm](./Kadane.cpp)
     - [Interview Problem](./interview_problem.cpp)
     - [Leetcode Problems](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Minimum-(Maximum)-Path-to-Reach-a-Target)

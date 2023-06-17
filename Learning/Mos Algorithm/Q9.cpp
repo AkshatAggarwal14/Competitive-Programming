@@ -1,4 +1,4 @@
-// https://codeforces.com/contest/221/problem/D
+// https://codeforces.com/contest/617/problem/E
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -7,11 +7,12 @@ using ll = long long;
 // TODO: Find optimal block_size for compiler optimization
 const int block_size = 317;  // sqrt(N) or N/sqrt(Q)
 // TODO: Define constants needed for global variables (arrays etc. - The DS)
-const int N = 1e5 + 5;
+const int N = 1e6 + 5;
 
 // TODO: initialize data structure, along with answer variable - can define get_answer() function also
-int a[N], cnt[N];
-ll ans;
+int a[N], cnt[1 << 20], pref[N];
+unsigned long long ans;
+int k;
 
 struct Query {
     int l, r, idx;
@@ -24,19 +25,16 @@ struct Query {
 };
 
 // TODO: add value at idx from data structure
+// number x occurs exactly x times
 void add(int idx) {
-    if (a[idx] >= N) return;
-    if (cnt[a[idx]] == a[idx]) --ans;
+    ans += cnt[a[idx] ^ k];
     ++cnt[a[idx]];
-    if (cnt[a[idx]] == a[idx]) ++ans;
 }
 
 // TODO: remove value at idx from data structure
 void remove(int idx) {
-    if (a[idx] >= N) return;
-    if (cnt[a[idx]] == a[idx]) --ans;
     --cnt[a[idx]];
-    if (cnt[a[idx]] == a[idx]) ++ans;
+    ans -= cnt[a[idx] ^ k];
 }
 
 vector<ll> mo_s_algorithm(vector<Query> queries) {
@@ -78,16 +76,23 @@ int main() {
     memset(cnt, 0, sizeof(cnt));
 
     int n, q;
-    cin >> n >> q;
-    for (int i = 0; i < n; ++i) cin >> a[i];
+    cin >> n >> q >> k;
+    a[0] = 0;
+    for (int i = 1; i <= n; ++i) {
+        cin >> a[i];
+        a[i] = a[i] ^ a[i - 1];  // make prefix
+    }
 
     vector<Query> queries(q);
     for (int i = 0; i < q; ++i) {
         int l, r;
         cin >> l >> r;
-        queries[i] = {l - 1, r - 1, i};
+        queries[i] = {l - 1, r, i};
     }
     vector<ll> res = mo_s_algorithm(queries);
     for (auto &x : res)
         cout << x << '\n';
 }
+
+// count pref[j]^pref[i] = k for i,j in range [l-1,r]
+// pref[j] = k^pref[i] -> count pairs using map
