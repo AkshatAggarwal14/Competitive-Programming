@@ -1,6 +1,6 @@
 #ifndef ONLINE_JUDGE
 // https://github.com/AkshatAggarwal14/Competetive-Programming/tree/master/CodeForces
-#include "Akshat.hpp"
+#include "debug.hpp"
 #else
 #include "bits/stdc++.h"
 using namespace std;

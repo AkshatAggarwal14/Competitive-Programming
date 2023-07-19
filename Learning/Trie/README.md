@@ -1,7 +1,7 @@
 # What is a Trie?
 Trie data structure is a tree-based data structure used for storing collections of strings. The word trie comes from the word _re**TRIE**val_ which means to find or get something back. 
 
-_It can also be used to store numbers in form of binary strings._
+_It can also be used to store numbers in form of binary (or [decimal](#range-query-trie)) strings._
 
 If two strings have a common prefix then they will have the same ancestor in the trie. In a trie data structure, we can store a large number of strings and can do search operations on it in an efficient way. 
 
@@ -11,7 +11,7 @@ A trie can be used to sort a collection of strings alphabetically as well as sea
 - A trie data structure can be used to implement a wide range of features that can't be implemented with a hash table. For example, Prefix-based searching can't be done with a hash table.
 - There are no collisions in a trie data structure which means a better worst-case time complexity than a hash table that is not implemented properly.
 - Hash functions are not used in a Trie data structure.
-- Searching of a string in a Trie data structure is done in $O(k)$ time complexity. Where k is the number of words in the query string. It may also take less than $O(k)$ time when the query string is not present in the trie.
+- Searching of a string in a Trie data structure is done in $O(k)$ time complexity. Where $k$ is the number of words in the query string. It may also take less than $O(k)$ time when the query string is not present in the trie.
 
 # Structure of Trie:
 
@@ -39,3 +39,26 @@ Another important thing to note is that every string in the Trie data structure 
 
 # Disadvantage of Trie Data Structure:
 The main disadvantage with Trie is that they take a lot of memory for storing strings as compared to other data structures. This is because each node consists of an array of pointers for the child nodes and also contains some additional variables like the `wordEndCnt` variable we used in the TrieNode structure.
+
+# Range Query Trie
+
+Questions solved in this directory.
+Idea from: `theabbie`@CF and [Link 1](https://codeforces.com/blog/entry/17658?#comment-378429), [Link 2](https://codeforces.com/blog/entry/104650)
+
+# Wavelet Trees
+
+[Link 1](http://rachitiitr.blogspot.com/2017/06/wavelet-trees-wavelet-trees-editorial.html)
+
+[Link 2](https://codeforces.com/blog/entry/52854)
+
+# Sparse Segtree
+
+[Link 1](https://codeforces.com/blog/entry/83969)
+
+[Link 2](https://usaco.guide/plat/sparse-segtree?lang=cpp)
+
+# Some Trie Questions
+1. [Find subarray with Maximum XOR](./Qs/1.cpp)
+2. [Count subarrays with XOR < k](./Qs/2.cpp) - [Tutorial](https://threadsiiithyderabad.quora.com/Tutorial-on-Trie-and-example-problems)
+3. [Find minimum K for which (count of subarrays with XOR <= K) >= X](./Qs/3.cpp)
+4. [Count Pairs With XOR in a Range](./Qs/4.cpp)

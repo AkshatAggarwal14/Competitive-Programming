@@ -15,10 +15,8 @@ do
     ./$3 > input
     ./$2 < input > outSlow
     ./$1 < input > outWrong
-    H1=`md5sum outWrong`
-    H2=`md5sum outSlow`
     echo "Passed Test $testNum"
-    if !(cmp -s "outWrong" "outSlow")
+    if !(cmp -s outWrong outSlow)
     then
         echo "Error found!"
         echo "Input:"
