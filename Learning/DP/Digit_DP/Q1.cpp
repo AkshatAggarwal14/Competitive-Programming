@@ -23,7 +23,6 @@ int main() {
     cin >> L >> R >> X;
 
     function<ll(string&, ll, ll, ll)> dfs = [&](string& num, ll digs, ll sum, bool tight) {
-        if (sum < 0) return 0LL;
         if (digs == 0) {
             if (sum == 0) return 1LL;
             return 0LL;
@@ -36,7 +35,8 @@ int main() {
         ans = 0;
         for (int dig = 0; dig <= ub; ++dig) {
             // tight stays 1 in upperbound case only
-            ans += dfs(num, digs - 1, sum - dig, tight && (dig == ub));
+            if (sum >= dig)
+                ans += dfs(num, digs - 1, sum - dig, tight && (dig == ub));
         }
         return ans;
     };

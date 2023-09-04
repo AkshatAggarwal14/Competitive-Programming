@@ -13,6 +13,7 @@ const ll MOD = 1e9 + 7;  // 998244353;
 
 void test() {
     string s = "123";
+    ll n = int(s.size());
     function<void(ll, ll, ll)> dfs = [&](ll digs, bool tight, ll curNum) {
         if (digs == -1) {
             cout << curNum << '\n';
@@ -20,7 +21,7 @@ void test() {
         }
 
         int ub = 9;
-        if (tight) ub = s[2 - digs] - '0';
+        if (tight) ub = s[n - 1 - digs] - '0';
 
         for (int i = 0; i < ub; ++i) {
             dfs(digs - 1, false, curNum * 10 + i);
@@ -28,7 +29,7 @@ void test() {
         dfs(digs - 1, tight, curNum * 10 + ub);
     };
 
-    dfs(2, true, 0);
+    dfs(n - 1, true, 0);
 }
 
 int32_t main() {

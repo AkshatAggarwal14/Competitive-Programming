@@ -1,5 +1,5 @@
 #ifdef LOCAL
-#include "Akshat.hpp"
+#include "debug.hpp"
 #else
 #include "bits/stdc++.h"
 using namespace std;
@@ -17,35 +17,33 @@ void test() {
     string s;
     cin >> s;
     int n = sz(s);
-    vector<vector<int>> dp(n, vector<int>(n, 0));
+    vector<vector<int>> isPalindrome(n, vector<int>(n, 0));
     // dp[i][j] = s[i, j] is palindrome
     for (int j = 0; j < n; ++j) {
         for (int i = j; i >= 0; --i) {
             if (i == j)
-                dp[i][j] = 1;
+                isPalindrome[i][j] = 1;
             else if (j - i == 1)
-                dp[i][j] = int(s[i] == s[j]);
+                isPalindrome[i][j] = int(s[i] == s[j]);
             else if (s[i] == s[j])
-                dp[i][j] = dp[i + 1][j - 1];
+                isPalindrome[i][j] = isPalindrome[i + 1][j - 1];
         }
     }
-    // Now use 2D prefix_sum
-    vector<vector<int>> pref(n + 1, vector<int>(n + 1, 0));
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < n; ++j) {
-            pref[i + 1][j + 1] =
-                pref[i + 1][j] + pref[i][j + 1] - pref[i][j] + dp[i][j];
+    // dp2[i][j]: total sequence in range l to r
+    vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
+    for (int i = n; i >= 1; --i) {
+        for (int j = 1; j <= n; ++j) {
+            // [i, i+1,...j-1, j]
+            // [i...j-1] + [i+1...j] - [i+1...j-1] <- double count
+            dp[i][j] = dp[i][j - 1] + dp[i + 1][j] - dp[i + 1][j - 1] + isPalindrome[i - 1][j - 1];
         }
     }
-    auto get = [&](int i, int j) {
-        return pref[j][j] - pref[i - 1][j] - pref[j][i - 1] + pref[i - 1][i - 1];
-    };
     int q;
     cin >> q;
     while (q--) {
         int l, r;
         cin >> l >> r;
-        cout << get(l, r) << '\n';
+        cout << dp[l][r] << '\n';
     }
 }
 
