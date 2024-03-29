@@ -10,7 +10,7 @@ N=3, SUM = 4
 (4,0)
 
 Answer = 3
-1. Choosing elements 1, 2
+1. Choosing elements 1,2
 2. Choosing elements 2,1
 3. Choosing elements 3
 

@@ -9,6 +9,8 @@ fi
 build.sh $1
 build.sh $2
 
+mkdir -p ./tests
+
 for ((testNum=0;testNum<$3;testNum++))
 do
     ./$1 > ./tests/test$testNum.in
